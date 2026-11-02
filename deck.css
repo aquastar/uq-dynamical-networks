@@ -135,3 +135,17 @@ table.map.build{display:table}
 /* labels stay legible over lines and dots */
 .viz svg text{paint-order:stroke;stroke:#fff;stroke-width:5px;stroke-linejoin:round}
 .viz svg .ax-x text,.viz svg .ax-y text{stroke:none}
+
+/* the cover: title left, the ward alive on the right */
+.reveal section.slide.cover2{flex-direction:row;align-items:stretch;gap:44px;padding:56px 64px 60px}
+.cover2 .c-left{flex:1.05;min-width:0;display:flex;flex-direction:column;gap:20px}
+.cover2 .c-right{flex:1;min-width:0;display:flex;align-items:center;justify-content:center}
+.cover2 .c-right svg{width:100%;height:100%}
+.cover2 h1{font-size:80px;max-width:none}
+.cover2 h1 .hl{color:var(--blue)}
+.cover2 .lede{font-size:27px;max-width:none}
+.authors{display:flex;gap:36px}
+.authors b{display:block;font-family:var(--display);font-size:24px;font-weight:700;line-height:1.15}
+.authors span{display:block;font-size:18px;color:var(--muted);line-height:1.25;margin-top:3px}
+.cover2 .keys{font-size:18px;color:var(--muted);line-height:1.4}
+html.reveal-print .reveal section.cover2{flex-direction:row!important}

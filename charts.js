@@ -110,6 +110,51 @@ window.Charts = (function () {
       show: k => { w.nodes.style("transition", "opacity .5s").style("opacity", i => (k >= 1 || Sim.W.roles[i] === 0) ? 1 : 0); w.edges.style("transition", "opacity .8s").style("opacity", k >= 2 ? 1 : 0); L.show(k >= 3 ? 1 : 0); } };
   };
 
+  // the cover: the ward with an outbreak running through it on a loop, a fresh run each time; below it, the curve of every run so far
+  R.cover = (e, D) => {
+    const W0 = 720, H0 = 800, T = 40;
+    const w = ward(e, { w: W0, h: H0, r: 9.5, pad: 14, padT: 44, padB: 323 });
+    w.edges.attr("stroke-opacity", .32);
+    w.nodes.attr("stroke-width", 1.6).style("transition", "fill .28s");
+    const [sx, sy] = w.P(Sim.W.src);
+    w.rings.append("circle").attr("cx", sx).attr("cy", sy).attr("r", 17).attr("fill", "none").attr("stroke", C.ink).attr("stroke-width", 2.5);
+    const mono = "'IBM Plex Mono', ui-monospace, monospace"; const B = w.box;
+    const mtext = (x, y, size, col, anchor) => w.svg.append("text").attr("x", x).attr("y", y).attr("font-family", mono).attr("font-size", size).attr("fill", col).attr("text-anchor", anchor || "start");
+    mtext(B.x, 24, 15, C.muted).attr("letter-spacing", ".08em").text(`A REAL HOSPITAL WARD · ${Sim.N} PEOPLE · ${Sim.W.edges.length} CONTACTS`);
+    const tRun = mtext(B.x + B.w, 24, 15, C.muted, "end").attr("letter-spacing", ".08em");
+    const yL = B.y + B.h + 30;
+    const tDay = mtext(B.x, yL, 18, C.ink);
+    mtext(B.x + B.w, yL, 15, C.muted, "end").text("same ward, same virus, same first patient");
+    // the curve of every run so far: day on x, people infected so far on y
+    const cx0 = B.x + 34, cx1 = B.x + B.w, cy0 = H0 - 40, cy1 = yL + 46;
+    const x = d3.scaleLinear().domain([0, T]).range([cx0, cx1]), y = d3.scaleLinear().domain([0, Sim.N]).range([cy0, cy1]);
+    const cg = w.svg.append("g");
+    cg.append("line").attr("x1", cx0).attr("x2", cx1).attr("y1", cy0).attr("y2", cy0).attr("stroke", C.line).attr("stroke-width", 1.5);
+    mtext(cx0 - 8, cy0 + 5, 14, C.muted, "end").text("0"); mtext(cx0 - 8, cy1 + 5, 14, C.muted, "end").text(String(Sim.N));
+    mtext(cx0, cy0 + 22, 14, C.muted).text("day 0"); mtext(cx1, cy0 + 22, 14, C.muted, "end").text(`day ${T}`);
+    mtext(cx0, cy1 - 14, 14, C.muted).attr("letter-spacing", ".08em").text("INFECTED SO FAR · EVERY RUN SO FAR");
+    const line = d3.line().x((v, i) => x(i)).y(v => y(v)).curve(d3.curveMonotoneX);
+    const past = cg.append("g").attr("fill", "none").attr("stroke", C.grey).attr("stroke-opacity", .45).attr("stroke-width", 1.5);
+    const cur = cg.append("path").attr("fill", "none").attr("stroke", C.red).attr("stroke-width", 3).attr("stroke-linecap", "round");
+    let frames = [], cum = [], k = 0, run = 0, hold = 0;
+    const fresh = () => { if (cum.length) past.append("path").attr("d", line(cum)); run++; frames = []; const r = Sim.sir(Sim.W.beta, Sim.W.gamma, Sim.W.src, T, null, (t, s) => frames.push(new Uint8Array(s))); cum = r.cum; k = 0; };
+    const paint = () => { w.state(frames[k]); cur.attr("d", line(cum.slice(0, k + 1))); tDay.text(`day ${k} · ${cum[k]} infected so far`); tRun.text(`RUN ${run}`); };
+    if (reduce()) {   // print: one frame, with thirty earlier runs behind it
+      for (let i = 0; i < 30; i++) past.append("path").attr("d", line(Sim.sir(Sim.W.beta, Sim.W.gamma, Sim.W.src, T).cum));
+      fresh(); run = 31; k = 14; paint(); return { steps: 1, caps: [], show: () => { } };
+    }
+    fresh();
+    const section = e.closest("section");
+    const tick = () => {
+      if (!e.isConnected) { clearInterval(timer); return; }
+      if (window.Reveal && Reveal.getCurrentSlide && Reveal.getCurrentSlide() !== section) return;   // paused while another slide is up
+      if (k > T) { if (hold++ < 6) { tDay.text(`day ${T} · ${cum[T]} people in the end`); return; } hold = 0; fresh(); }
+      paint(); k++;
+    };
+    paint(); k++; const timer = setInterval(tick, 300);
+    return { steps: 1, caps: [], show: () => { } };
+  };
+
   // 0 · two runs
   R.tworuns = (e, D) => {
     const row = el("div", "vrow"); e.appendChild(row);

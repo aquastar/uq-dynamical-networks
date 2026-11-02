@@ -1,0 +1,767 @@
+[
+ {
+  "part": "Part 0 · The ward",
+  "cite": "Vanhems et al. 2013",
+  "url": "https://doi.org/10.1371/journal.pone.0073970",
+  "title": "Estimating Potential Infection Transmission Routes in Hospital Wards Using Wearable Proximity Sensors",
+  "venue": "PLoS ONE",
+  "year": 2013,
+  "authors": "Philippe Vanhems, Alain Barrat, Ciro Cattuto, Jean-François Pinton et al."
+ },
+ {
+  "part": "Part 0 · The ward",
+  "cite": "Holme & Saramäki 2012",
+  "url": "https://doi.org/10.1016/j.physrep.2012.03.001",
+  "title": "Temporal networks",
+  "venue": "Physics Reports",
+  "authors": "Petter Holme, Jari Saramäki",
+  "year": 2012
+ },
+ {
+  "part": "Part 1 · Luck",
+  "cite": "Newman 2002 PRE",
+  "url": "https://doi.org/10.1103/physreve.66.016128",
+  "title": "Spread of epidemic disease on networks",
+  "venue": "Physical Review E",
+  "year": 2002,
+  "authors": "M. E. J. Newman"
+ },
+ {
+  "part": "Part 1 · Luck",
+  "cite": "Stehlé et al. 2011 BMC Medicine",
+  "url": "https://doi.org/10.1186/1741-7015-9-87",
+  "title": "Simulation of an SEIR infectious disease model on the dynamic contact network of conference attendees",
+  "venue": "BMC Medicine",
+  "year": 2011,
+  "authors": "Juliette Stehlé, Nicolas Voirin, Alain Barrat, Ciro Cattuto et al."
+ },
+ {
+  "part": "Part 1 · Luck",
+  "cite": "Kiss, Miller & Simon 2017",
+  "url": "https://doi.org/10.1007/978-3-319-50806-1",
+  "title": "Mathematics of Epidemics on Networks: From Exact to Approximate Models",
+  "venue": "Springer (book)",
+  "authors": "István Z. Kiss, Joel C. Miller, Péter L. Simon",
+  "year": 2017
+ },
+ {
+  "part": "Part 1 · Luck",
+  "cite": "Kitsak et al. 2010 Nature Physics",
+  "url": "https://doi.org/10.1038/nphys1746",
+  "title": "Identification of influential spreaders in complex networks",
+  "venue": "Nature Physics",
+  "year": 2010,
+  "authors": "Maksim Kitsak, Lazaros K. Gallos, Shlomo Havlin, Fredrik Liljeros et al."
+ },
+ {
+  "part": "Part 1 · Luck",
+  "cite": "Lawyer 2015 Scientific Reports",
+  "url": "https://doi.org/10.1038/srep08665",
+  "title": "Understanding the influence of all nodes in a network",
+  "venue": "Scientific Reports",
+  "year": 2015,
+  "authors": "Glenn Lawyer"
+ },
+ {
+  "part": "Part 1 · Luck",
+  "cite": "Karrer & Newman 2010 PRE",
+  "url": "https://doi.org/10.1103/physreve.82.016101",
+  "title": "Message passing approach for general epidemic models",
+  "venue": "Physical Review E",
+  "year": 2010,
+  "authors": "Brian Karrer, M. E. J. Newman"
+ },
+ {
+  "part": "Part 2 · Numbers we don’t know",
+  "cite": "Pritchard et al. 1999",
+  "url": "https://doi.org/10.1093/oxfordjournals.molbev.a026091",
+  "title": "Population growth of human Y chromosomes: a study of Y chromosome microsatellites",
+  "venue": "Molecular Biology and Evolution",
+  "year": 1999,
+  "authors": "J. K. Pritchard, M. T. Seielstad, A. Perez-Lezaun, M. W. Feldman"
+ },
+ {
+  "part": "Part 2 · Numbers we don’t know",
+  "cite": "Beaumont, Zhang & Balding 2002",
+  "url": "https://doi.org/10.1093/genetics/162.4.2025",
+  "title": "Approximate Bayesian Computation in Population Genetics",
+  "venue": "Genetics",
+  "year": 2002,
+  "authors": "Mark A Beaumont, Wenyang Zhang, David J Balding"
+ },
+ {
+  "part": "Part 2 · Numbers we don’t know",
+  "cite": "Dutta, Mira & Onnela 2018",
+  "url": "https://doi.org/10.1098/rspa.2018.0129",
+  "title": "Bayesian inference of spreading processes on networks",
+  "venue": "Proceedings of the Royal Society A: Mathematical, Physical and Engineering Sciences",
+  "year": 2018,
+  "authors": "Ritabrata Dutta, Antonietta Mira, Jukka-Pekka Onnela"
+ },
+ {
+  "part": "Part 2 · Numbers we don’t know",
+  "cite": "Kypraios, Neal & Prangle 2017",
+  "url": "https://doi.org/10.1016/j.mbs.2016.07.001",
+  "title": "A tutorial introduction to Bayesian inference for stochastic epidemic models using Approximate Bayesian Computation",
+  "venue": "Mathematical Biosciences",
+  "year": 2017,
+  "authors": "Theodore Kypraios, Peter Neal, Dennis Prangle"
+ },
+ {
+  "part": "Part 2 · Numbers we don’t know",
+  "cite": "Chatha et al. 2024, preprint",
+  "url": "https://arxiv.org/abs/2412.12967v2",
+  "title": "Neural Posterior Estimation for Stochastic Epidemic Modeling",
+  "venue": "arXiv preprint",
+  "year": 2024,
+  "authors": "Prayag Chatha, Fan Bu, Jeffrey Regier, Evan Snitkin et al."
+ },
+ {
+  "part": "Part 2 · Numbers we don’t know",
+  "cite": "Sobol’ 2001",
+  "url": "https://doi.org/10.1016/S0378-4754(00)00270-6",
+  "title": "Global sensitivity indices for nonlinear mathematical models and their Monte Carlo estimates",
+  "venue": "Mathematics and Computers in Simulation",
+  "authors": "I. M. Sobol’",
+  "year": 2001
+ },
+ {
+  "part": "Part 2 · Numbers we don’t know",
+  "cite": "Hart, Alexanderian & Gremaud 2017 SIAM SISC",
+  "url": "https://doi.org/10.1137/16m106193x",
+  "title": "Efficient Computation of Sobol' Indices for Stochastic Models",
+  "venue": "SIAM Journal on Scientific Computing",
+  "year": 2017,
+  "authors": "J. L. Hart, A. Alexanderian, P. A. Gremaud"
+ },
+ {
+  "part": "Part 2 · Numbers we don’t know",
+  "cite": "Lu & Borgonovo 2023 EJOR",
+  "url": "https://doi.org/10.1016/j.ejor.2021.11.018",
+  "title": "Global sensitivity analysis in epidemiological modeling",
+  "venue": "European Journal of Operational Research",
+  "year": 2023,
+  "authors": "Xuefei Lu, Emanuele Borgonovo"
+ },
+ {
+  "part": "Part 2 · Numbers we don’t know",
+  "cite": "Kennedy & O’Hagan 2001 JRSS-B",
+  "url": "https://doi.org/10.1111/1467-9868.00294",
+  "title": "Bayesian Calibration of Computer Models",
+  "venue": "Journal of the Royal Statistical Society Series B: Statistical Methodology",
+  "year": 2001,
+  "authors": "Marc C. Kennedy, Anthony O'Hagan"
+ },
+ {
+  "part": "Part 2 · Numbers we don’t know",
+  "cite": "Cranmer, Brehmer & Louppe 2020 PNAS",
+  "url": "https://doi.org/10.1073/pnas.1912789117",
+  "title": "The frontier of simulation-based inference",
+  "venue": "Proceedings of the National Academy of Sciences",
+  "year": 2020,
+  "authors": "Kyle Cranmer, Johann Brehmer, Gilles Louppe"
+ },
+ {
+  "part": "Part 2 · Numbers we don’t know",
+  "cite": "Biazzo et al. 2022 Scientific Reports",
+  "url": "https://doi.org/10.1038/s41598-022-20898-x",
+  "title": "A Bayesian generative neural network framework for epidemic inference problems",
+  "venue": "Scientific Reports",
+  "year": 2022,
+  "authors": "Indaco Biazzo, Alfredo Braunstein, Luca Dall’Asta, Fabio Mazza"
+ },
+ {
+  "part": "Part 2 · Numbers we don’t know",
+  "cite": "Groendyke, Welch & Hunter 2011 (epinet)",
+  "url": "https://doi.org/10.1111/j.1467-9469.2010.00721.x",
+  "title": "Bayesian Inference for Contact Networks Given Epidemic Data",
+  "venue": "Scandinavian Journal of Statistics",
+  "year": 2011,
+  "authors": "CHRIS GROENDYKE, DAVID WELCH, DAVID R. HUNTER"
+ },
+ {
+  "part": "Part 3 · A graph we don’t fully know",
+  "cite": "Génois, Vestergaard, Cattuto & Barrat 2015 Nature Communications",
+  "url": "https://doi.org/10.1038/ncomms9860",
+  "title": "Compensating for population sampling in simulations of epidemic spread on temporal contact networks",
+  "venue": "Nature Communications",
+  "year": 2015,
+  "authors": "Mathieu Génois, Christian L. Vestergaard, Ciro Cattuto, Alain Barrat"
+ },
+ {
+  "part": "Part 3 · A graph we don’t fully know",
+  "cite": "Newman 2018 Nature Physics",
+  "url": "https://doi.org/10.1038/s41567-018-0076-1",
+  "title": "Network structure from rich but noisy data",
+  "venue": "Nature Physics",
+  "year": 2018,
+  "authors": "M. E. J. Newman"
+ },
+ {
+  "part": "Part 3 · A graph we don’t fully know",
+  "cite": "Young, Cantwell & Newman 2020",
+  "url": "https://doi.org/10.1093/comnet/cnaa046",
+  "title": "Bayesian inference of network structure from unreliable data",
+  "venue": "Journal of Complex Networks",
+  "year": 2020,
+  "authors": "Jean-Gabriel Young, George T Cantwell, M E J Newman"
+ },
+ {
+  "part": "Part 3 · A graph we don’t fully know",
+  "cite": "Hoff, Raftery & Handcock 2002",
+  "url": "https://doi.org/10.1198/016214502388618906",
+  "title": "Latent space approaches to social network analysis",
+  "venue": "Journal of the American Statistical Association",
+  "authors": "Peter D. Hoff, Adrian E. Raftery, Mark S. Handcock",
+  "year": 2002
+ },
+ {
+  "part": "Part 3 · A graph we don’t fully know",
+  "cite": "Sewell & Chen 2015",
+  "url": "https://doi.org/10.1080/01621459.2014.988214",
+  "title": "Latent space models for dynamic networks",
+  "venue": "Journal of the American Statistical Association",
+  "authors": "Daniel K. Sewell, Yuguo Chen",
+  "year": 2015
+ },
+ {
+  "part": "Part 3 · A graph we don’t fully know",
+  "cite": "Peixoto 2019 PRL",
+  "url": "https://doi.org/10.1103/physrevlett.123.128301",
+  "title": "Network Reconstruction and Community Detection from Dynamics",
+  "venue": "Physical Review Letters",
+  "year": 2019,
+  "authors": "Tiago P. Peixoto"
+ },
+ {
+  "part": "Part 3 · A graph we don’t fully know",
+  "cite": "Kipf et al. 2018 (NRI)",
+  "url": "https://arxiv.org/abs/1802.04687v2",
+  "title": "Neural Relational Inference for Interacting Systems",
+  "venue": "arXiv",
+  "year": 2018,
+  "authors": "Thomas Kipf, Ethan Fetaya, Kuan-Chieh Wang, Max Welling et al."
+ },
+ {
+  "part": "Part 3 · A graph we don’t fully know",
+  "cite": "StructInfer, NeurIPS 2024",
+  "url": "https://doi.org/10.52202/079017-4295",
+  "title": "Benchmarking Structural Inference Methods for Interacting Dynamical Systems with Synthetic Data",
+  "venue": "Advances in Neural Information Processing Systems 37",
+  "year": 2024,
+  "authors": "Aoran Wang, Tsz Pan Tong, Andrzej Mizera, Jun Pang"
+ },
+ {
+  "part": "Part 3 · A graph we don’t fully know",
+  "cite": "Dabush & Routtenberg 2024",
+  "url": "https://doi.org/10.1109/icassp48485.2024.10446697",
+  "title": "Kalman Filter for Tracking Network Dynamic",
+  "venue": "ICASSP 2024 - 2024 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)",
+  "year": 2024,
+  "authors": "Lital Dabush, Tirza Routtenberg"
+ },
+ {
+  "part": "Part 3 · A graph we don’t fully know",
+  "cite": "Prasse & Van Mieghem 2022 PNAS",
+  "url": "https://doi.org/10.1073/pnas.2205517119",
+  "title": "Predicting network dynamics without requiring the knowledge of the interaction graph",
+  "venue": "Proceedings of the National Academy of Sciences",
+  "year": 2022,
+  "authors": "Bastian Prasse, Piet Van Mieghem"
+ },
+ {
+  "part": "Part 4 · Tracking what we can’t see",
+  "cite": "Del Moral 2004",
+  "url": "https://doi.org/10.1007/978-1-4684-9393-1",
+  "title": "Feynman-Kac Formulae: Genealogical and Interacting Particle Systems with Applications",
+  "venue": "Springer (book)",
+  "authors": "Pierre Del Moral",
+  "year": 2004
+ },
+ {
+  "part": "Part 4 · Tracking what we can’t see",
+  "cite": "Snyder et al. 2008",
+  "url": "https://doi.org/10.1175/2008mwr2529.1",
+  "title": "Obstacles to High-Dimensional Particle Filtering",
+  "venue": "Monthly Weather Review",
+  "year": 2008,
+  "authors": "Chris Snyder, Thomas Bengtsson, Peter Bickel, Jeff Anderson"
+ },
+ {
+  "part": "Part 4 · Tracking what we can’t see",
+  "cite": "Kalman 1960",
+  "url": "https://doi.org/10.1115/1.3662552",
+  "title": "A New Approach to Linear Filtering and Prediction Problems",
+  "venue": "Journal of Basic Engineering",
+  "year": 1960,
+  "authors": "R. E. Kalman"
+ },
+ {
+  "part": "Part 4 · Tracking what we can’t see",
+  "cite": "Gordon, Salmond & Smith 1993",
+  "url": "https://doi.org/10.1049/ip-f-2.1993.0015",
+  "title": "Novel approach to nonlinear/non-Gaussian Bayesian state estimation",
+  "venue": "IEE Proceedings F Radar and Signal Processing",
+  "year": 1993,
+  "authors": "N.J. Gordon, D.J. Salmond, A.F.M. Smith"
+ },
+ {
+  "part": "Part 4 · Tracking what we can’t see",
+  "cite": "Evensen 2003",
+  "url": "https://doi.org/10.1007/s10236-003-0036-9",
+  "title": "The Ensemble Kalman Filter: theoretical formulation and practical implementation",
+  "venue": "Ocean Dynamics",
+  "year": 2003,
+  "authors": "Geir Evensen"
+ },
+ {
+  "part": "Part 4 · Tracking what we can’t see",
+  "cite": "Ju, Heng & Jacob 2021, arXiv",
+  "url": "https://arxiv.org/abs/2101.12156v1",
+  "title": "Sequential Monte Carlo algorithms for agent-based models of disease transmission",
+  "venue": "arXiv preprint",
+  "year": 2021,
+  "authors": "Nianqiao Ju, Jeremy Heng, Pierre E. Jacob"
+ },
+ {
+  "part": "Part 4 · Tracking what we can’t see",
+  "cite": "Li, Pei et al. 2020 Science",
+  "url": "https://doi.org/10.1126/science.abb3221",
+  "title": "Substantial undocumented infection facilitates the rapid dissemination of novel coronavirus (SARS-CoV-2)",
+  "venue": "Science",
+  "year": 2020,
+  "authors": "Ruiyun Li, Sen Pei, Bin Chen, Yimeng Song et al."
+ },
+ {
+  "part": "Part 4 · Tracking what we can’t see",
+  "cite": "Tsui et al. 2024 PNAS",
+  "url": "",
+  "title": "",
+  "venue": "",
+  "year": 2024,
+  "authors": ""
+ },
+ {
+  "part": "Part 4 · Tracking what we can’t see",
+  "cite": "Meirom et al. 2021 ICML",
+  "url": "https://arxiv.org/abs/2010.05313",
+  "title": "Controlling graph dynamics with reinforcement learning and graph neural networks",
+  "venue": "ICML 2021",
+  "authors": "Eli A. Meirom, Haggai Maron, Shie Mannor, Gal Chechik",
+  "year": 2021
+ },
+ {
+  "part": "Part 4 · Tracking what we can’t see",
+  "cite": "Borovitskiy et al. 2021",
+  "url": "https://arxiv.org/abs/2010.15538v4",
+  "title": "Matérn Gaussian Processes on Graphs",
+  "venue": "arXiv",
+  "year": 2020,
+  "authors": "Viacheslav Borovitskiy, Iskander Azangulov, Alexander Terenin, Peter Mostowsky et al."
+ },
+ {
+  "part": "Part 4 · Tracking what we can’t see",
+  "cite": "Stadler et al. 2021 NeurIPS (GPN)",
+  "url": "https://arxiv.org/abs/2110.14012v1",
+  "title": "Graph Posterior Network: Bayesian Predictive Uncertainty for Node Classification",
+  "venue": "arXiv",
+  "year": 2021,
+  "authors": "Maximilian Stadler, Bertrand Charpentier, Simon Geisler, Daniel Zügner et al."
+ },
+ {
+  "part": "Part 5 · Guarantees for any model",
+  "cite": "Vovk, Gammerman & Shafer 2005",
+  "url": "https://doi.org/10.1007/b106715",
+  "title": "Algorithmic Learning in a Random World",
+  "venue": "Springer (book)",
+  "authors": "Vladimir Vovk, Alex Gammerman, Glenn Shafer",
+  "year": 2005
+ },
+ {
+  "part": "Part 5 · Guarantees for any model",
+  "cite": "Lei et al. 2018",
+  "url": "https://doi.org/10.1080/01621459.2017.1307116",
+  "title": "Distribution-Free Predictive Inference for Regression",
+  "venue": "Journal of the American Statistical Association",
+  "year": 2018,
+  "authors": "Jing Lei, Max G’Sell, Alessandro Rinaldo, Ryan J. Tibshirani et al."
+ },
+ {
+  "part": "Part 5 · Guarantees for any model",
+  "cite": "Angelopoulos & Bates 2023",
+  "url": "https://doi.org/10.1561/9781638281597",
+  "title": "Conformal Prediction: A Gentle Introduction",
+  "venue": "Now Publishers",
+  "year": 2023,
+  "authors": "Anastasios N. Angelopoulos, Stephen Bates"
+ },
+ {
+  "part": "Part 5 · Guarantees for any model",
+  "cite": "Shafer & Vovk 2008",
+  "url": "https://arxiv.org/abs/0706.3188v1",
+  "title": "A tutorial on conformal prediction",
+  "venue": "arXiv",
+  "year": 2007,
+  "authors": "Glenn Shafer, Vladimir Vovk"
+ },
+ {
+  "part": "Part 5 · Guarantees for any model",
+  "cite": "Gibbs & Candès 2021 NeurIPS",
+  "url": "https://arxiv.org/abs/2106.00170v3",
+  "title": "Adaptive Conformal Inference Under Distribution Shift",
+  "venue": "arXiv",
+  "year": 2021,
+  "authors": "Isaac Gibbs, Emmanuel Candès"
+ },
+ {
+  "part": "Part 5 · Guarantees for any model",
+  "cite": "Barber, Candès, Ramdas & Tibshirani 2023",
+  "url": "https://doi.org/10.1214/23-aos2276",
+  "title": "Conformal prediction beyond exchangeability",
+  "venue": "The Annals of Statistics",
+  "year": 2023,
+  "authors": "Rina Foygel Barber, Emmanuel J. Candès, Aaditya Ramdas, Ryan J. Tibshirani"
+ },
+ {
+  "part": "Part 5 · Guarantees for any model",
+  "cite": "Gneiting, Balabdaoui & Raftery 2007 JRSS-B",
+  "url": "https://doi.org/10.1111/j.1467-9868.2007.00587.x",
+  "title": "Probabilistic Forecasts, Calibration and Sharpness",
+  "venue": "Journal of the Royal Statistical Society Series B: Statistical Methodology",
+  "year": 2007,
+  "authors": "Tilmann Gneiting, Fadoua Balabdaoui, Adrian E. Raftery"
+ },
+ {
+  "part": "Part 5 · Guarantees for any model",
+  "cite": "Gneiting & Raftery 2007 JASA",
+  "url": "https://doi.org/10.1198/016214506000001437",
+  "title": "Strictly Proper Scoring Rules, Prediction, and Estimation",
+  "venue": "Journal of the American Statistical Association",
+  "year": 2007,
+  "authors": "Tilmann Gneiting, Adrian E Raftery"
+ },
+ {
+  "part": "Part 5 · Guarantees for any model",
+  "cite": "Bracher, Ray, Gneiting & Reich 2021 PLOS Comp Bio",
+  "url": "https://doi.org/10.1371/journal.pcbi.1010592",
+  "title": "Correction: Evaluating epidemic forecasts in an interval format",
+  "venue": "PLOS Computational Biology",
+  "year": 2022,
+  "authors": "Johannes Bracher, Evan L. Ray, Tilmann Gneiting, Nicholas G. Reich"
+ },
+ {
+  "part": "Part 5 · Guarantees for any model",
+  "cite": "CF-GNN, NeurIPS 2023 (Huang et al.)",
+  "url": "https://doi.org/10.52202/075280-1160",
+  "title": "Uncertainty Quantification over Graph with Conformalized Graph Neural Networks",
+  "venue": "Advances in Neural Information Processing Systems 36",
+  "year": 2023,
+  "authors": "Kexin Huang, Ying Jin, Emmanuel Candes, Jure Leskovec"
+ },
+ {
+  "part": "Part 5 · Guarantees for any model",
+  "cite": "DAPS, ICML 2023 (Zargarbashi et al.)",
+  "url": "",
+  "title": "Conformal prediction sets for graph neural networks",
+  "venue": "",
+  "year": 2023,
+  "authors": ""
+ },
+ {
+  "part": "Part 5 · Guarantees for any model",
+  "cite": "CoRel, ICML 2025 (Cini et al.)",
+  "url": "https://arxiv.org/abs/2502.09443v2",
+  "title": "Relational Conformal Prediction for Correlated Time Series",
+  "venue": "arXiv",
+  "year": 2025,
+  "authors": "Andrea Cini, Alexander Jenkins, Danilo Mandic, Cesare Alippi et al."
+ },
+ {
+  "part": "Part 5 · Guarantees for any model",
+  "cite": "Zargarbashi & Bojchevski, ICLR 2024",
+  "url": "https://arxiv.org/abs/2407.09173v1",
+  "title": "Conformal Inductive Graph Neural Networks",
+  "venue": "arXiv",
+  "year": 2024,
+  "authors": "Soroush H. Zargarbashi, Aleksandar Bojchevski"
+ },
+ {
+  "part": "Part 5 · Guarantees for any model",
+  "cite": "Conformal PID, NeurIPS 2023 (Angelopoulos et al.)",
+  "url": "https://doi.org/10.52202/075280-1000",
+  "title": "Conformal PID Control for Time Series Prediction",
+  "venue": "Advances in Neural Information Processing Systems 36",
+  "year": 2023,
+  "authors": "Anastasios Angelopoulos, Emmanuel Candes, Ryan Tibshirani"
+ },
+ {
+  "part": "Part 5 · Guarantees for any model",
+  "cite": "Lakshminarayanan, Pritzel & Blundell 2017",
+  "url": "https://arxiv.org/abs/1612.01474v3",
+  "title": "Simple and Scalable Predictive Uncertainty Estimation using Deep Ensembles",
+  "venue": "arXiv",
+  "year": 2016,
+  "authors": "Balaji Lakshminarayanan, Alexander Pritzel, Charles Blundell"
+ },
+ {
+  "part": "Part 5 · Guarantees for any model",
+  "cite": "Gal & Ghahramani 2016",
+  "url": "https://arxiv.org/abs/1506.02142v6",
+  "title": "Dropout as a Bayesian Approximation: Representing Model Uncertainty in Deep Learning",
+  "venue": "arXiv",
+  "year": 2015,
+  "authors": "Yarin Gal, Zoubin Ghahramani"
+ },
+ {
+  "part": "Part 5 · Guarantees for any model",
+  "cite": "Wang et al. 2024 TMLR",
+  "url": "https://arxiv.org/abs/2403.07185",
+  "title": "Uncertainty in graph neural networks: a survey",
+  "venue": "Transactions on Machine Learning Research",
+  "authors": "Fangxin Wang, Yuqing Liu, Kay Liu, Yibo Wang, Sourav Medya, Philip S. Yu",
+  "year": 2024
+ },
+ {
+  "part": "Part 5 · Guarantees for any model",
+  "cite": "Hsu et al. 2022 (GATS)",
+  "url": "https://doi.org/10.52202/068431-1001",
+  "title": "What Makes Graph Neural Networks Miscalibrated?",
+  "venue": "Advances in Neural Information Processing Systems 35",
+  "year": 2022,
+  "authors": "Hans Hao-Hsun Hsu, Yuesong Shen, Christian Tomani, Daniel Cremers"
+ },
+ {
+  "part": "Part 5 · Guarantees for any model",
+  "cite": "Wen et al. 2023 (DiffSTG)",
+  "url": "https://doi.org/10.1145/3589132.3625614",
+  "title": "DiffSTG: Probabilistic Spatio-Temporal Graph Forecasting with Denoising Diffusion Models",
+  "venue": "Proceedings of the 31st ACM International Conference on Advances in Geographic Information Systems",
+  "year": 2023,
+  "authors": "Haomin Wen, Youfang Lin, Yutong Xia, Huaiyu Wan et al."
+ },
+ {
+  "part": "Part 5 · Guarantees for any model",
+  "cite": "Kamarthi et al. 2021 (EpiFNP)",
+  "url": "https://arxiv.org/abs/2106.03904v3",
+  "title": "When in Doubt: Neural Non-Parametric Uncertainty Quantification for Epidemic Forecasting",
+  "venue": "arXiv",
+  "year": 2021,
+  "authors": "Harshavardhan Kamarthi, Lingkai Kong, Alexander Rodríguez, Chao Zhang et al."
+ },
+ {
+  "part": "Part 5 · Guarantees for any model",
+  "cite": "Cramer et al. 2022 PNAS",
+  "url": "https://doi.org/10.1073/pnas.2113561119",
+  "title": "Evaluation of individual and ensemble probabilistic forecasts of COVID-19 mortality in the United States",
+  "venue": "Proceedings of the National Academy of Sciences",
+  "authors": "Estee Y. Cramer et al.",
+  "year": 2022
+ },
+ {
+  "part": "Part 5 · Guarantees for any model",
+  "cite": "Wu et al. 2021 KDD",
+  "url": "https://doi.org/10.1145/3447548.3467325",
+  "title": "Quantifying Uncertainty in Deep Spatiotemporal Forecasting",
+  "venue": "Proceedings of the 27th ACM SIGKDD Conference on Knowledge Discovery &amp; Data Mining",
+  "year": 2021,
+  "authors": "Dongxia Wu, Liyao Gao, Matteo Chinazzi, Xinyue Xiong et al."
+ },
+ {
+  "part": "Part 6 · Running it backwards",
+  "cite": "Shah & Zaman 2011",
+  "url": "https://doi.org/10.1109/tit.2011.2158885",
+  "title": "Rumors in a Network: Who's the Culprit?",
+  "venue": "IEEE Transactions on Information Theory",
+  "year": 2011,
+  "authors": "Devavrat Shah, Tauhid Zaman"
+ },
+ {
+  "part": "Part 6 · Running it backwards",
+  "cite": "Antulov-Fantulin et al. 2015 PRL",
+  "url": "https://doi.org/10.1103/physrevlett.114.248701",
+  "title": "Identification of Patient Zero in Static and Temporal Networks: Robustness and Limitations",
+  "venue": "Physical Review Letters",
+  "year": 2015,
+  "authors": "Nino Antulov-Fantulin, Alen Lančić, Tomislav Šmuc, Hrvoje Štefančić et al."
+ },
+ {
+  "part": "Part 6 · Running it backwards",
+  "cite": "Dawkins, Li & Xu 2021 ICML",
+  "url": "https://arxiv.org/abs/2106.04800v2",
+  "title": "Diffusion Source Identification on Networks with Statistical Confidence",
+  "venue": "arXiv",
+  "year": 2021,
+  "authors": "Quinlan Dawkins, Tianxi Li, Haifeng Xu"
+ },
+ {
+  "part": "Part 6 · Running it backwards",
+  "cite": "Jian et al. 2026 AAAI",
+  "url": "https://doi.org/10.1609/aaai.v40i43.40990",
+  "title": "Conformal Prediction for Multi-Source Detection on a Network",
+  "venue": "Proceedings of the AAAI Conference on Artificial Intelligence",
+  "year": 2026,
+  "authors": "Xingchao Jian, Purui Zhang, Lan Tian, Feng Ji et al."
+ },
+ {
+  "part": "Part 6 · Running it backwards",
+  "cite": "Yan, Fang & He 2023 NeurIPS",
+  "url": "https://doi.org/10.52202/075280-0980",
+  "title": "Diffusion Model for Graph Inverse Problems: Towards Effective Source Localization on Complex Networks",
+  "venue": "Advances in Neural Information Processing Systems 36",
+  "year": 2023,
+  "authors": "Xin Yan, Hui Fang, Qiang He"
+ },
+ {
+  "part": "Part 6 · Running it backwards",
+  "cite": "Ling et al. 2022 KDD",
+  "url": "https://doi.org/10.1145/3534678.3539288",
+  "title": "Source Localization of Graph Diffusion via Variational Autoencoders for Graph Inverse Problems",
+  "venue": "Proceedings of the 28th ACM SIGKDD Conference on Knowledge Discovery and Data Mining",
+  "year": 2022,
+  "authors": "Chen Ling, Junji Jiang, Junxiang Wang, Zhao Liang"
+ },
+ {
+  "part": "Part 7 · Deciding anyway",
+  "cite": "Nemhauser, Wolsey & Fisher 1978",
+  "url": "https://doi.org/10.1007/bf01588971",
+  "title": "An analysis of approximations for maximizing submodular set functions—I",
+  "venue": "Mathematical Programming",
+  "year": 1978,
+  "authors": "G. L. Nemhauser, L. A. Wolsey, M. L. Fisher"
+ },
+ {
+  "part": "Part 7 · Deciding anyway",
+  "cite": "Kempe, Kleinberg & Tardos 2003",
+  "url": "https://doi.org/10.1145/956750.956769",
+  "title": "Maximizing the spread of influence through a social network",
+  "venue": "Proceedings of the ninth ACM SIGKDD international conference on Knowledge discovery and data mining",
+  "year": 2003,
+  "authors": "David Kempe, Jon Kleinberg, Éva Tardos"
+ },
+ {
+  "part": "Part 7 · Deciding anyway",
+  "cite": "Ohsaka & Yoshida 2017 WWW",
+  "url": "https://doi.org/10.1145/3038912.3052628",
+  "title": "Portfolio Optimization for Influence Spread",
+  "venue": "Proceedings of the 26th International Conference on World Wide Web",
+  "year": 2017,
+  "authors": "Naoto Ohsaka, Yuichi Yoshida"
+ },
+ {
+  "part": "Part 7 · Deciding anyway",
+  "cite": "Rockafellar & Uryasev 2000",
+  "url": "https://doi.org/10.21314/jor.2000.038",
+  "title": "Optimization of conditional value-at-risk",
+  "venue": "The Journal of Risk",
+  "year": 2000,
+  "authors": "R. Tyrrell Rockafellar, Stanislav Uryasev"
+ },
+ {
+  "part": "Part 7 · Deciding anyway",
+  "cite": "Staib, Wilder & Jegelka 2019 AISTATS",
+  "url": "https://arxiv.org/abs/1802.05249v2",
+  "title": "Distributionally Robust Submodular Maximization",
+  "venue": "arXiv",
+  "year": 2018,
+  "authors": "Matthew Staib, Bryan Wilder, Stefanie Jegelka"
+ },
+ {
+  "part": "Part 7 · Deciding anyway",
+  "cite": "Esfahani & Kuhn 2018",
+  "url": "https://doi.org/10.1007/s10107-017-1172-1",
+  "title": "Data-driven distributionally robust optimization using the Wasserstein metric: performance guarantees and tractable reformulations",
+  "venue": "Mathematical Programming",
+  "year": 2018,
+  "authors": "Peyman Mohajerin Esfahani, Daniel Kuhn"
+ },
+ {
+  "part": "Part 7 · Deciding anyway",
+  "cite": "Chen et al. 2016 KDD",
+  "url": "https://doi.org/10.1145/2939672.2939745",
+  "title": "Robust Influence Maximization",
+  "venue": "Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining",
+  "year": 2016,
+  "authors": "Wei Chen, Tian Lin, Zihan Tan, Mingfei Zhao et al."
+ },
+ {
+  "part": "Part 7 · Deciding anyway",
+  "cite": "Han, Preciado, Nowzari & Pappas 2015 IEEE TNSE",
+  "url": "https://doi.org/10.1109/tnse.2015.2500158",
+  "title": "Data-Driven Network Resource Allocation for Controlling Spreading Processes",
+  "venue": "IEEE Transactions on Network Science and Engineering",
+  "year": 2015,
+  "authors": "Shuo Han, Victor M. Preciado, Cameron Nowzari, George J. Pappas"
+ },
+ {
+  "part": "Part 7 · Deciding anyway",
+  "cite": "Patel, Rayan & Tewari 2024 AISTATS",
+  "url": "https://arxiv.org/abs/2310.10003v1",
+  "title": "Conformal Contextual Robust Optimization",
+  "venue": "arXiv",
+  "year": 2023,
+  "authors": "Yash Patel, Sahana Rayan, Ambuj Tewari"
+ },
+ {
+  "part": "Part 7 · Deciding anyway",
+  "cite": "Wilder, Dilkina & Tambe 2019 AAAI",
+  "url": "https://doi.org/10.1609/aaai.v33i01.33011658",
+  "title": "Melding the Data-Decisions Pipeline: Decision-Focused Learning for Combinatorial Optimization",
+  "venue": "Proceedings of the AAAI Conference on Artificial Intelligence",
+  "year": 2019,
+  "authors": "Bryan Wilder, Bistra Dilkina, Milind Tambe"
+ },
+ {
+  "part": "Part 7 · Deciding anyway",
+  "cite": "Elmachtoub & Grigas 2022",
+  "url": "https://doi.org/10.1287/mnsc.2020.3922",
+  "title": "Smart “Predict, then Optimize”",
+  "venue": "Management Science",
+  "year": 2022,
+  "authors": "Adam N. Elmachtoub, Paul Grigas"
+ },
+ {
+  "part": "Part 7 · Deciding anyway",
+  "cite": "Hu et al. 2026 ICLR",
+  "url": "",
+  "title": "",
+  "venue": "",
+  "year": 2026,
+  "authors": ""
+ },
+ {
+  "part": "Part 8 · The map",
+  "cite": "Rebeschini & van Handel 2015 Ann. Appl. Probab.",
+  "url": "https://doi.org/10.1214/14-aap1061",
+  "title": "Can local particle filters beat the curse of dimensionality?",
+  "venue": "The Annals of Applied Probability",
+  "year": 2015,
+  "authors": "Patrick Rebeschini, Ramon van Handel"
+ },
+ {
+  "part": "Part 8 · The map",
+  "cite": "Gross, D’Lima & Blasius 2006 PRL",
+  "url": "https://doi.org/10.1103/physrevlett.96.208701",
+  "title": "Epidemic Dynamics on an Adaptive Network",
+  "venue": "Physical Review Letters",
+  "year": 2006,
+  "authors": "Thilo Gross, Carlos J. Dommar D’Lima, Bernd Blasius"
+ },
+ {
+  "part": "Part 8 · The map",
+  "cite": "Psaros et al. 2023 J. Comp. Phys.",
+  "url": "https://doi.org/10.1016/j.jcp.2022.111902",
+  "title": "Uncertainty quantification in scientific machine learning: Methods, metrics, and comparisons",
+  "venue": "Journal of Computational Physics",
+  "year": 2023,
+  "authors": "Apostolos F. Psaros, Xuhui Meng, Zongren Zou, Ling Guo et al."
+ },
+ {
+  "part": "Part 8 · The map",
+  "cite": "Lunde, Levina & Zhu 2025 JASA",
+  "url": "https://doi.org/10.1080/01621459.2025.2506198",
+  "title": "Conformal Prediction for Network-Assisted Regression",
+  "venue": "Journal of the American Statistical Association",
+  "year": 2025,
+  "authors": "Robert Lunde, Elizaveta Levina, Ji Zhu"
+ }
+]

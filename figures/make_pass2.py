@@ -1,6 +1,6 @@
 """Pass-2 numbers for the deck: metrics, the filter fixed by conformal, a GP surrogate, deep-learning bands,
-a scale test, the three risk-dial plans and the manager's numbers. Self-contained: reads data.json (repo root),
-writes figures/pass2.json (merge_pass2.py puts it into data.json (repo root) as D.p2).   python make_pass2.py
+a scale test, the three risk-dial plans and the manager's numbers. Self-contained: reads deck/data.json,
+writes figures/pass2.json (merge_pass2.py puts it into deck/data.json as D.p2).   python make_pass2.py
 """
 import os, sys, json, time
 sys.stdout.reconfigure(encoding="utf-8")
@@ -8,7 +8,7 @@ import numpy as np
 import scipy.sparse as sp
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-D = json.load(open(os.path.join(HERE, "..", "data.json"), encoding="utf-8"))
+D = json.load(open(os.path.join(HERE, "..", "deck", "data.json"), encoding="utf-8"))
 W = D["ward"]; N = len(W["pos"]); BETA, GAMMA, SRC, T = W["beta"], W["gamma"], W["src"], 40
 A = np.zeros((N, N))
 for a, b in W["edges"]:
@@ -54,14 +54,14 @@ if not done('metrics'):
         z = (y - mu) / sigma
         return float(np.mean(sigma * (z * (2 * norm.cdf(z) - 1) + 2 * norm.pdf(z) - 1 / np.sqrt(np.pi))))
     rows = []
-    f4 = D["fig4"]; d = slice(11, 41)
+    f4 = D["fig4"]; d = slice(10, 41)   # the same days as fig6 (day 10 onwards), so the scorecard and the Part 3 figure agree
     rows.append(dict(part="Part 2 · fan, every plausible β", cov=round(100 * float(np.mean((C_true[d] >= np.array(f4["q05"])[d]) & (C_true[d] <= np.array(f4["q95"])[d])))), width=round(float(np.mean(np.array(f4["q95"])[d] - np.array(f4["q05"])[d])), 1), iscore=round(interval_score(np.array(f4["q05"])[d], np.array(f4["q95"])[d], C_true[d]), 1), crps=None))
     f6 = D["fig6"]
     for lab, lo, hi in [("Part 3 · recorded graph", f6["lg"], f6["hg"]), ("Part 3 · plausible graphs", f6["lb"], f6["hb"])]:
         lo, hi = np.array(lo), np.array(hi)
         rows.append(dict(part=lab, cov=round(100 * float(np.mean((C_true[d] >= lo[d]) & (C_true[d] <= hi[d])))), width=round(float(np.mean(hi[d] - lo[d])), 1), iscore=round(interval_score(lo[d], hi[d], C_true[d]), 1), crps=None))
     f8 = D["fig8"]; lo8, hi8 = np.array(f8["lo"]), np.array(f8["hi"])
-    rows.append(dict(part="Part 4 · particle filter", cov=round(100 * float(np.mean((I_true >= lo8) & (I_true <= hi8)))), width=round(float(np.mean(hi8 - lo8)), 1), iscore=round(interval_score(lo8, hi8, I_true), 1), crps=None))
+    rows.append(dict(part="Part 4 · particle filter, this outbreak", cov=round(100 * float(np.mean((I_true >= lo8) & (I_true <= hi8)))), width=round(float(np.mean(hi8 - lo8)), 1), iscore=round(interval_score(lo8, hi8, I_true), 1), crps=None))
     f10 = D["fig10"]; res = np.array(f10["res_test"]); rcal = np.array(f10["res_cal"]); z90 = 1.6449
     from scipy.stats import norm
     pit = norm.cdf(res / 2.0)

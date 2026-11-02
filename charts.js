@@ -155,6 +155,48 @@ window.Charts = (function () {
     return { steps: 1, caps: [], show: () => { } };
   };
 
+  // 0 · four questions, each shown on the ward
+  R.fourq = (e, D) => {
+    const row = el("div", "fourq grid"); e.appendChild(row); const T = 40;
+    const hubs = d3.range(Sim.N).sort((a, b) => Sim.deg[b] - Sim.deg[a]).slice(0, 8);
+    let big = null; for (let i = 0; i < 60 && !big; i++) { const fr = []; const r = Sim.sir(Sim.W.beta, Sim.W.gamma, Sim.W.src, T, null, (t, s) => fr.push(new Uint8Array(s))); if (r.cum[T] >= 50) big = fr; }
+    if (!big) { const fr = []; Sim.sir(Sim.W.beta, Sim.W.gamma, Sim.W.src, T, null, (t, s) => fr.push(new Uint8Array(s))); big = fr; }
+    const tested = new Set(d3.range(Sim.N).filter(i => (i * 7) % 10 < 3));
+    const Q = [
+      { k: "Parts 1 to 3", q: "How big will it get?", a: "A forecast, with how sure we are", draw: w => w.state(big[T]) },
+      { k: "Part 4", q: "Who is infected right now?", a: "We only test some people, and tests miss cases", draw: w => { const s = big[12]; w.nodes.attr("fill", i => tested.has(i) ? Sim.STATE[s[i]] : "#fff").attr("stroke", i => tested.has(i) ? "#fff" : C.grey); } },
+      { k: "Part 6", q: "Who started it?", a: "A name, or a short list of suspects", draw: w => { w.state(D.truth.snapshot8); w.ring(new Set(D.fig11.set90), C.blue, 6.5, 1.6, "3,2"); } },
+      { k: "Part 7", q: "Whom do we isolate or vaccinate?", a: "A decision that has to survive being wrong", draw: w => { w.nodes.attr("fill", i => hubs.includes(i) ? C.blue : C.light); w.size(i => hubs.includes(i) ? 7 : w.rad(i)); } },
+    ];
+    const panels = Q.map(q => {
+      const p = el("div", "fq"); row.appendChild(p); const txt = el("div", "txt"); p.appendChild(txt); txt.appendChild(el("p", "k", q.k)); txt.appendChild(el("h3", null, q.q)); txt.appendChild(el("p", "a", q.a));
+      const fig = el("div", "figbox"); p.appendChild(fig); const w = ward(fig, { w: 420, h: 270, r: 5, pad: 8, padT: 6, padB: 6 });
+      w.edges.attr("stroke-opacity", .25).attr("stroke-width", 1); w.nodes.attr("stroke-width", .8); q.draw(w); return p;
+    });
+    return { steps: 4, caps: [], show: k => panels.forEach((p, i) => p.classList.toggle("on", i <= k)) };
+  };
+
+  // 2 · Bayes in one sentence: the prior, the data, the posterior, as three small figures
+  R.bayes3 = (e, D) => {
+    const row = el("div", "fourq three"); e.appendChild(row);
+    const mk = (k, title, sub, accent) => { const p = el("div", "fq" + (accent ? " accent" : "")); row.appendChild(p); p.appendChild(el("p", "k", k)); p.appendChild(el("h3", null, title)); const fig = el("div", "figbox"); p.appendChild(fig); const a = el("p", "a", sub); p.appendChild(a); return { p, fig }; };
+    const M = { l: 44, r: 16, t: 22, b: 54 }, W = 420, H = 300; const bx = () => d3.scaleLinear().domain([0, 0.31]).range([0, W - M.l - M.r]);
+    // prior: every β from 1% to 30% equally likely
+    const P1 = mk("Before data", "β could be anything from 1% to 30%", "the prior: a flat line");
+    { const f = frame(P1.fig, W, H, M), x = bx(), y = d3.scaleLinear().domain([0, 1]).range([f.ih, 0]); axes(f, x, y, "β, how contagious", "", { xt: 6, noY: true });
+      f.g.append("rect").attr("x", x(0.01)).attr("y", y(.45)).attr("width", x(0.30) - x(0.01)).attr("height", f.ih - y(.45)).attr("fill", C.blueSoft).attr("stroke", C.blue).attr("stroke-width", 2).attr("rx", 3); }
+    // data: the case counts, days 0 to 10
+    const obs = D.truth.C.slice(0, 11); const P2 = mk("Data", "The case counts on days 0 to 10", "what the ward actually showed us");
+    { const f = frame(P2.fig, W, H, M), x = d3.scaleLinear().domain([0, 10]).range([0, f.iw]), y = d3.scaleLinear().domain([0, d3.max(obs) * 1.15]).range([f.ih, 0]); axes(f, x, y, "day", "", { xt: 5, yt: 3 });
+      f.g.append("path").attr("d", d3.line().x((v, i) => x(i)).y(v => y(v))(obs)).attr("fill", "none").attr("stroke", C.ink).attr("stroke-width", 2);
+      f.g.selectAll("circle").data(obs).join("circle").attr("cx", (v, i) => x(i)).attr("cy", v => y(v)).attr("r", 5.5).attr("fill", C.ink); }
+    // posterior: the β values that reproduced those counts (the kept guesses of the next slide)
+    const P3 = mk("After data", "Which β values could have produced those counts?", "the posterior: a pile, not a point", true);
+    { const f = frame(P3.fig, W, H, M), x = bx(), y = d3.scaleLinear().range([f.ih, 0]); bars(f.g, D.fig4.keep, x, y, { bins: 30, color: C.blue }); axes(f, x, y, "β, how contagious", "", { xt: 6, noY: true }); }
+    const panels = [P1.p, P2.p, P3.p]; const cap = e.closest("section").querySelector(".cap");
+    return { steps: 4, caps: [], show: k => { panels.forEach((p, i) => p.classList.toggle("on", i <= k)); if (cap) { cap.style.transition = reduce() ? "none" : "opacity .4s"; cap.style.opacity = k >= 3 ? 1 : 0; } } };
+  };
+
   // 0 · two runs
   R.tworuns = (e, D) => {
     const row = el("div", "vrow"); e.appendChild(row);
@@ -477,7 +519,7 @@ window.Charts = (function () {
     box(l0, f.iw - 420, 8, 410, "20 FRESH OUTBREAKS, BEFORE", [`inside ${P.cov_before}% of days · width ${P.width_before}`]);
     const l1 = L.add().attr("transform", T(f)); bandY(l1, x, y, lo2, hi2, C.blue, .18); l1.append("path").datum(d3.range(41)).attr("fill", "none").attr("stroke", C.blue).attr("stroke-width", 2.5).attr("stroke-dasharray", "7 5").attr("d", d3.line().x(t => x(t)).y(t => y(hi2[t]))); l1.append("path").datum(d3.range(41)).attr("fill", "none").attr("stroke", C.blue).attr("stroke-width", 2.5).attr("stroke-dasharray", "7 5").attr("d", d3.line().x(t => x(t)).y(t => y(lo2[t]))); note(l1, x(27), y(hi2[27]), ADD ? `conformal: the filter’s centre ± ${Math.round(P.q)} people` : `the same band × ${P.q.toFixed(2)}`, 40, -70, C.blue);
     box(l1, f.iw - 420, 128, 410, "20 HELD-OUT OUTBREAKS, AFTER", [`inside ${P.cov_after}% of days · width ${P.width_after}`]);
-    return { steps: 3, caps: [`Back to Part 4’s filter. On ${P.n_test} fresh outbreaks its 90% band held the truth ${P.cov_before}% of the time.`, ADD ? `Line 1: ${P.n_cal} past outbreaks, ${P.n_cal * 41} days. Line 2: how far the truth sat from the filter’s centre, in people; the 90th percentile is ${Math.round(P.q)}. Line 3: report centre ± ${Math.round(P.q)}.` : `Line 1: ${P.n_cal} past outbreaks. Line 2: how far the truth fell outside, in band-widths; the 90th percentile is ${P.q.toFixed(2)}. Line 3: stretch every band by that factor.`, `On ${P.n_test} outbreaks it had never seen: ${P.cov_after}%. The catch, said again: we calibrated across outbreaks, which are exchangeable, not across days, which are not.`], show: k => L.show(k >= 1 ? 2 : 1) };
+    return { steps: 3, caps: [`Back to Part 4’s filter, on ${P.n_test} more outbreaks, a different twenty from Part 4’s ${D.fig8.rep.coverage}%: its 90% band held the truth ${P.cov_before}% of the time. Same over-confidence.`, ADD ? `Line 1: ${P.n_cal} past outbreaks, ${P.n_cal * 41} days. Line 2: how far the truth sat from the filter’s centre, in people; the 90th percentile is ${Math.round(P.q)}. Line 3: report centre ± ${Math.round(P.q)}.` : `Line 1: ${P.n_cal} past outbreaks. Line 2: how far the truth fell outside, in band-widths; the 90th percentile is ${P.q.toFixed(2)}. Line 3: stretch every band by that factor.`, `On ${P.n_test} outbreaks it had never seen: ${P.cov_after}%. The catch, said again: we calibrated across outbreaks, which are exchangeable, not across days, which are not.`], show: k => L.show(k >= 1 ? 2 : 1) };
   };
 
   // pass 2 · metrics: coverage, width, interval score, PIT, CRPS
@@ -485,7 +527,8 @@ window.Charts = (function () {
     const M = D.p2.metrics; const row = el("div", "vrow"); e.appendChild(row); const left = el("div"), right = el("div"); left.style.flex = "1"; right.style.flex = "1.5"; row.append(left, right);
     const f = frame(left, 520, 480, { l: 56, r: 20, t: 36, b: 56 }); const x = d3.scaleLinear().domain([0, 1]).range([0, f.iw]), y = d3.scaleLinear().domain([0, d3.max(M.pit_hist) * 1.1]).range([f.ih, 0]); axes(f, x, y, "where the truth fell in the forecast distribution", "", { xt: 5, yt: 4 });
     const L = Layers(f.svg); const l0 = L.add().attr("transform", T(f)); l0.selectAll("rect.bar").data(M.pit_hist).join("rect").attr("class", "bar").attr("x", (v, i) => x(i / 10) + 2).attr("width", x(.1) - 4).attr("y", v => y(v)).attr("height", v => f.ih - y(v)).attr("fill", C.orange).attr("rx", 3); l0.append("line").attr("x1", 0).attr("x2", f.iw).attr("y1", y(M.n_pit / 10)).attr("y2", y(M.n_pit / 10)).attr("stroke", C.ink).attr("stroke-dasharray", "7 5").attr("stroke-width", 2); l0.append("text").attr("x", f.iw / 2).attr("y", y(M.n_pit / 10) - 10).attr("text-anchor", "middle").attr("font-size", 18).attr("fill", C.ink).text("honest: flat"); l0.append("text").attr("x", f.iw / 2).attr("y", -12).attr("text-anchor", "middle").attr("font-size", 21).attr("font-weight", 600).attr("fill", C.ink).text("PIT histogram, the simple model of Part 5");
-    const tbl = el("table", "map metrics"); right.appendChild(tbl); const cols = ["forecaster", "coverage", "width", "interval score", "CRPS"]; tbl.innerHTML = `<tr>${cols.map((c, i) => `<th class="c${i}">${c}</th>`).join("")}</tr>` + M.rows.map(r => `<tr><td>${r.part}</td><td class="num c1">${r.cov}%</td><td class="num c2">${r.width}</td><td class="num c3">${r.iscore}</td><td class="num c4">${r.crps == null ? "–" : r.crps}</td></tr>`).join("");
+    const R8 = D.fig8.rep; const rowsAll = M.rows.flatMap(r => r.part.startsWith("Part 4") ? [r, { part: `Part 4 · particle filter, ${R8.outbreaks} fresh outbreaks`, cov: R8.coverage, width: R8.width, iscore: "–", crps: null }] : [r]);
+    const tbl = el("table", "map metrics"); right.appendChild(tbl); const cols = ["forecaster", "coverage", "width", "interval score", "CRPS"]; tbl.innerHTML = `<tr>${cols.map((c, i) => `<th class="c${i}">${c}</th>`).join("")}</tr>` + rowsAll.map(r => `<tr><td>${r.part}</td><td class="num c1">${r.cov}%</td><td class="num c2">${r.width}</td><td class="num c3">${r.iscore}</td><td class="num c4">${r.crps == null ? "–" : r.crps}</td></tr>`).join("");
     const setCols = n => tbl.querySelectorAll(".c3, .c4").forEach(c => c.style.opacity = (c.classList.contains("c3") && n >= 1) || (c.classList.contains("c4") && n >= 3) ? 1 : 0);
     return { steps: 4, caps: ["Two numbers have scored every part: coverage and width. The field keeps a few more, and they agree with ours.", "The interval score adds them up: the width, plus a penalty of 20 widths-worth for every miss. One number, lower is better; the Forecast Hub ranks models with its multi-level version, WIS.", "The PIT histogram asks where the truth landed in the forecast distribution. Honest forecasters give a flat histogram; the simple model of Part 5 piles up at one end and in the middle: too narrow, and the wrong shape.", "CRPS scores the whole distribution, not one band: the distance between the forecast’s CDF and the truth. For a Gaussian it is a formula; for 1000 copies, a sum."],
       show: k => { setCols(k); L.show(k >= 2 ? 1 : 0); } };
@@ -515,7 +558,7 @@ window.Charts = (function () {
     rows.forEach((r, i) => { const g = L.add().attr("transform", T(f)); g.append("text").attr("x", -16).attr("y", y(r[0]) + y.bandwidth() / 2 + 8).attr("text-anchor", "end").attr("font-size", 23).attr("font-weight", 600).attr("fill", C.ink).text(r[0]); g.append("rect").attr("class", "bar").attr("x", 0).attr("y", y(r[0])).attr("height", y.bandwidth()).attr("width", xc(r[1])).attr("fill", r[1] >= 85 ? C.blue : C.orange).attr("rx", 6); g.append("text").attr("x", xc(r[1]) + 10).attr("y", y(r[0]) + y.bandwidth() / 2 + 9).attr("font-size", 24).attr("font-weight", 700).attr("font-family", F.disp).attr("fill", C.ink).text(r[1] + "%"); g.append("rect").attr("class", "bar").attr("x", ox).attr("y", y(r[0])).attr("height", y.bandwidth()).attr("width", xw(r[2])).attr("fill", C.light).attr("rx", 6); g.append("text").attr("x", ox + xw(r[2]) + 10).attr("y", y(r[0]) + y.bandwidth() / 2 + 9).attr("font-size", 24).attr("font-weight", 700).attr("font-family", F.disp).attr("fill", C.ink).text(r[2]); });
     f.g.append("text").attr("x", f.iw / 2 - 100).attr("y", f.ih + 44).attr("text-anchor", "middle").attr("font-size", 17).attr("fill", C.muted).text(`a 3-input network (${L_.inputs}) predicting ${L_.target}; ${L_.n_train} training runs, ${L_.n_cal} calibration, ${L_.n_test} test; trained live in numpy, ${L_.secs} s`);
     const verdict = c => c < 85 ? "over-confident" : c > 95 ? "wider than it needs to be" : "honest, this time";
-    return { steps: 4, caps: [`A neural network that predicts the final size from β, γ and patient zero, with its own “give or take” output. Its 90% band holds ${rows[0][1]}%: ${verdict(rows[0][1])}. The width is Part 1’s luck: most of the spread is irreducible.`, `Train five from different random starts and pool them, a deep ensemble: the disagreement between them is the model’s own doubt. ${rows[1][1]}%, width ${rows[1][2]}.`, `MC dropout: one net, dropout left on at prediction time, 50 passes. ${rows[2][1]}%, width ${rows[2][2]}. Both are heuristics: sometimes right, never a promise, and only the check tells you which.`, `The three lines again, on the first net: ${rows[3][1]}%, width ${rows[3][2]}, guaranteed. Any deep model, any band: the recipe does not care what is inside.`],
+    return { steps: 4, caps: [`A neural network that predicts the final size from β, γ and patient zero, with its own “give or take” output. Its 90% band holds ${rows[0][1]}%: ${verdict(rows[0][1])}. The width is Part 1’s luck: most of the spread is irreducible.`, `Train five from different random starts and pool them, a deep ensemble: the disagreement between them is the model’s own doubt. ${rows[1][1]}%, width ${rows[1][2]}.`, `MC dropout: one net, dropout left on at prediction time, 50 passes. ${rows[2][1]}%, width ${rows[2][2]}. Both are heuristics: sometimes right, never a promise, and only the check tells you which.`, `The three lines again, on the first net: ${rows[3][1]}%, width ${rows[3][2]}, guaranteed. Wider than the ward, because the final size is a die-out or a sweep and one band must straddle both; Part 2’s emulator split them and got ${D.p2.surrogate.w_two}. Any deep model, any band: the recipe does not care what is inside.`],
       show: k => L.show(k + 1) };
   };
 

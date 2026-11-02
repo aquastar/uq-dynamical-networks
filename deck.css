@@ -44,9 +44,9 @@ html,body{background:var(--paper)}
 .cards{display:grid;gap:22px;flex:1;min-height:0;grid-auto-rows:1fr;align-content:stretch}
 .cards.c2{grid-template-columns:1fr 1fr}.cards.c3{grid-template-columns:1fr 1fr 1fr}.cards.c4{grid-template-columns:1fr 1fr 1fr 1fr}
 .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px 30px;display:flex;flex-direction:column;gap:10px;justify-content:center}
-.card .k{font-family:var(--mono);font-size:17px;letter-spacing:.1em;text-transform:uppercase;color:var(--blue)}
-.card h3{font-size:30px}
-.card p{font-size:22px;color:var(--muted);line-height:1.35}
+.card .k{font-family:var(--mono);font-size:18px;letter-spacing:.1em;text-transform:uppercase;color:var(--blue)}
+.card h3{font-size:33px}
+.card p{font-size:24px;color:var(--muted);line-height:1.35}
 .card p.dark{color:var(--ink)}
 .card.accent{background:var(--blue-soft);border-color:#C9D3E6}
 .steps{display:flex;flex-direction:column;gap:16px;flex:1}
@@ -78,7 +78,7 @@ html,body{background:var(--paper)}
 .thm b{color:var(--ink)}
 table.map.metrics td,table.map.scale td{font-size:21px}
 table.map.metrics .c3,table.map.metrics .c4{transition:opacity .4s}
-.cards.c4 .card p.dark{font-size:21px}
+.cards.c4 .card p.dark{font-size:22px}
 /* live badge */
 .live{display:inline-flex;align-items:center;gap:8px;vertical-align:middle;margin-left:16px;font:600 15px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--orange);background:var(--orange-soft);border-radius:999px;padding:6px 14px 6px 10px;position:relative;top:-8px}
 .live::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--orange);animation:pulse 1.4s ease-in-out infinite}
@@ -149,3 +149,36 @@ table.map.build{display:table}
 .authors span{display:block;font-size:18px;color:var(--muted);line-height:1.25;margin-top:3px}
 .cover2 .keys{font-size:18px;color:var(--muted);line-height:1.4}
 html.reveal-print .reveal section.cover2{flex-direction:row!important}
+
+/* pass 4: the text slides carry more weight */
+.card{gap:12px}
+.cards.one .card{align-items:flex-start}
+.cards.one .card h3{font-size:40px;line-height:1.1}
+.qbig{font-family:var(--display);font-size:56px;font-weight:700;color:var(--blue);margin-top:6px}
+/* four questions, each on the ward; Bayes in three small figures */
+.fourq{display:flex;gap:22px;flex:1;min-height:0}
+.fourq>.fq{flex:1;min-width:0;display:flex;flex-direction:column;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 22px 20px;opacity:0;transition:opacity .5s}
+.fourq>.fq.on{opacity:1}
+.fq svg{width:100%;height:auto;display:block}
+.fq .k{font-family:var(--mono);font-size:17px;letter-spacing:.1em;text-transform:uppercase;color:var(--blue)}
+.fq h3{font-size:30px;line-height:1.1}
+.fq p.a{font-size:22px;color:var(--muted);line-height:1.35}
+.fq .figbox{flex:1;min-height:0;display:flex;align-items:center}
+.fq.accent{background:var(--blue-soft);border-color:#C9D3E6}
+.fourq.three>.fq{gap:10px}
+.fourq.grid{display:grid;grid-template-columns:1fr 1fr;grid-auto-rows:1fr;gap:22px}
+.fourq.grid>.fq{flex-direction:row;align-items:center;gap:18px;padding:18px 26px}
+.fourq.grid .txt{flex:1;min-width:0;display:flex;flex-direction:column;gap:8px}
+.fourq.grid .figbox{flex:1.15;min-width:0}
+.fig>.viz.ladder-corner{position:absolute;flex:none;height:250px;display:block}
+.ladder-corner>svg{width:100%;height:auto}
+/* the references page: a QR code beside the closing line */
+.qrrow{flex:0 0 auto;align-items:center;gap:28px}
+.qrrow .cap{flex:1;min-height:0}
+.qr{flex:0 0 auto;display:flex;align-items:center;gap:14px}
+.qr .qrsvg{width:124px;height:124px;display:block}
+.qr p{font-family:var(--mono);font-size:14px;line-height:1.35;color:var(--muted);margin:0}
+.cover .qr{margin-left:24px;flex-direction:column;align-items:flex-start;gap:6px}
+.cover .qr p{max-width:150px;font-size:12px;word-break:break-all}
+html.reveal-print .fourq>.fq{transition:none}
+@media (prefers-reduced-motion:reduce){.fourq>.fq{transition:none}}

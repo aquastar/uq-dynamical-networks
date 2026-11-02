@@ -6,21 +6,28 @@
 <title>Uncertainty Quantification for Dynamical Networks</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@500&display=swap">
 <link rel="stylesheet" href="vendor/reveal.css">
-<link rel="stylesheet" href="deck.css?v=26">
+<link rel="stylesheet" href="deck.css?v=27">
 </head>
 <body>
 <div class="reveal">
 <div class="slides">
 
 <!-- ================= PART 0 ================= -->
-<section class="slide cover">
-  <p class="eyebrow">IEEE BigData 2026 · Tutorial · Phoenix, December 2026</p>
-  <h1>Uncertainty Quantification for Dynamical Networks</h1>
-  <p class="lede">One hospital ward. One outbreak. Seven questions, each a little harder than the last. Every figure builds on screen, computed from one simulation on a real contact network.</p>
-  <div style="flex:1"></div>
-  <p class="small">Marouane Benbrahim (Rochester Institute of Technology) · Tamanna Rashme (Mississippi State University) · Zhiqian Chen (Rochester Institute of Technology)</p>
-  <p class="small muted">Two hours with a five-minute break · → advances one idea at a time · <b>S</b> speaker notes · <b>F</b> fullscreen · code, data and this deck: github.com/aquastar/uq-dynamical-networks</p>
-  <aside class="notes">Welcome. One promise before we start: there is exactly one example in this tutorial, a virus in a hospital ward of 75 people. Every method today is applied to that same ward. And every part ends with the same test: did our error bars actually contain what happened?</aside>
+<section class="slide cover cover2">
+  <div class="c-left">
+    <p class="eyebrow">IEEE BigData 2026 · Tutorial · Phoenix, December 2026</p>
+    <h1>Uncertainty Quantification <span class="hl">for Dynamical Networks</span></h1>
+    <p class="lede">One hospital ward. One outbreak. Seven questions, each a little harder than the last. Every figure builds on screen, computed live from one simulation on a real contact network.</p>
+    <div style="flex:1"></div>
+    <div class="authors">
+      <div><b>Marouane Benbrahim</b><span>Rochester Institute of Technology</span></div>
+      <div><b>Tamanna Rashme</b><span>Mississippi State University</span></div>
+      <div><b>Zhiqian Chen</b><span>Rochester Institute of Technology</span></div>
+    </div>
+    <p class="keys">Two hours with a five-minute break · → advances one idea at a time · <b>S</b> speaker notes · <b>F</b> fullscreen · code, data and this deck: github.com/aquastar/uq-dynamical-networks</p>
+  </div>
+  <div class="viz c-right" data-viz="cover"></div>
+  <aside class="notes">Welcome. One promise before we start: there is exactly one example in this tutorial, a virus in a hospital ward of 75 people. It is running on the right: the same ward, the same virus, the same first patient, and every run ends differently. Every method today is applied to that same ward. And every part ends with the same test: did our error bars actually contain what happened?</aside>
 </section>
 
 <section class="slide fig">
@@ -480,10 +487,10 @@
 </div>
 <script src="vendor/reveal.js"></script>
 <script src="vendor/d3.js"></script>
-<script src="sim.js?v=26"></script>
-<script src="charts.js?v=26"></script>
+<script src="sim.js?v=27"></script>
+<script src="charts.js?v=27"></script>
 <script>
-fetch("data.json?v=26").then(r => r.json()).then(D => {
+fetch("data.json?v=27").then(r => r.json()).then(D => {
   Sim.init(D.ward); window.DECK = D; Charts.fill(document, D);
   // cards, steps and table rows build one per arrow press
   document.querySelectorAll(".build > .card, .build > .step, .build > .check, .build > .note, table.build tr:not(:first-child)").forEach(el => el.classList.add("fragment", "fade-up"));

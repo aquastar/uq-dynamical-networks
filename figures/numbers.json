@@ -1,0 +1,131 @@
+{
+ "n_people": 75,
+ "n_edges": 395,
+ "mean_contacts": 10.5,
+ "roles": {
+  "patient": 29,
+  "nurse": 27,
+  "doctor": 11,
+  "admin": 8
+ },
+ "src_contacts": 4,
+ "fig2": {
+  "p_dieout": 0.31,
+  "p_big": 0.69,
+  "mean": 43,
+  "big_lo": 57,
+  "big_hi": 67,
+  "runs": 2000
+ },
+ "fig3": {
+  "min_contacts": 1,
+  "p_min": 0.34,
+  "min_role": "patient",
+  "max_contacts": 34,
+  "p_max": 0.98,
+  "max_role": "doctor"
+ },
+ "fig4": {
+  "coverage": 1.0,
+  "width20": 15,
+  "width40": 14,
+  "kept": 232,
+  "beta_lo": 0.04,
+  "beta_hi": 0.17
+ },
+ "fig5": {
+  "\u03b2": 12,
+  "\u03b3": 6,
+  "who": 20,
+  "luck": 63
+ },
+ "fig6": {
+  "cov_recorded": 6,
+  "width_recorded": 56,
+  "cov_plausible": 100,
+  "width_plausible": 70,
+  "missed_pct": 35
+ },
+ "fig8": {
+  "days_in": 36,
+  "coverage": 88,
+  "width": 7,
+  "scale": 3.0,
+  "particles": 1000,
+  "rep": {
+   "outbreaks": 20,
+   "coverage": 83,
+   "width": 6.6
+  }
+ },
+ "fig9": {
+  "tested": 0.01,
+  "untested": 0.11,
+  "max_untested": 0.25
+ },
+ "fig10": {
+  "n_cal": 2000,
+  "n_test": 1000,
+  "naive_cov": 62,
+  "naive_width": 6.6,
+  "conf_cov": 89,
+  "conf_width": 21.2
+ },
+ "fig11": {
+  "top1_right": true,
+  "set_size": 17,
+  "infected": 19,
+  "in_set": true,
+  "cleared_infected": 2,
+  "uninfected": 56,
+  "day": 8
+ },
+ "fig12": {
+  "no vaccination": {
+   "mean": 48,
+   "cvar": 67
+  },
+  "random 8": {
+   "mean": 38,
+   "cvar": 58
+  },
+  "8 most-connected": {
+   "mean": 28,
+   "cvar": 52
+  }
+ },
+ "fig17": {
+  "orders": [
+   3,
+   1
+  ]
+ },
+ "fig18": {
+  "common": 8,
+  "obs_mean": 26,
+  "obs_cvar": 52,
+  "real_mean": 28,
+  "real_cvar": 53
+ },
+ "rep100": {
+  "set_hit_pct": 70,
+  "set_size": 31.0,
+  "top1_pct": 6,
+  "min_infected": 5,
+  "n_tried": 146
+ },
+ "rep100_plan": {
+  "pred_cvar": 52,
+  "fresh_cvar": 52,
+  "fresh_mean": 27
+ },
+ "hub": {
+  "models": 27,
+  "weeks": 79,
+  "forecasts": 14260,
+  "ens50": 0.53,
+  "ens95": 0.9,
+  "range95": "0.31 to 0.93",
+  "within5_95": 2
+ }
+}

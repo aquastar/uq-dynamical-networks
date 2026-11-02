@@ -1,30 +1,52 @@
-<p align="center">
-  <a href="https://revealjs.com">
-  <img src="https://hakim-static.s3.amazonaws.com/reveal-js/logo/v1/reveal-black-text-sticker.png" alt="reveal.js" width="500">
-  </a>
-  <br><br>
-  <a href="https://github.com/hakimel/reveal.js/actions"><img src="https://github.com/hakimel/reveal.js/workflows/tests/badge.svg"></a>
-  <a href="https://slides.com/"><img src="https://static.slid.es/images/slides-github-banner-320x40.png?1" alt="Slides" width="160" height="20"></a>
-</p>
+# Uncertainty Quantification for Dynamical Networks
 
-reveal.js is an open source HTML presentation framework. It enables anyone with a web browser to create beautiful presentations for free. Check out the live demo at [revealjs.com](https://revealjs.com/).
+Tutorial at IEEE BigData 2026 (Phoenix, December 2026, two hours).
+Marouane Benbrahim and Zhiqian Chen (Rochester Institute of Technology), Tamanna Rashme (Mississippi State University).
 
-The framework comes with a powerful feature set including [nested slides](https://revealjs.com/vertical-slides/), [Markdown support](https://revealjs.com/markdown/), [Auto-Animate](https://revealjs.com/auto-animate/), [PDF export](https://revealjs.com/pdf-export/), [speaker notes](https://revealjs.com/speaker-view/), [LaTeX typesetting](https://revealjs.com/math/), [syntax highlighted code](https://revealjs.com/code/) and an [extensive API](https://revealjs.com/api/).
+**Open the deck:** https://aquastar.github.io/uq-dynamical-networks/
 
----
+One hospital ward, one outbreak, seven questions. Every figure is drawn live in the browser (D3)
+from one simulation on a real contact network, and every part ends with the same test:
+did the band contain what happened, and how wide was it?
 
-Want to create reveal.js presentation in a graphical editor? Try <https://slides.com>. It's made by the same people behind reveal.js.
+Keys: `→` advances one idea at a time, `S` opens the speaker notes, `F` is fullscreen,
+`?print-pdf` on the URL gives a printable version.
 
----
+## What is in this repository
 
-### Getting started
-- 🚀 [Install reveal.js](https://revealjs.com/installation)
-- 👀 [View the demo presentation](https://revealjs.com/demo)
-- 📖 [Read the documentation](https://revealjs.com/markup/)
-- 🖌 [Try the visual editor for reveal.js at Slides.com](https://slides.com/)
-- 🎬 [Watch the reveal.js video course (paid)](https://revealjs.com/course)
+| Path | What it is |
+|---|---|
+| `index.html`, `deck.css`, `charts.js`, `sim.js` | The deck. reveal.js slides; `charts.js` draws every figure; `sim.js` runs the small in-browser simulations. |
+| `data.json` | Every number the deck shows, produced by the pipeline below. Nothing on a slide is typed in by hand. |
+| `vendor/` | reveal.js 5.1 and D3 7.9, so the deck works offline. |
+| `figures/` | The Python pipeline that produces `data.json` and static PNG versions of the figures. |
+| `figures/data/hospital_lyon_contacts.dat.gz` | The contact network: SocioPatterns hospital ward (Lyon, 2010), Vanhems et al. 2013, PLoS ONE. |
+| `previous-deck.html`, `assets/`, `ref.md` | The earlier deck (WSDM 2026 tutorial, February 2026) and its paper list, kept exactly as they were. Also tagged `previous-deck-2026-02`. |
 
---- 
-<div align="center">
-  MIT licensed | Copyright © 2011-2026 Hakim El Hattab, https://hakim.se
-</div>
+The remaining folders (`css/`, `js/`, `dist/`, `plugin/`, `examples/`, `test/`) are the reveal.js framework
+this repository was forked from; the earlier deck uses `dist/` and `plugin/`.
+
+## Reproducing the numbers
+
+```
+cd figures
+pip install -r requirements.txt
+python export_deck_data.py
+python make_pass2.py
+python merge_pass2.py
+```
+
+`export_deck_data.py` runs `make_figures.py` and `make_extra.py` (the simulations and the PNGs, seeded, so
+the output is reproducible), then writes `../data.json`. `make_pass2.py` adds the second-pass numbers
+(metrics, the conformal-fixed filter, the surrogate and deep-learning bands, the risk dial) to `figures/pass2.json`,
+and `merge_pass2.py` puts them into `data.json`. The pipeline needs numpy, scipy, networkx and matplotlib.
+
+## Checked facts
+
+The COVID-19 Forecast Hub slide quotes coverage for 28 models from Cramer et al. 2022, PNAS 119(15), Table 1.
+Every value was checked against the paper (29 October 2026).
+
+## Credits
+
+Built on [reveal.js](https://revealjs.com) (MIT, Hakim El Hattab) and [D3](https://d3js.org) (ISC, Mike Bostock).
+Contact data from [SocioPatterns](http://www.sociopatterns.org/datasets/hospital-ward-dynamic-contact-network/) (CC BY-SA).

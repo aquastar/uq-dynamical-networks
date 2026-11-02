@@ -1,0 +1,137 @@
+/* Ward Outbreak deck theme for reveal.js 5. Light paper, one ink, blue + orange accents (same as the figures). */
+:root{
+  --paper:#FFFFFF; --ink:#1B2430; --muted:#5B6473; --line:#E3E0D8; --card:#FFFFFF;
+  --blue:#2563EB; --blue-soft:#E8EEFC; --orange:#EA580C; --orange-soft:#FDEBE0;
+  --red:#DC2626; --green:#16A34A; --grey:#9CA3AF; --light:#E5E7EB; --amber:#F59E0B;
+  --display:"Bricolage Grotesque","Source Sans 3",system-ui,sans-serif;
+  --body:"Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+html,body{background:var(--paper)}
+.reveal{font-family:var(--body);font-size:26px;color:var(--ink);line-height:1.4}
+.reveal .slides{text-align:left}
+.reveal .slides section{padding:0;height:100%;box-sizing:border-box}
+.reveal section.slide{display:flex!important;flex-direction:column;gap:14px;padding:40px 64px 56px;overflow:hidden}
+.reveal h1,.reveal h2,.reveal h3{font-family:var(--display);color:var(--ink);text-transform:none;letter-spacing:0;line-height:1.08;margin:0;text-wrap:balance}
+.reveal h1{font-size:76px;font-weight:700}
+.reveal h2{font-size:50px;font-weight:700}
+.reveal h3{font-size:30px;font-weight:700}
+.reveal p{margin:0}
+.reveal ul{margin:0;padding-left:1.1em;list-style:disc}
+.reveal li{margin:0 0 .35em}
+.reveal b{font-weight:600}
+.reveal a{color:var(--blue);text-decoration:none;border-bottom:1px solid var(--blue)}
+.eyebrow{font-family:var(--mono);font-size:18px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue)}
+.cols{display:flex;gap:40px;flex:1;min-height:0;align-items:stretch}
+.cols>.viz{flex:1.35;min-width:0;min-height:0;display:flex;flex-direction:column;gap:10px;justify-content:stretch}
+.viz{min-height:0}
+.viz>svg,.viz>div>svg{flex:1 1 0;min-height:0;width:100%;height:100%}
+.vrow{flex:1;min-height:0;display:flex;gap:18px}
+.vrow>div{display:flex;flex-direction:column;min-height:0;min-width:0;flex:1}
+.vrow>div>svg{flex:1 1 0;min-height:0;width:100%;height:100%}
+[data-viz]{display:flex;flex-direction:column;min-height:0;gap:10px}
+.viz>[data-viz]{flex:1}
+.cols>.txt{flex:1;min-width:0;display:flex;flex-direction:column;gap:18px;justify-content:center;font-size:25px}
+.cols>.txt ul{font-size:25px}
+.cols.wide>.viz{flex:2}
+.viz svg{display:block;font-family:var(--body)}
+.check{background:var(--orange-soft);border-radius:12px;padding:14px 20px;font-size:23px;line-height:1.35}
+.check::before{content:"Did the band cover the truth, and how wide was it?";display:block;font-family:var(--mono);font-size:16px;letter-spacing:.1em;text-transform:uppercase;color:var(--orange);margin-bottom:4px}
+.check.rep::before{content:"Repeat on 100 outbreaks"}
+.note{background:var(--blue-soft);border-radius:12px;padding:14px 20px;font-size:23px;line-height:1.35}
+.refs{font-size:18px;color:var(--muted);line-height:1.35}
+.refs b{color:var(--ink)}
+.cards{display:grid;gap:22px;flex:1;min-height:0;grid-auto-rows:1fr;align-content:stretch}
+.cards.c2{grid-template-columns:1fr 1fr}.cards.c3{grid-template-columns:1fr 1fr 1fr}.cards.c4{grid-template-columns:1fr 1fr 1fr 1fr}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px 30px;display:flex;flex-direction:column;gap:10px;justify-content:center}
+.card .k{font-family:var(--mono);font-size:17px;letter-spacing:.1em;text-transform:uppercase;color:var(--blue)}
+.card h3{font-size:30px}
+.card p{font-size:22px;color:var(--muted);line-height:1.35}
+.card p.dark{color:var(--ink)}
+.card.accent{background:var(--blue-soft);border-color:#C9D3E6}
+.steps{display:flex;flex-direction:column;gap:16px;flex:1}
+.step{display:flex;gap:22px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 24px;font-size:27px;flex:1}
+.step .n{font-family:var(--display);font-size:44px;font-weight:700;color:var(--blue);width:44px;flex:none}
+.ctl{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;font-size:19px;color:var(--muted)}
+.ctl button{font:600 19px var(--body);border:0;background:var(--blue);color:#fff;border-radius:999px;padding:9px 18px;cursor:pointer}
+.ctl button.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.ctl button:hover{filter:brightness(1.08)}
+.ctl label{display:flex;align-items:center;gap:8px}
+.ctl sub,.stat sub{font-size:.7em;vertical-align:baseline;position:relative;top:.3em}
+.ctl input[type=range]{width:180px;accent-color:var(--blue)}
+.ctl .val{font-family:var(--mono);color:var(--ink);min-width:3.2em}
+.stats{display:flex;gap:14px;flex-wrap:wrap}
+.stat{background:var(--blue-soft);border-radius:10px;padding:8px 14px;min-width:120px}
+.stat b{display:block;font-family:var(--display);font-size:30px;line-height:1.1}
+.stat span{font-size:17px;color:var(--muted)}
+/* part openers */
+.reveal section.opener{flex-direction:row;align-items:stretch;gap:48px;padding:64px 80px}
+.op-left{flex:1.2;display:flex;flex-direction:column;justify-content:center;gap:18px}
+.op-right{flex:1;display:flex;align-items:center;justify-content:center;min-height:0}
+.op-right>div{width:100%;height:100%;display:flex;align-items:center}
+.op-right svg{width:100%;height:100%}
+.op-num{font-family:var(--display);font-size:200px;font-weight:700;line-height:.85;color:var(--blue-soft);margin:-10px 0 -20px -6px}
+.opener h1{font-size:76px}
+.op-sub{font-size:30px;color:var(--muted)}
+.op-q{font-size:30px;line-height:1.35;color:var(--ink);border-left:6px solid var(--orange);padding-left:22px;margin-top:10px}
+.thm{font-size:20px;line-height:1.35;color:var(--muted);border-top:1px solid var(--line);padding-top:12px;margin-top:6px}
+.thm b{color:var(--ink)}
+table.map.metrics td,table.map.scale td{font-size:21px}
+table.map.metrics .c3,table.map.metrics .c4{transition:opacity .4s}
+.cards.c4 .card p.dark{font-size:21px}
+/* live badge */
+.live{display:inline-flex;align-items:center;gap:8px;vertical-align:middle;margin-left:16px;font:600 15px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--orange);background:var(--orange-soft);border-radius:999px;padding:6px 14px 6px 10px;position:relative;top:-8px}
+.live::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--orange);animation:pulse 1.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.5);opacity:.5}}
+@media (prefers-reduced-motion:reduce){.live::before{animation:none}}
+.reveal .fragment.fade-up{transform:translate(0,14px)}
+.reveal .fragment.fade-up.visible{transform:none}
+.foot{position:absolute;left:72px;bottom:26px;font-family:var(--mono);font-size:14px;color:var(--muted);letter-spacing:.06em}
+.ladder-corner{position:absolute;right:56px;top:40px;width:250px}
+section.dark{background:#FFFFFF!important}
+.reveal .progress{color:var(--blue);height:4px}
+.reveal .slide-number{background:transparent;color:var(--muted);font-family:var(--mono);font-size:18px;right:auto;left:64px;bottom:22px}
+.reveal .controls{color:var(--blue)}
+table.map{border-collapse:collapse;width:100%;font-size:21px;line-height:1.35;flex:1}
+table.map td,table.map th{height:1px}
+table.map th{font-family:var(--mono);font-size:16px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:left;padding:8px 10px;border-bottom:2px solid var(--line);font-weight:500}
+table.map td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+table.map tr:nth-child(even) td{background:#F6F7FB}
+table.map td.num{font-family:var(--mono);white-space:nowrap}
+.tip{position:absolute;pointer-events:none;background:var(--ink);color:#fff;font-size:15px;padding:5px 9px;border-radius:6px;opacity:0;transition:opacity .1s}
+.fragment.fade-in-then-semi-out.visible:not(.current-fragment){opacity:.35}
+@media print{.foot{display:none}}
+html.reveal-print .reveal section.slide{display:flex!important;flex-direction:column;padding:40px 64px 56px!important;height:899px!important;box-sizing:border-box;overflow:hidden!important}
+html.reveal-print .reveal section.opener{padding:64px 80px!important}
+html.reveal-print .reveal section.opener{flex-direction:row}
+html.reveal-print .reveal .slide-number{display:block}
+html.reveal-print .ctl{display:none}
+
+/* ---- figure-is-the-slide layout ---- */
+.reveal section.slide.fig{gap:12px}
+.reveal section.fig h2{font-size:42px}
+.fig>.viz{flex:1;min-height:0;display:flex;flex-direction:column;gap:10px}
+.fig>.viz>svg{flex:1 1 0;min-height:0;width:100%;height:100%}
+.cap{font-size:30px;line-height:1.3;color:var(--ink);min-height:2.6em;transition:opacity .16s;max-width:60em;font-weight:400}
+.cap b{color:var(--blue)}
+.cover{justify-content:flex-start}
+.cover h1{font-size:84px;max-width:14em}
+.cover .lede{font-size:34px;max-width:28em;color:var(--muted);line-height:1.35}
+.small{font-size:22px}.muted{color:var(--muted)}
+.ctl{margin-top:4px}
+.msg{font-size:24px;min-height:1.3em;color:var(--ink)}
+.reveal .fragment.beat{display:none}
+.stats{flex:0 0 auto}
+.cards.c4{grid-template-columns:1fr 1fr 1fr 1fr}
+table.map.build{display:table}
+.reveal .slide-number{font-size:18px}
+
+/* a figure beside its steps (Tool 1, the recipe) */
+.cols>.steps{flex:1;min-width:0}
+.cols>.viz[data-viz]{flex:1.15;min-width:0}
+.cols.recipe{flex:1;min-height:0}
+.cols.recipe>.viz{flex:1.05}
+.cols.recipe+.steps{flex:0 0 auto}
+/* labels stay legible over lines and dots */
+.viz svg text{paint-order:stroke;stroke:#fff;stroke-width:5px;stroke-linejoin:round}
+.viz svg .ax-x text,.viz svg .ax-y text{stroke:none}

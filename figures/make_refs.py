@@ -192,9 +192,29 @@ FIXED = {
  "Sobol’ 2001": dict(url="https://doi.org/10.1016/S0378-4754(00)00270-6", title="Global sensitivity indices for nonlinear mathematical models and their Monte Carlo estimates", venue="Mathematics and Computers in Simulation", authors="I. M. Sobol’", year=2001),
  "Vovk, Gammerman & Shafer 2005": dict(url="https://doi.org/10.1007/b106715", title="Algorithmic Learning in a Random World", venue="Springer (book)", authors="Vladimir Vovk, Alex Gammerman, Glenn Shafer", year=2005),
  "Cramer et al. 2022 PNAS": dict(url="https://doi.org/10.1073/pnas.2113561119", title="Evaluation of individual and ensemble probabilistic forecasts of COVID-19 mortality in the United States", venue="Proceedings of the National Academy of Sciences", authors="Estee Y. Cramer et al.", year=2022),
- "Hu et al. 2026 ICLR": dict(url="", title="", venue="ICLR 2026", authors="", year=2026),
+ "Hu et al. 2026 ICLR": dict(url="https://openreview.net/forum?id=bt4Ahpemmi", title="Conformal robustness control: a new strategy for robust decision", venue="ICLR 2026 (oral)", authors="Yang Hu, Jieren Tan, Changliang Zou, Yajie Bao, Haojie Ren", year=2026),
+ "Tsui et al. 2024 PNAS": dict(url="https://doi.org/10.1073/pnas.2412424121", title="Toward optimal disease surveillance with graph-based active learning", venue="Proceedings of the National Academy of Sciences 121(52)", authors="Joseph L.-H. Tsui, Mengyan Zhang, Prathyush Sambaturu, Simon Busch-Moreno, Marc A. Suchard, Oliver G. Pybus, Seth Flaxman, Elizaveta Semenova, Moritz U. G. Kraemer", year=2024),
+ "DAPS, ICML 2023 (Zargarbashi et al.)": dict(url="https://proceedings.mlr.press/v202/h-zargarbashi23a.html", title="Conformal prediction sets for graph neural networks", venue="ICML 2023, PMLR 202", authors="Soroush H. Zargarbashi, Simone Antonelli, Aleksandar Bojchevski", year=2023),
+ "Bracher, Ray, Gneiting & Reich 2021 PLOS Comp Bio": dict(url="https://doi.org/10.1371/journal.pcbi.1008618", title="Evaluating epidemic forecasts in an interval format", venue="PLOS Computational Biology 17(2)", authors="Johannes Bracher, Evan L. Ray, Tilmann Gneiting, Nicholas G. Reich", year=2021),
 }
 ARXIV_ONLY = {"CoRel, ICML 2025 (Cini et al.)", "Staib, Wilder & Jegelka 2019 AISTATS", "Zargarbashi & Bojchevski, ICLR 2024", "DAPS, ICML 2023 (Zargarbashi et al.)"}
+PATCH = {
+ "Kipf et al. 2018 (NRI)": dict(url="https://proceedings.mlr.press/v80/kipf18a.html", venue="ICML 2018, PMLR 80", year=2018),
+ "Borovitskiy et al. 2021": dict(url="https://proceedings.mlr.press/v130/borovitskiy21a.html", venue="AISTATS 2021, PMLR 130", year=2021),
+ "Stadler et al. 2021 NeurIPS (GPN)": dict(venue="NeurIPS 2021", year=2021),
+ "Shafer & Vovk 2008": dict(url="https://jmlr.org/papers/v9/shafer08a.html", venue="Journal of Machine Learning Research 9", year=2008),
+ "Gibbs & Candès 2021 NeurIPS": dict(venue="NeurIPS 2021", year=2021),
+ "CoRel, ICML 2025 (Cini et al.)": dict(url="https://proceedings.mlr.press/v267/cini25a.html", venue="ICML 2025, PMLR 267", year=2025),
+ "Zargarbashi & Bojchevski, ICLR 2024": dict(venue="ICLR 2024", year=2024),
+ "Lakshminarayanan, Pritzel & Blundell 2017": dict(venue="NeurIPS 2017", year=2017),
+ "Gal & Ghahramani 2016": dict(url="https://proceedings.mlr.press/v48/gal16.html", venue="ICML 2016, PMLR 48", year=2016),
+ "Kamarthi et al. 2021 (EpiFNP)": dict(venue="NeurIPS 2021", year=2021),
+ "Dawkins, Li & Xu 2021 ICML": dict(url="https://proceedings.mlr.press/v139/dawkins21a.html", venue="ICML 2021, PMLR 139", year=2021),
+ "Staib, Wilder & Jegelka 2019 AISTATS": dict(url="https://proceedings.mlr.press/v89/staib19a.html", venue="AISTATS 2019, PMLR 89", year=2019),
+ "Patel, Rayan & Tewari 2024 AISTATS": dict(url="https://proceedings.mlr.press/v238/patel24a.html", venue="AISTATS 2024, PMLR 238", year=2024),
+ "Groendyke, Welch & Hunter 2011 (epinet)": dict(authors="Chris Groendyke, David Welch, David R. Hunter"),
+ "Wu et al. 2021 KDD": dict(venue="Proceedings of the 27th ACM SIGKDD Conference on Knowledge Discovery & Data Mining"),
+}
 cache_path = os.path.join(DECK, "refs.json")
 CACHE = {r["cite"]: r for r in json.load(open(cache_path, encoding="utf-8"))} if os.path.exists(cache_path) else {}
 
@@ -207,6 +227,7 @@ for part, cite, surname, year, title, venue in REFS:
     if hit is not None and not hit.get("url"): hit = None
     if hit:
         if venue: hit["venue"] = venue
+        if cite in PATCH: hit.update(PATCH[cite])
         out.append(dict(part=part, cite=cite, **hit)); print("ok  ", cite, "->", hit["url"])
     else:
         out.append(dict(part=part, cite=cite, url="", title=title if not title.startswith(surname) else "", venue=venue, year=year, authors="")); missing.append(cite); print("MISS", cite)

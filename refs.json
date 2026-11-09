@@ -384,7 +384,7 @@
   "title": "Bayesian Inference for Contact Networks Given Epidemic Data",
   "venue": "Scandinavian Journal of Statistics",
   "year": 2011,
-  "authors": "CHRIS GROENDYKE, DAVID WELCH, DAVID R. HUNTER"
+  "authors": "Chris Groendyke, David Welch, David R. Hunter"
  },
  {
   "part": "Part 3 · A graph we don’t fully know",
@@ -443,9 +443,9 @@
  {
   "part": "Part 3 · A graph we don’t fully know",
   "cite": "Kipf et al. 2018 (NRI)",
-  "url": "https://arxiv.org/abs/1802.04687v2",
+  "url": "https://proceedings.mlr.press/v80/kipf18a.html",
   "title": "Neural Relational Inference for Interacting Systems",
-  "venue": "arXiv",
+  "venue": "ICML 2018, PMLR 80",
   "year": 2018,
   "authors": "Thomas Kipf, Ethan Fetaya, Kuan-Chieh Wang, Max Welling et al."
  },
@@ -542,11 +542,11 @@
  {
   "part": "Part 4 · Tracking what we can’t see",
   "cite": "Tsui et al. 2024 PNAS",
-  "url": "",
-  "title": "",
-  "venue": "",
-  "year": 2024,
-  "authors": ""
+  "url": "https://doi.org/10.1073/pnas.2412424121",
+  "title": "Toward optimal disease surveillance with graph-based active learning",
+  "venue": "Proceedings of the National Academy of Sciences 121(52)",
+  "authors": "Joseph L.-H. Tsui, Mengyan Zhang, Prathyush Sambaturu, Simon Busch-Moreno, Marc A. Suchard, Oliver G. Pybus, Seth Flaxman, Elizaveta Semenova, Moritz U. G. Kraemer",
+  "year": 2024
  },
  {
   "part": "Part 4 · Tracking what we can’t see",
@@ -560,10 +560,10 @@
  {
   "part": "Part 4 · Tracking what we can’t see",
   "cite": "Borovitskiy et al. 2021",
-  "url": "https://arxiv.org/abs/2010.15538v4",
+  "url": "https://proceedings.mlr.press/v130/borovitskiy21a.html",
   "title": "Matérn Gaussian Processes on Graphs",
-  "venue": "arXiv",
-  "year": 2020,
+  "venue": "AISTATS 2021, PMLR 130",
+  "year": 2021,
   "authors": "Viacheslav Borovitskiy, Iskander Azangulov, Alexander Terenin, Peter Mostowsky et al."
  },
  {
@@ -571,7 +571,7 @@
   "cite": "Stadler et al. 2021 NeurIPS (GPN)",
   "url": "https://arxiv.org/abs/2110.14012v1",
   "title": "Graph Posterior Network: Bayesian Predictive Uncertainty for Node Classification",
-  "venue": "arXiv",
+  "venue": "NeurIPS 2021",
   "year": 2021,
   "authors": "Maximilian Stadler, Bertrand Charpentier, Simon Geisler, Daniel Zügner et al."
  },
@@ -605,10 +605,10 @@
  {
   "part": "Part 5 · Guarantees for any model",
   "cite": "Shafer & Vovk 2008",
-  "url": "https://arxiv.org/abs/0706.3188v1",
+  "url": "https://jmlr.org/papers/v9/shafer08a.html",
   "title": "A tutorial on conformal prediction",
-  "venue": "arXiv",
-  "year": 2007,
+  "venue": "Journal of Machine Learning Research 9",
+  "year": 2008,
   "authors": "Glenn Shafer, Vladimir Vovk"
  },
  {
@@ -616,7 +616,7 @@
   "cite": "Gibbs & Candès 2021 NeurIPS",
   "url": "https://arxiv.org/abs/2106.00170v3",
   "title": "Adaptive Conformal Inference Under Distribution Shift",
-  "venue": "arXiv",
+  "venue": "NeurIPS 2021",
   "year": 2021,
   "authors": "Isaac Gibbs, Emmanuel Candès"
  },
@@ -650,11 +650,11 @@
  {
   "part": "Part 5 · Guarantees for any model",
   "cite": "Bracher, Ray, Gneiting & Reich 2021 PLOS Comp Bio",
-  "url": "https://doi.org/10.1371/journal.pcbi.1010592",
-  "title": "Correction: Evaluating epidemic forecasts in an interval format",
-  "venue": "PLOS Computational Biology",
-  "year": 2022,
-  "authors": "Johannes Bracher, Evan L. Ray, Tilmann Gneiting, Nicholas G. Reich"
+  "url": "https://doi.org/10.1371/journal.pcbi.1008618",
+  "title": "Evaluating epidemic forecasts in an interval format",
+  "venue": "PLOS Computational Biology 17(2)",
+  "authors": "Johannes Bracher, Evan L. Ray, Tilmann Gneiting, Nicholas G. Reich",
+  "year": 2021
  },
  {
   "part": "Part 5 · Guarantees for any model",
@@ -668,18 +668,18 @@
  {
   "part": "Part 5 · Guarantees for any model",
   "cite": "DAPS, ICML 2023 (Zargarbashi et al.)",
-  "url": "",
+  "url": "https://proceedings.mlr.press/v202/h-zargarbashi23a.html",
   "title": "Conformal prediction sets for graph neural networks",
-  "venue": "",
-  "year": 2023,
-  "authors": ""
+  "venue": "ICML 2023, PMLR 202",
+  "authors": "Soroush H. Zargarbashi, Simone Antonelli, Aleksandar Bojchevski",
+  "year": 2023
  },
  {
   "part": "Part 5 · Guarantees for any model",
   "cite": "CoRel, ICML 2025 (Cini et al.)",
-  "url": "https://arxiv.org/abs/2502.09443v2",
+  "url": "https://proceedings.mlr.press/v267/cini25a.html",
   "title": "Relational Conformal Prediction for Correlated Time Series",
-  "venue": "arXiv",
+  "venue": "ICML 2025, PMLR 267",
   "year": 2025,
   "authors": "Andrea Cini, Alexander Jenkins, Danilo Mandic, Cesare Alippi et al."
  },
@@ -688,7 +688,7 @@
   "cite": "Zargarbashi & Bojchevski, ICLR 2024",
   "url": "https://arxiv.org/abs/2407.09173v1",
   "title": "Conformal Inductive Graph Neural Networks",
-  "venue": "arXiv",
+  "venue": "ICLR 2024",
   "year": 2024,
   "authors": "Soroush H. Zargarbashi, Aleksandar Bojchevski"
  },
@@ -706,17 +706,17 @@
   "cite": "Lakshminarayanan, Pritzel & Blundell 2017",
   "url": "https://arxiv.org/abs/1612.01474v3",
   "title": "Simple and Scalable Predictive Uncertainty Estimation using Deep Ensembles",
-  "venue": "arXiv",
-  "year": 2016,
+  "venue": "NeurIPS 2017",
+  "year": 2017,
   "authors": "Balaji Lakshminarayanan, Alexander Pritzel, Charles Blundell"
  },
  {
   "part": "Part 5 · Guarantees for any model",
   "cite": "Gal & Ghahramani 2016",
-  "url": "https://arxiv.org/abs/1506.02142v6",
+  "url": "https://proceedings.mlr.press/v48/gal16.html",
   "title": "Dropout as a Bayesian Approximation: Representing Model Uncertainty in Deep Learning",
-  "venue": "arXiv",
-  "year": 2015,
+  "venue": "ICML 2016, PMLR 48",
+  "year": 2016,
   "authors": "Yarin Gal, Zoubin Ghahramani"
  },
  {
@@ -751,7 +751,7 @@
   "cite": "Kamarthi et al. 2021 (EpiFNP)",
   "url": "https://arxiv.org/abs/2106.03904v3",
   "title": "When in Doubt: Neural Non-Parametric Uncertainty Quantification for Epidemic Forecasting",
-  "venue": "arXiv",
+  "venue": "NeurIPS 2021",
   "year": 2021,
   "authors": "Harshavardhan Kamarthi, Lingkai Kong, Alexander Rodríguez, Chao Zhang et al."
  },
@@ -769,7 +769,7 @@
   "cite": "Wu et al. 2021 KDD",
   "url": "https://doi.org/10.1145/3447548.3467325",
   "title": "Quantifying Uncertainty in Deep Spatiotemporal Forecasting",
-  "venue": "Proceedings of the 27th ACM SIGKDD Conference on Knowledge Discovery &amp; Data Mining",
+  "venue": "Proceedings of the 27th ACM SIGKDD Conference on Knowledge Discovery & Data Mining",
   "year": 2021,
   "authors": "Dongxia Wu, Liyao Gao, Matteo Chinazzi, Xinyue Xiong et al."
  },
@@ -794,9 +794,9 @@
  {
   "part": "Part 6 · Running it backwards",
   "cite": "Dawkins, Li & Xu 2021 ICML",
-  "url": "https://arxiv.org/abs/2106.04800v2",
+  "url": "https://proceedings.mlr.press/v139/dawkins21a.html",
   "title": "Diffusion Source Identification on Networks with Statistical Confidence",
-  "venue": "arXiv",
+  "venue": "ICML 2021, PMLR 139",
   "year": 2021,
   "authors": "Quinlan Dawkins, Tianxi Li, Haifeng Xu"
  },
@@ -866,10 +866,10 @@
  {
   "part": "Part 7 · Deciding anyway",
   "cite": "Staib, Wilder & Jegelka 2019 AISTATS",
-  "url": "https://arxiv.org/abs/1802.05249v2",
+  "url": "https://proceedings.mlr.press/v89/staib19a.html",
   "title": "Distributionally Robust Submodular Maximization",
-  "venue": "arXiv",
-  "year": 2018,
+  "venue": "AISTATS 2019, PMLR 89",
+  "year": 2019,
   "authors": "Matthew Staib, Bryan Wilder, Stefanie Jegelka"
  },
  {
@@ -902,10 +902,10 @@
  {
   "part": "Part 7 · Deciding anyway",
   "cite": "Patel, Rayan & Tewari 2024 AISTATS",
-  "url": "https://arxiv.org/abs/2310.10003v1",
+  "url": "https://proceedings.mlr.press/v238/patel24a.html",
   "title": "Conformal Contextual Robust Optimization",
-  "venue": "arXiv",
-  "year": 2023,
+  "venue": "AISTATS 2024, PMLR 238",
+  "year": 2024,
   "authors": "Yash Patel, Sahana Rayan, Ambuj Tewari"
  },
  {
@@ -929,11 +929,11 @@
  {
   "part": "Part 7 · Deciding anyway",
   "cite": "Hu et al. 2026 ICLR",
-  "url": "",
-  "title": "",
-  "venue": "",
-  "year": 2026,
-  "authors": ""
+  "url": "https://openreview.net/forum?id=bt4Ahpemmi",
+  "title": "Conformal robustness control: a new strategy for robust decision",
+  "venue": "ICLR 2026 (oral)",
+  "authors": "Yang Hu, Jieren Tan, Changliang Zou, Yajie Bao, Haojie Ren",
+  "year": 2026
  },
  {
   "part": "Part 8 · The map",

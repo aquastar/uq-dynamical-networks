@@ -6,7 +6,7 @@
 <title>Uncertainty Quantification for Dynamical Networks</title>
 <link rel="stylesheet" href="vendor/fonts/fonts.css">
 <link rel="stylesheet" href="vendor/reveal.css">
-<link rel="stylesheet" href="deck.css?v=30">
+<link rel="stylesheet" href="deck.css?v=32">
 </head>
 <body>
 <div class="reveal">
@@ -529,10 +529,10 @@
 </div>
 <script src="vendor/reveal.js"></script>
 <script src="vendor/d3.js"></script>
-<script src="sim.js?v=30"></script>
-<script src="charts.js?v=30"></script>
+<script src="sim.js?v=32"></script>
+<script src="charts.js?v=32"></script>
 <script>
-fetch("data.json?v=30").then(r => r.json()).then(D => {
+fetch("data.json?v=32").then(r => r.json()).then(D => {
   Sim.init(D.ward); window.DECK = D; Charts.fill(document, D);
   // cards, steps and table rows build one per arrow press
   document.querySelectorAll(".build > .card, .build > .step, .build > .check, .build > .note, table.build tr:not(:first-child)").forEach(el => el.classList.add("fragment", "fade-up"));

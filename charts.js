@@ -705,7 +705,11 @@ window.Charts = (function () {
     const along = (d, off) => { const [x1, y1] = N[d[0]], [x2, y2] = N[d[1]], [mx, my] = mid(d[0], d[1], off); return `rotate(${Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI},${mx},${my})`; };
     g.append("g").selectAll("text").data(edges).join("text").attr("x", d => mid(d[0], d[1], upper(d) ? -26 : 26)[0]).attr("y", d => mid(d[0], d[1], upper(d) ? -26 : 26)[1] + 7).attr("transform", d => along(d, upper(d) ? -26 : 26)).attr("text-anchor", "middle").attr("font-size", 21).attr("fill", C.muted).text(d => d[2]);
     const flows = g.append("g").selectAll("text").data(edges).join("text").attr("x", d => mid(d[0], d[1], upper(d) ? 30 : -30)[0]).attr("y", d => mid(d[0], d[1], upper(d) ? 30 : -30)[1] + 8).attr("transform", d => along(d, upper(d) ? 30 : -30)).attr("text-anchor", "middle").attr("font-size", 22).attr("font-weight", 700).attr("fill", C.blue).style("transition", "opacity .7s");
-    const lS = L.add(); lS.append("line").attr("x1", N.A[0]).attr("y1", N.A[1] + 30).attr("x2", N.B[0]).attr("y2", N.B[1] - 30).attr("stroke", C.orange).attr("stroke-width", 4).attr("stroke-dasharray", "10 8").attr("stroke-linecap", "round"); lS.append("text").attr("x", N.A[0] + 18).attr("y", 250).attr("font-size", 21).attr("fill", C.orange).attr("font-weight", 600).text("new shortcut: 0 min");
+    // the shortcut: layer 0 is the dashed marker when it is just built; layer 1 is the same road thick, with its traffic, once everyone uses it
+    const lS = L.add(); lS.append("line").attr("x1", N.A[0]).attr("y1", N.A[1] + 30).attr("x2", N.B[0]).attr("y2", N.B[1] - 30).attr("stroke", C.orange).attr("stroke-width", 4).attr("stroke-dasharray", "10 8").attr("stroke-linecap", "round");
+    lS.append("text").attr("x", N.A[0] + 26).attr("y", 250).attr("font-size", 21).attr("fill", C.orange).attr("font-weight", 600).text("new shortcut: 0 min");
+    const lU = L.add(); lU.append("line").attr("x1", N.A[0]).attr("y1", N.A[1] + 30).attr("x2", N.B[0]).attr("y2", N.B[1] - 30).attr("stroke", C.orange).attr("stroke-width", 3 + 16).attr("stroke-linecap", "round");
+    lU.append("text").attr("x", N.A[0] - 22).attr("y", 258).attr("transform", `rotate(-90,${N.A[0] - 22},250)`).attr("text-anchor", "middle").attr("font-size", 22).attr("font-weight", 700).attr("fill", C.orange).text(`${DR} cars`);
     const nodes = g.append("g"); for (const [k, [x, y]] of Object.entries(N)) { const end = k === "s" || k === "t"; nodes.append("circle").attr("cx", x).attr("cy", y).attr("r", end ? 44 : 30).attr("fill", "#fff").attr("stroke", C.ink).attr("stroke-width", 3); nodes.append("text").attr("x", x).attr("y", y + (end ? 9 : 11)).attr("text-anchor", "middle").attr("font-size", end ? 24 : 30).attr("font-weight", 700).attr("fill", C.ink).attr("font-family", F.disp).text(k === "s" ? "home" : k === "t" ? "work" : k); }
     // the numbers, in a block on the right
     const bx = 905; const big = g.append("text").attr("x", bx).attr("y", 215).attr("font-size", 60).attr("font-weight", 700).attr("fill", C.ink).attr("font-family", F.disp);
@@ -715,7 +719,7 @@ window.Charts = (function () {
       if (k < 2) { big.text("65 min"); sub1.text("every driver, either route"); sub2.text(`${DR / 2} cars each way: 20 + 45`); } else { big.text("80 min"); sub1.text("every driver, via the shortcut: was 65"); sub2.text(`${DR} cars: 40 + 0 + 40`); } };
     setFlows(0);
     return { steps: 4, caps: ["4000 people drive from home to work. Two routes, each a slow road that takes one minute per hundred cars, then a fixed 45-minute road. They split evenly: 65 minutes each.", "The city builds a free shortcut between the two junctions.", "Everyone takes it: at each step it looks faster. Now every driver needs 80 minutes, and nobody can do better by switching alone.", "A network is not the sum of its roads. What happens at one node depends on every other node, so we model the graph and the dynamics on it together, and that is before any uncertainty is added."],
-      show: k => { setFlows(k); L.show(k >= 2 ? 2 : k >= 1 ? 1 : 0); } };
+      show: k => { setFlows(k); L.show(k >= 2 ? 3 : k >= 1 ? 1 : 0); } };
   };
 
   // Part 0 · what uncertainty quantification is: a number, a spread, then the check and the decision, on the ward's own numbers

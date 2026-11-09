@@ -12,6 +12,7 @@ window.Charts = (function () {
   const R = {};
   const fmtPct = v => Math.round(100 * v) + "%";
   const el = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; };
+  const IMG = n => (R.IMG && R.IMG[n]) || ("img/" + n);   // images live in img/; the self-contained artifact inlines them as data URIs
   const svgIn = (parent, w, h) => d3.select(parent).append("svg").attr("viewBox", `0 0 ${w} ${h}`).attr("preserveAspectRatio", "xMidYMid meet");
   const reduce = () => !!R.PRINT || matchMedia("(prefers-reduced-motion: reduce)").matches;
   const EASE = "cubic-bezier(.2,.8,.2,1)";
@@ -100,14 +101,43 @@ window.Charts = (function () {
   // =====================================================================
   // 0 · the ward
   R.ward = (e, D) => {
-    const w = ward(e, { w: 1300, h: 640, r: 10 }); const L = Layers(w.svg);
-    w.edges.style("opacity", 0); w.nodes.style("opacity", i => Sim.W.roles[i] === 0 ? 1 : 0);
+    const w = ward(e, { w: 1300, h: 640, r: 10 }); const L = Layers(w.svg); const svg = w.svg;
+    w.edges.style("opacity", 0); w.nodes.style("opacity", 0);
     const l3 = L.add(); const [sx, sy] = w.P(Sim.W.src);
     l3.append("circle").attr("cx", sx).attr("cy", sy).attr("r", 17).attr("fill", "none").attr("stroke", C.ink).attr("stroke-width", 3);
     note(l3, sx, sy, "patient zero: a patient with 4 contacts", 70, 70);
-    w.legend(roleLegend, null, 634);
-    return { steps: 4, caps: ["A real hospital ward in Lyon. 29 patients (circles), tracked by proximity badges for four days.", "27 nurses (squares), 11 doctors (diamonds), 8 admin staff (triangles). 75 people. The bigger the mark, the more contacts.", `An edge: at least five minutes face to face, plus the single strongest contact for the four people with none. ${Sim.W.n_edges} contacts, ${Sim.W.mean_contacts} per person. Nurses are the hub.`, "One person starts every outbreak in Parts 0 to 6. Watch what happens to them."],
-      show: k => { w.nodes.style("transition", "opacity .5s").style("opacity", i => (k >= 1 || Sim.W.roles[i] === 0) ? 1 : 0); w.edges.style("transition", "opacity .8s").style("opacity", k >= 2 ? 1 : 0); L.show(k >= 3 ? 1 : 0); } };
+    w.legend(roleLegend, null, 634); const legend = w.svg.select("g:last-of-type");
+    // where the ward is: a map with the dot on Lyon and a photograph of the city, large on the first beat, then tucked into the
+    // margins either side of the ward (the ward box is 858 wide in a 1300 frame, so each margin is 221) where they stay, in print too
+    const G = D.geo, MW = 560, MH = 520, PW = 1100, PH = 736, XW = 900, XH = 639, uid = "w" + Math.random().toString(36).slice(2, 7);
+    const clip = (id, cw, ch) => svg.append("clipPath").attr("id", id).append("rect").attr("width", cw).attr("height", ch).attr("rx", 14);
+    clip(uid + "m", MW, MH); clip(uid + "p", PW, PH); clip(uid + "x", XW, XH);
+    const gMap = svg.append("g"); const mapIn = gMap.append("g").attr("clip-path", `url(#${uid}m)`);
+    mapIn.append("rect").attr("width", MW).attr("height", MH).attr("fill", "#E6EEF7");
+    const proj = d3.geoMercator().fitExtent([[0, 0], [MW, MH]], { type: "MultiPoint", coordinates: [[-5.4, 42.2], [9.8, 42.2], [9.8, 51.3], [-5.4, 51.3]] }); const gp = d3.geoPath(proj);
+    mapIn.append("g").selectAll("path").data(G.features).join("path").attr("d", gp).attr("fill", d => d.properties.name === "France" ? "#FFFFFF" : "#F1EFE9").attr("stroke", "#C3C9D3").attr("stroke-width", 1).style("vector-effect", "non-scaling-stroke");
+    gMap.append("rect").attr("width", MW).attr("height", MH).attr("rx", 14).attr("fill", "none").attr("stroke", "#C9CDD6").style("vector-effect", "non-scaling-stroke");
+    const [px, py] = proj([2.3522, 48.8566]); const paris = gMap.append("g"); paris.append("circle").attr("r", 4).attr("fill", C.muted); paris.append("text").attr("x", 9).attr("y", 6).attr("font-size", 18).attr("fill", C.muted).text("Paris");
+    const [lx, ly] = proj(G.lyon); const mark = gMap.append("g");
+    if (!reduce()) { const ring = mark.append("circle").attr("r", 9).attr("fill", "none").attr("stroke", C.red).attr("stroke-width", 3); ring.append("animate").attr("attributeName", "r").attr("values", "9;34").attr("dur", "1.8s").attr("repeatCount", "indefinite"); ring.append("animate").attr("attributeName", "opacity").attr("values", "1;0").attr("dur", "1.8s").attr("repeatCount", "indefinite"); }
+    mark.append("circle").attr("r", 9).attr("fill", C.red).attr("stroke", "#fff").attr("stroke-width", 3); mark.append("text").attr("x", 16).attr("y", 9).attr("font-size", 26).attr("font-weight", 700).attr("fill", C.ink).attr("font-family", F.disp).text("Lyon");
+    const gPh = svg.append("g"); gPh.append("image").attr("href", IMG("lyon.jpg")).attr("width", PW).attr("height", PH).attr("clip-path", `url(#${uid}p)`);
+    const gX = svg.append("g").style("opacity", 0); gX.append("image").attr("href", IMG("vanhems_fig1_counts.png")).attr("width", XW).attr("height", XH).attr("clip-path", `url(#${uid}x)`); gX.append("rect").attr("width", XW).attr("height", XH).attr("rx", 14).attr("fill", "none").attr("stroke", "#C9CDD6").style("vector-effect", "non-scaling-stroke");
+    const lines = (g, x, y, size, arr, col = C.muted) => { const t = g.append("text").attr("x", x).attr("y", y).attr("font-size", size).attr("fill", col); arr.forEach((s, i) => t.append("tspan").attr("x", x).attr("dy", i ? size * 1.3 : 0).text(s)); return t; };
+    const capBig = lines(svg, 650, 488, 21, ["Lyon, from Fourvière hill. Photo: Aldg692VX, CC BY-SA 4.0.", "The ward: a short-stay geriatric unit of the university hospital, 6 to 10 December 2010."]);
+    const capPh = lines(svg, 1087, 218, 15, ["Lyon, France"]).style("opacity", 0);
+    const capX = lines(svg, 8, 500, 15, ["Contacts by role, as the authors", "counted them: 2951 patient–nurse,", "97 patient–patient (fig. 1)."]).style("opacity", 0);
+    const T = (sel, instant) => instant ? sel : sel.transition("lay").duration(700).ease(d3.easeCubicInOut);
+    const lay = (k, instant) => { const big = k === 0, inst = instant || reduce(), ms = .72 * MW / 205;
+      T(gMap, inst).attr("transform", big ? "translate(40,30)" : `translate(8,60) scale(${205 / MW})`);
+      T(mark, inst).attr("transform", `translate(${lx},${ly}) scale(${big ? 1 : ms})`);
+      T(paris, inst).attr("transform", `translate(${px},${py}) scale(${big ? 1 : ms})`);
+      T(gPh, inst).attr("transform", big ? `translate(650,40) scale(${610 / PW})` : `translate(1087,60) scale(${205 / PW})`);
+      gX.attr("transform", `translate(8,330) scale(${205 / XW})`);
+      T(capBig, inst).style("opacity", big ? 1 : 0); T(legend, inst).style("opacity", big ? 0 : 1); T(capPh, inst).style("opacity", big ? 0 : 1); T(gX, inst).style("opacity", k >= 3 ? 1 : 0); T(capX, inst).style("opacity", k >= 3 ? 1 : 0); };
+    lay(0, true);
+    return { steps: 5, caps: ["A real place. The ward in this tutorial is a short-stay geriatric unit of a university hospital in Lyon, France; the data are four days there, 6 to 10 December 2010.", "29 patients (circles), tracked by proximity badges for four days.", "27 nurses (squares), 11 doctors (diamonds), 8 admin staff (triangles). 75 people. The bigger the mark, the more contacts.", `An edge: at least five minutes face to face, plus the single strongest contact for the four people with none. ${Sim.W.n_edges} contacts, ${Sim.W.mean_contacts} per person. Nurses are the hub, and the authors' own count says the same: patients met nurses thirty times more often than each other.`, "One person starts every outbreak in Parts 0 to 6. Watch what happens to them."],
+      show: k => { lay(k); w.nodes.style("transition", "opacity .5s").style("opacity", i => (k >= 2 || (k >= 1 && Sim.W.roles[i] === 0)) ? 1 : 0); w.edges.style("transition", "opacity .8s").style("opacity", k >= 3 ? 1 : 0); L.show(k >= 4 ? 1 : 0); } };
   };
 
   // the cover: the ward with an outbreak running through it on a loop, a fresh run each time; below it, the curve of every run so far
@@ -666,7 +696,9 @@ window.Charts = (function () {
   const cascadeFrames = (nb, src) => { const n = nb.length; let fallback = null; for (const alpha of [0.9, 0.8, 0.7, 0.6, 0.55, 0.5, 0.45, 0.4, 0.35, 0.3, 0.25, 0.2, 0.15, 0.1]) { const load = nb.map(a => a.length), cap = load.map(l => (1 + alpha) * l + .01), s = new Uint8Array(n); s[src] = 1; const fr = [new Uint8Array(s)]; for (let step = 0; step < 14; step++) { const just = []; for (let i = 0; i < n; i++) if (s[i] === 1) just.push(i); if (!just.length) break; for (const i of just) { const alive = nb[i].filter(j => s[j] === 0); for (const j of alive) load[j] += load[i] / alive.length; s[i] = 2; } for (let i = 0; i < n; i++) if (s[i] === 0 && load[i] > cap[i]) s[i] = 1; fr.push(new Uint8Array(s)); } const reached = fr[fr.length - 1].filter(v => v).length / n; if (reached >= .4 && reached <= .85) return fr; if (reached >= .4 && !fallback) fallback = fr; } return fallback || [new Uint8Array(n)]; };
   R.spreads = (e, D) => {
     const row = el("div", "fourq grid"); e.appendChild(row); const W = 420, H = 270; const rnd = mulberry(7);
-    const panel = (k, h, a) => { const p = el("div", "fq"); row.appendChild(p); const txt = el("div", "txt"); p.appendChild(txt); txt.appendChild(el("p", "k", k)); txt.appendChild(el("h3", null, h)); txt.appendChild(el("p", "a", a)); const fig = el("div", "figbox"); p.appendChild(fig); return { p, fig }; };
+    const panel = (k, h, a) => { const p = el("div", "fq"); row.appendChild(p); const txt = el("div", "txt"); p.appendChild(txt); txt.appendChild(el("p", "k", k)); txt.appendChild(el("h3", null, h)); const pa = el("p", "a", a); txt.appendChild(pa); const fig = el("div", "figbox"); p.appendChild(fig); return { p, fig, a: pa }; };
+    // the real record behind a drawing: an image over the figbox, shown on the last beat, with its own caption
+    const real = (q, src, cap, labels) => { const r = el("div", "real"); if (labels) r.appendChild(el("div", "lab", labels.map(s => `<span>${s}</span>`).join(""))); const im = el("img"); im.src = IMG(src); im.alt = ""; r.appendChild(im); q.fig.appendChild(r); q.p.__real = { cap, drawn: q.a.textContent, a: q.a }; };
     // a small graph drawing with a state painter; roads draw the jam on the streets, the others on the nodes
     const graph = (fig, pos, edges, opt = {}) => { const svg = svgIn(fig, W, H); const eg = svg.append("g").selectAll("line").data(edges).join("line").attr("x1", d => pos[d[0]][0]).attr("y1", d => pos[d[0]][1]).attr("x2", d => pos[d[1]][0]).attr("y2", d => pos[d[1]][1]).attr("stroke", C.grey).attr("stroke-opacity", opt.roads ? .9 : .45).attr("stroke-width", opt.roads ? 5 : 1.1).attr("stroke-linecap", "round"); const deg = nbList(pos.length, edges).map(a => a.length); const ng = svg.append("g").selectAll("circle").data(d3.range(pos.length)).join("circle").attr("cx", i => pos[i][0]).attr("cy", i => pos[i][1]).attr("r", i => opt.roads ? 3.2 : opt.r ? opt.r(deg[i]) : 4.5).attr("fill", C.light).attr("stroke", "#fff").attr("stroke-width", 1);
       return s => { ng.attr("fill", i => Sim.STATE[s[i]]); if (opt.roads) eg.attr("stroke", d => (s[d[0]] && s[d[1]]) ? (s[d[0]] === 1 || s[d[1]] === 1 ? C.red : C.amber) : C.grey); } };
@@ -675,10 +707,10 @@ window.Charts = (function () {
     { const q = panel("Disease · a hospital ward", "Who gets sick depends on who met whom", "The real ward of this tutorial: 75 people, four days of badge contacts, one virus running."); const w = ward(q.fig, { w: W, h: H, r: 5, pad: 8, padT: 6, padB: 6 }); w.edges.attr("stroke-opacity", .25).attr("stroke-width", 1); w.nodes.attr("stroke-width", .8);
       P.push({ p: q.p, paint: s => w.state(s), make: () => { const fr = []; Sim.sir(Sim.W.beta, Sim.W.gamma, Sim.W.src, 30, null, (t, s) => fr.push(new Uint8Array(s))); return fr; } }); }
     // 2 · a social network, a rumour
-    { const n = 80, edges = socialGraph(n, 11), nb = nbList(n, edges), pos = forcePos(n, edges, W, H, 5); const q = panel("Rumours · social network", "A false claim reaches the hubs first", "During COVID a rumour and the virus never touched, yet coupled through what people chose to do."); const deg = nb.map(a => a.length), md = Math.max(...deg); const paint = graph(q.fig, pos, edges, { r: d => 3 + 7 * Math.sqrt(d / md) }); const leaves = d3.range(n).filter(i => deg[i] === 1);
+    { const n = 80, edges = socialGraph(n, 11), nb = nbList(n, edges), pos = forcePos(n, edges, W, H, 5); const q = panel("Rumours · social network", "A false claim reaches the hubs first", "During COVID a rumour and the virus never touched, yet coupled through what people chose to do."); real(q, "cinelli_fig2_top.png", "The record: who posted about COVID, day by day, early 2020. Fitted like an epidemic, R₀ and all."); const deg = nb.map(a => a.length), md = Math.max(...deg); const paint = graph(q.fig, pos, edges, { r: d => 3 + 7 * Math.sqrt(d / md) }); const leaves = d3.range(n).filter(i => deg[i] === 1);
       P.push({ p: q.p, paint, make: () => spreadFrames(nb, .45, .12, leaves[Math.floor(rnd() * leaves.length)], 30, rnd) }); }
     // 3 · a power grid, a cascade
-    { const cols = 10, rows = 6, n = cols * rows, edges = latticeGraph(cols, rows, .8, 21), nb = nbList(n, edges), pos = latticePos(cols, rows, W, H, 22, 23); const q = panel("Failures · a power grid", "One line trips, its load moves next door", "Neighbours overload and trip in turn. The 2003 North American blackout left 50 million people without power."); const paint = graph(q.fig, pos, edges, {}); const hubs = d3.range(n).filter(i => nb[i].length >= 3);
+    { const cols = 10, rows = 6, n = cols * rows, edges = latticeGraph(cols, rows, .8, 21), nb = nbList(n, edges), pos = latticePos(cols, rows, W, H, 22, 23); const q = panel("Failures · a power grid", "One line trips, its load moves next door", "Neighbours overload and trip in turn. The 2003 North American blackout left 50 million people without power."); real(q, "blackout_pair.jpg", "The record: night lights the evening before, and at 21:03 on 14 August 2003, Toronto to New York gone dark (NOAA/DMSP).", ["13 August 2003", "14 August, 21:03"]); const paint = graph(q.fig, pos, edges, {}); const hubs = d3.range(n).filter(i => nb[i].length >= 3);
       P.push({ p: q.p, paint, make: () => cascadeFrames(nb, hubs[Math.floor(rnd() * hubs.length)]) }); }
     // 4 · a road network, a jam
     { const cols = 10, rows = 6, n = cols * rows, edges = latticeGraph(cols, rows, 1.01, 1), nb = nbList(n, edges), pos = latticePos(cols, rows, W, H, 0, 1); const q = panel("Traffic · a road network", "A blocked street jams the next one", "Flow on one street depends on flow on all the others. Each of these is a graph plus a dynamic on it, and each forecast of it needs error bars."); const paint = graph(q.fig, pos, edges, { roads: true });
@@ -690,12 +722,12 @@ window.Charts = (function () {
     let timer = null; if (!reduce()) timer = setInterval(() => { if (!e.isConnected) { clearInterval(timer); return; } tick(); }, 330);
     // print and reduced motion: the frame with the most activity, so the page shows the spreading rather than the aftermath
     const liveliest = fr => fr.reduce((b, f, i) => f.filter(v => v === 1).length > fr[b].filter(v => v === 1).length ? i : b, 0);
-    return { steps: 4, caps: [], show: k => { on = k + 1; P.forEach((q, i) => { q.p.classList.toggle("on", i <= k); if (reduce() && i <= k) q.paint(q.frames[liveliest(q.frames)]); }); } };
+    return { steps: 5, caps: [], show: k => { on = Math.min(k, 3) + 1; P.forEach((q, i) => { q.p.classList.toggle("on", i <= k); if (reduce() && i <= k) q.paint(q.frames[liveliest(q.frames)]); const r = q.p.__real; if (r) { q.p.classList.toggle("show-real", k >= 4); r.a.textContent = k >= 4 ? r.cap : r.drawn; } }); } };
   };
 
   // Part 0 · Braess's paradox: 4000 drivers, two routes, then a free shortcut that makes everyone slower
   R.braess = (e, D) => {
-    const f = frame(e, 1300, 560, { l: 30, r: 30, t: 30, b: 20 }); const g = f.g; const L = Layers(f.svg);
+    const f = frame(e, 1300, 560, { l: 30, r: 30, t: 30, b: 20 }); const g = f.g; const L = Layers(g); const svg = f.svg; const uid = Math.random().toString(36).slice(2, 7);
     const N = { s: [70, 250], A: [450, 55], B: [450, 445], t: [830, 250] }; const DR = 4000;
     const edges = [["s", "A", "1 min per 100 cars"], ["A", "t", "45 min"], ["s", "B", "45 min"], ["B", "t", "1 min per 100 cars"]];
     const upper = d => d[1] === "A" || d[0] === "A";   // the two roads via A: labels above, flows below; via B the other way round
@@ -715,11 +747,18 @@ window.Charts = (function () {
     const bx = 905; const big = g.append("text").attr("x", bx).attr("y", 215).attr("font-size", 60).attr("font-weight", 700).attr("fill", C.ink).attr("font-family", F.disp);
     const sub1 = g.append("text").attr("x", bx).attr("y", 256).attr("font-size", 22).attr("fill", C.muted), sub2 = g.append("text").attr("x", bx).attr("y", 286).attr("font-size", 22).attr("fill", C.muted);
     const lX = L.add(); lX.append("text").attr("x", bx).attr("y", 354).attr("font-size", 21).attr("font-weight", 600).attr("fill", C.orange).text("both old routes would now take 85,"); lX.append("text").attr("x", bx).attr("y", 382).attr("font-size", 21).attr("font-weight", 600).attr("fill", C.orange).text("so nobody gains by switching back.");
+    // the fifth beat: Seoul. Live, the photo covers the network and the numbers stay; in print it is a strip under the numbers so the network stays too
+    const lP = L.add(); const P_ = reduce(); const [ix, iy, iw, ich] = P_ ? [905, 405, 365, 100] : [80, 8, 740, 740 * 733 / 1100]; const ih = iw * 733 / 1100;
+    svg.append("clipPath").attr("id", "seoul" + uid).append("rect").attr("x", ix).attr("y", iy).attr("width", iw).attr("height", ich).attr("rx", 14);
+    if (!P_) lP.append("rect").attr("x", -30).attr("y", -30).attr("width", 925).attr("height", 560).attr("fill", "#fff");
+    lP.append("image").attr("href", IMG("seoul.jpg")).attr("x", ix).attr("y", P_ ? iy - (ih - ich) / 2 : iy).attr("width", iw).attr("height", ih).attr("clip-path", `url(#seoul${uid})`);
+    lP.append("rect").attr("x", ix).attr("y", iy + ich - 36).attr("width", iw).attr("height", 36).attr("fill", "#000").attr("opacity", .45).attr("clip-path", `url(#seoul${uid})`);
+    lP.append("text").attr("x", ix + 14).attr("y", iy + ich - 12).attr("font-size", 18).attr("font-weight", 600).attr("fill", "#fff").style("stroke", "none").text(P_ ? "Seoul, Cheonggyecheon" : "Seoul, Cheonggyecheon: the expressway that stood here came down in 2005");
     const setFlows = k => { const fl = k < 2 ? [DR / 2, DR / 2, DR / 2, DR / 2] : [DR, 0, 0, DR]; lines.attr("stroke-width", (d, i) => 3 + 16 * fl[i] / DR).style("opacity", (d, i) => fl[i] ? 1 : .25); flows.text((d, i) => fl[i] ? `${fl[i]} cars` : "").style("opacity", (d, i) => fl[i] ? 1 : 0);
       if (k < 2) { big.text("65 min"); sub1.text("every driver, either route"); sub2.text(`${DR / 2} cars each way: 20 + 45`); } else { big.text("80 min"); sub1.text("every driver, via the shortcut: was 65"); sub2.text(`${DR} cars: 40 + 0 + 40`); } };
     setFlows(0);
-    return { steps: 4, caps: ["4000 people drive from home to work. Two routes, each a slow road that takes one minute per hundred cars, then a fixed 45-minute road. They split evenly: 65 minutes each.", "The city builds a free shortcut between the two junctions.", "Everyone takes it: at each step it looks faster. Now every driver needs 80 minutes, and nobody can do better by switching alone.", "A network is not the sum of its roads. What happens at one node depends on every other node, so we model the graph and the dynamics on it together, and that is before any uncertainty is added."],
-      show: k => { setFlows(k); L.show(k >= 2 ? 3 : k >= 1 ? 1 : 0); } };
+    return { steps: 5, caps: ["4000 people drive from home to work. Two routes, each a slow road that takes one minute per hundred cars, then a fixed 45-minute road. They split evenly: 65 minutes each.", "The city builds a free shortcut between the two junctions.", "Everyone takes it: at each step it looks faster. Now every driver needs 80 minutes, and nobody can do better by switching alone.", "A network is not the sum of its roads. What happens at one node depends on every other node, so we model the graph and the dynamics on it together, and that is before any uncertainty is added.", "Seoul took the lesson literally. In 2005 the Cheonggye expressway, an elevated road through the centre, came down to uncover the stream beneath it, and travel times around it improved rather than worsened. Braess in reverse, in a real city."],
+      show: k => { setFlows(k); L.show(k >= 4 ? 4 : k >= 2 ? 3 : k >= 1 ? 1 : 0); } };
   };
 
   // Part 0 · what uncertainty quantification is: a number, a spread, then the check and the decision, on the ward's own numbers

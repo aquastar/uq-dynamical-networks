@@ -82,6 +82,51 @@
  },
  {
   "part": "Part 0 · Why graphs, what UQ is",
+  "cite": "Baker 2009, Scientific American",
+  "url": "https://www.scientificamerican.com/article/removing-roads-and-traffic-lights",
+  "title": "Detours by design (online as: Removing roads and traffic lights speeds urban travel)",
+  "venue": "Scientific American 300(2), 20–22",
+  "authors": "Linda Baker",
+  "year": 2009
+ },
+ {
+  "part": "Part 0 · Photographs, satellite images and maps",
+  "cite": "Aldg692VX, CC BY-SA 4.0",
+  "url": "https://commons.wikimedia.org/wiki/File:Lyon-part-dieu-2023.jpg",
+  "title": "Lyon-part-dieu-2023.jpg: Lyon seen from Fourvière hill (photograph, cropped and resized for the slides)",
+  "venue": "Wikimedia Commons, CC BY-SA 4.0",
+  "authors": "Aldg692VX",
+  "year": 2023
+ },
+ {
+  "part": "Part 0 · Photographs, satellite images and maps",
+  "cite": "Basile Morin 2024, CC BY-SA 4.0",
+  "url": "https://commons.wikimedia.org/wiki/File:Cheonggyecheon_stream_at_sunrise_with_trees_in_Seoul.jpg",
+  "title": "Cheonggyecheon stream at sunrise with trees in Seoul (photograph, resized for the slides)",
+  "venue": "Wikimedia Commons, CC BY-SA 4.0",
+  "authors": "Basile Morin",
+  "year": 2024
+ },
+ {
+  "part": "Part 0 · Photographs, satellite images and maps",
+  "cite": "NOAA/DMSP",
+  "url": "https://commons.wikimedia.org/wiki/File:Northeast_blackout_2003.gif",
+  "title": "Northeast blackout 2003: night lights on 13 August and on 14 August at 21:03 EDT (two frames, cropped to the Toronto–Washington corridor)",
+  "venue": "NOAA / Defense Meteorological Satellite Program, via Wikimedia Commons; public domain (U.S. government work)",
+  "authors": "National Oceanic and Atmospheric Administration; Defense Meteorological Satellite Program",
+  "year": 2003
+ },
+ {
+  "part": "Part 0 · Photographs, satellite images and maps",
+  "cite": "Natural Earth",
+  "url": "https://www.naturalearthdata.com/",
+  "title": "Natural Earth 1:110m cultural vectors (country outlines), via world-atlas 2.0.2",
+  "venue": "public domain",
+  "authors": "Natural Earth",
+  "year": 2023
+ },
+ {
+  "part": "Part 0 · Why graphs, what UQ is",
   "cite": "Der Kiureghian & Ditlevsen 2009",
   "url": "https://doi.org/10.1016/j.strusafe.2008.06.020",
   "title": "Aleatory or epistemic? Does it matter?",

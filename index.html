@@ -6,7 +6,7 @@
 <title>Uncertainty Quantification for Dynamical Networks</title>
 <link rel="stylesheet" href="vendor/fonts/fonts.css">
 <link rel="stylesheet" href="vendor/reveal.css">
-<link rel="stylesheet" href="deck.css?v=32">
+<link rel="stylesheet" href="deck.css?v=37">
 </head>
 <body>
 <div class="reveal">
@@ -34,8 +34,8 @@
   <p class="eyebrow">Part 0 · Why graphs</p>
   <h2>Four things that spread on a graph</h2>
   <div class="viz" data-viz="spreads"></div>
-  <p class="refs"><b>light</b> not reached yet · <b>red</b> active now · <b>amber</b> been through it (recovered, failed, cleared) · the ward is real (Vanhems et al. 2013); the other three graphs are synthetic illustrations · the COVID infodemic: Cinelli et al. 2020 Sci. Rep. · information and disease on two coupled layers: Granell, Gómez &amp; Arenas 2013 PRL · cascading failures: Motter &amp; Lai 2002 PRE; U.S.–Canada Power System Outage Task Force 2004 · temporal networks: Holme &amp; Saramäki 2012</p>
-  <aside class="notes">Four beats, one panel each, and every panel keeps running. The point for a newcomer: a graph is not decoration. In each of these systems the outcome for one node depends on its neighbours, so you cannot forecast a node without forecasting the network, and you cannot forecast the network with one number. Say that the ward is the only real one; the other three are drawn to look like their domain. The rumour panel is Dr. Chen’s infodemic example: during COVID the misinformation network and the contact network never touched, but a belief changed an action and an action changed exposure.</aside>
+  <p class="refs"><b>light</b> not reached yet · <b>red</b> active now · <b>amber</b> been through it (recovered, failed, cleared) · the ward is real (Vanhems et al. 2013); the other three graphs are drawn · the last beat shows the records behind two of them: night lights on 13 and 14 August 2003 (NOAA/DMSP, public domain) and rumour growth on three platforms (Cinelli et al. 2020, fig. 2, CC BY 4.0) · the COVID infodemic: Cinelli et al. 2020 Sci. Rep. · information and disease on two coupled layers: Granell, Gómez &amp; Arenas 2013 PRL · cascading failures: Motter &amp; Lai 2002 PRE; U.S.–Canada Power System Outage Task Force 2004 · temporal networks: Holme &amp; Saramäki 2012</p>
+  <aside class="notes">Five beats: one panel each, every panel keeps running, and the fifth swaps two of the drawings for the real records behind them. The point for a newcomer: a graph is not decoration. In each of these systems the outcome for one node depends on its neighbours, so you cannot forecast a node without forecasting the network, and you cannot forecast the network with one number. Say that the ward is the only real graph; the other three are drawn to look right, and then show the fifth beat: the night lights going out from Toronto to New York, and the same S-curve of an epidemic in the number of people posting about COVID. The rumour panel is Dr. Chen’s infodemic example: during COVID the misinformation network and the contact network never touched, but a belief changed an action and an action changed exposure.</aside>
 </section>
 
 <section class="slide fig">
@@ -43,8 +43,8 @@
   <h2>More roads, longer commutes</h2>
   <div class="viz" data-viz="braess"></div>
   <p class="cap"></p>
-  <p class="refs">Braess 1968, Unternehmensforschung · Steinberg &amp; Zangwill 1983, Transportation Science (how common the paradox is) · the numbers are the textbook example (Easley &amp; Kleinberg 2010, chapter 8)</p>
-  <aside class="notes">Four beats. Ask the room before the third: faster or slower? Most say faster. The fourth beat is the lesson, and it is not about traffic: on a network the right answer for one node depends on what every other node does, so local reasoning fails even without any uncertainty. Add uncertainty on top and the only honest answer is a distribution, which is the rest of the day.</aside>
+  <p class="refs">Braess 1968, Unternehmensforschung · Steinberg &amp; Zangwill 1983, Transportation Science (how common the paradox is) · the numbers are the textbook example (Easley &amp; Kleinberg 2010, chapter 8) · Seoul's Cheonggyecheon: Baker 2009, Scientific American; Easley &amp; Kleinberg 2010, section 8.1 · photo: Basile Morin 2024, CC BY-SA 4.0</p>
+  <aside class="notes">Five beats. Ask the room before the third: faster or slower? Most say faster. The fourth beat is the lesson, and it is not about traffic: on a network the right answer for one node depends on what every other node does, so local reasoning fails even without any uncertainty. Add uncertainty on top and the only honest answer is a distribution, which is the rest of the day. The fifth beat is the photograph: Seoul removed an expressway in 2005 and traffic got better, Braess run backwards in a real city.</aside>
 </section>
 
 <section class="slide fig">
@@ -52,8 +52,8 @@
   <h2>Meet the ward</h2>
   <div class="viz" data-viz="ward"></div>
   <p class="cap"></p>
-  <p class="refs">SocioPatterns hospital study, Vanhems et al. 2013 · the ward is four days of a temporal network squashed into one graph: Holme &amp; Saramäki 2012</p>
-  <aside class="notes">Four beats: patients, then the staff, then the contacts, then patient zero. Nurses are the hub; keep that in mind, it comes back in Part 7. Colours mean the same thing on every figure today: blue is our estimate, red is the truth, orange is the check or a warning, grey is the naive baseline, dark marks are facts we observed. Roles are shapes, so nobody has to tell green from orange.</aside>
+  <p class="refs">SocioPatterns hospital study, Vanhems et al. 2013 · the ward is four days of a temporal network squashed into one graph: Holme &amp; Saramäki 2012 · map: Natural Earth (public domain) · photo: Lyon from Fourvière, Aldg692VX, CC BY-SA 4.0 · contact counts by role: Vanhems et al. 2013, fig. 1, CC BY</p>
+  <aside class="notes">Five beats: where the ward is (a dot on the map, the city), then patients, the staff, the contacts, and patient zero. The map and the photo stay in the margins, so the room keeps seeing a real place. Nurses are the hub; keep that in mind, it comes back in Part 7. Colours mean the same thing on every figure today: blue is our estimate, red is the truth, orange is the check or a warning, grey is the naive baseline, dark marks are facts we observed. Roles are shapes, so nobody has to tell green from orange.</aside>
 </section>
 
 <section class="slide fig">
@@ -529,10 +529,10 @@
 </div>
 <script src="vendor/reveal.js"></script>
 <script src="vendor/d3.js"></script>
-<script src="sim.js?v=32"></script>
-<script src="charts.js?v=32"></script>
+<script src="sim.js?v=37"></script>
+<script src="charts.js?v=37"></script>
 <script>
-fetch("data.json?v=32").then(r => r.json()).then(D => {
+Promise.all([fetch("data.json?v=37"), fetch("geo.json?v=37")].map(p => p.then(r => r.json()))).then(([D, G]) => { D.geo = G;
   Sim.init(D.ward); window.DECK = D; Charts.fill(document, D);
   // cards, steps and table rows build one per arrow press
   document.querySelectorAll(".build > .card, .build > .step, .build > .check, .build > .note, table.build tr:not(:first-child)").forEach(el => el.classList.add("fragment", "fade-up"));

@@ -191,3 +191,14 @@ table.map.lifecycle td{font-size:20px;line-height:1.3;padding:8px 10px}
 table.map.lifecycle td:first-child{font-family:var(--display);font-size:22px;white-space:nowrap}
 table.map.lifecycle td:last-child{color:var(--blue)}
 table.map.lifecycle th:nth-child(3){width:34%}
+
+/* the real record behind a drawn panel (pass 6): an image over the figbox, shown on the last beat */
+.fourq.grid .figbox{position:relative;min-height:0}
+.fq .real{position:absolute;inset:0;display:flex;flex-direction:column;gap:4px;opacity:0;transition:opacity .6s;pointer-events:none}
+.fq.show-real .real{opacity:1}
+.fq .real img{flex:1;min-height:0;width:100%;object-fit:contain;border-radius:8px}
+.fq .real .lab{display:flex;justify-content:space-around;font-size:15px;color:var(--muted);line-height:1.2}
+.fq .figbox svg{transition:opacity .6s}
+.fq.show-real .figbox svg{opacity:.06}
+html.reveal-print .fq .real,html.reveal-print .fq .figbox svg{transition:none}
+@media (prefers-reduced-motion:reduce){.fq .real,.fq .figbox svg{transition:none}}

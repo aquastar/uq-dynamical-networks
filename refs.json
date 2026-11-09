@@ -90,6 +90,60 @@
   "year": 2009
  },
  {
+  "part": "Part 0 · Why graphs, what UQ is",
+  "cite": "White et al. 1986",
+  "url": "https://doi.org/10.1098/rstb.1986.0056",
+  "title": "The structure of the nervous system of the nematode Caenorhabditis elegans",
+  "venue": "Philosophical Transactions of the Royal Society B 314, 1–340",
+  "authors": "J. G. White, E. Southgate, J. N. Thomson, S. Brenner",
+  "year": 1986
+ },
+ {
+  "part": "Part 0 · Why graphs, what UQ is",
+  "cite": "Watts & Strogatz 1998",
+  "url": "https://doi.org/10.1038/30918",
+  "title": "Collective dynamics of 'small-world' networks",
+  "venue": "Nature 393, 440–442",
+  "authors": "Duncan J. Watts, Steven H. Strogatz",
+  "year": 1998
+ },
+ {
+  "part": "Part 0 · Why graphs, what UQ is",
+  "cite": "Newman 2006 PRE",
+  "url": "https://doi.org/10.1103/PhysRevE.74.036104",
+  "title": "Finding community structure in networks using the eigenvectors of matrices",
+  "venue": "Physical Review E 74, 036104",
+  "authors": "M. E. J. Newman",
+  "year": 2006
+ },
+ {
+  "part": "Part 0 · Why graphs, what UQ is",
+  "cite": "Adamic & Glance 2005",
+  "url": "https://doi.org/10.1145/1134271.1134277",
+  "title": "The political blogosphere and the 2004 U.S. election: divided they blog",
+  "venue": "Proceedings of the 3rd International Workshop on Link Discovery (LinkKDD), 36–43",
+  "authors": "Lada A. Adamic, Natalie Glance",
+  "year": 2005
+ },
+ {
+  "part": "Part 0 · Why graphs, what UQ is",
+  "cite": "OpenFlights",
+  "url": "https://openflights.org/data.php",
+  "title": "OpenFlights airport and route databases",
+  "venue": "Open Database License; route data last updated June 2014",
+  "authors": "OpenFlights (Jani Patokallio and contributors)",
+  "year": 2014
+ },
+ {
+  "part": "Part 0 · Why graphs, what UQ is",
+  "cite": "Netzschleuder (Peixoto)",
+  "url": "https://networks.skewed.de/",
+  "title": "Netzschleuder: the network catalogue, repository and centrifuge",
+  "venue": "networks.skewed.de",
+  "authors": "Tiago P. Peixoto",
+  "year": 2020
+ },
+ {
   "part": "Part 0 · Photographs, satellite images and maps",
   "cite": "Aldg692VX, CC BY-SA 4.0",
   "url": "https://commons.wikimedia.org/wiki/File:Lyon-part-dieu-2023.jpg",

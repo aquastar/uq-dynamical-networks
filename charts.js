@@ -725,6 +725,50 @@ window.Charts = (function () {
     return { steps: 5, caps: [], show: k => { on = Math.min(k, 3) + 1; P.forEach((q, i) => { q.p.classList.toggle("on", i <= k); if (reduce() && i <= k) q.paint(q.frames[liveliest(q.frames)]); const r = q.p.__real; if (r) { q.p.classList.toggle("show-real", k >= 4); r.a.textContent = k >= 4 ? r.cap : r.drawn; } }); } };
   };
 
+  // Part 0 · graphs are everywhere: five real networks drawn from their data, each with something moving on it
+  R.everywhere = (e, D) => {
+    const E = D.everywhere.panels, G = D.geo; const row = el("div", "fourq every"); e.appendChild(row); const fmt = n => n.toLocaleString("en-US");
+    const card = (cls, k, h, a) => { const p = el("div", "fq" + (cls ? " " + cls : "")); row.appendChild(p); const txt = el("div", "txt"); p.appendChild(txt); txt.appendChild(el("p", "k", k)); txt.appendChild(el("h3", null, h)); txt.appendChild(el("p", "a", a)); const fig = el("div", "figbox"); p.appendChild(fig); return { p, fig }; };
+    const P = [];
+    // a graph panel: one path for every edge, a circle per node, positions precomputed in figures/make_everywhere.py
+    const draw = (fig, pos, edges, r, W, H) => { const svg = svgIn(fig, W, H); const pad = 10; const X = i => pad + pos[i][0] * (W - 2 * pad), Y = i => pad + pos[i][1] * (H - 2 * pad);
+      svg.append("path").attr("d", edges.map(([a, b]) => `M${X(a).toFixed(1)},${Y(a).toFixed(1)}L${X(b).toFixed(1)},${Y(b).toFixed(1)}`).join("")).attr("stroke", C.grey).attr("stroke-opacity", .3).attr("stroke-width", .7).attr("fill", "none");
+      const ng = svg.append("g").selectAll("circle").data(d3.range(pos.length)).join("circle").attr("cx", X).attr("cy", Y).attr("r", r).attr("fill", C.light); const act = svg.append("g");
+      return s => { ng.attr("fill", i => Sim.STATE[s[i]]); act.selectAll("circle").data(d3.range(pos.length).filter(i => s[i] === 1)).join("circle").attr("cx", X).attr("cy", Y).attr("r", r * 2.2).attr("fill", Sim.STATE[1]).attr("stroke", "#fff").attr("stroke-width", .8); }; };
+    // something moving: a spreading pulse whose rate is set by the mean degree, or a load cascade on the grid
+    // the grid: the shared cascade wants 40% of the nodes to fall, which one failure never does on the real grid; here a blackout of 8 to 60% counts
+    const blackout = (nb, src) => { const n = nb.length; let best = null, bestR = 0; for (const alpha of [0.9, 0.7, 0.5, 0.4, 0.3, 0.22, 0.16, 0.12, 0.08, 0.05, 0.03]) {
+      const load = nb.map(a => a.length), cap = load.map(l => (1 + alpha) * l + .01), s = new Uint8Array(n); s[src] = 1; const fr = [new Uint8Array(s)];
+      for (let step = 0; step < 16; step++) { const just = []; for (let i = 0; i < n; i++) if (s[i] === 1) just.push(i); if (!just.length) break; for (const i of just) { const alive = nb[i].filter(j => s[j] === 0); for (const j of alive) load[j] += load[i] / alive.length; s[i] = 2; } for (let i = 0; i < n; i++) if (s[i] === 0 && load[i] > cap[i]) s[i] = 1; fr.push(new Uint8Array(s)); }
+      const reached = fr[fr.length - 1].filter(v => v).length / n; if (reached >= .08 && reached <= .6) return fr; if (reached <= .6 && reached > bestR) { bestR = reached; best = fr; } } return best || [new Uint8Array(n)]; };
+    const pulse = (q, nb, kind) => { const n = nb.length, deg = nb.map(a => a.length), md = d3.mean(deg), rnd = mulberry(11 + n), hubs = d3.range(n).filter(i => deg[i] >= 3);
+      const active = f => { let c = 0; for (const v of f) if (v === 1) c++; return c; };
+      // a run that fizzles after a node or two shows nothing: redraw until the wave reaches 8% of the nodes at some point (or keep the best of 25 tries)
+      const takeoff = () => { let best = null, bc = -1; for (let t = 0; t < 25; t++) { const fr = spreadFrames(nb, Math.min(.5, Math.max(.01, .6 / md)), .3, hubs[Math.floor(rnd() * hubs.length)], 40, rnd); const c = d3.max(fr, active); if (c >= .08 * n) return fr; if (c > bc) { bc = c; best = fr; } } return best; };
+      q.make = kind === "cascade" ? () => blackout(nb, hubs[Math.floor(rnd() * hubs.length)]) : takeoff; };
+    // the world on top: the busiest airports and the routes among them, as great circles
+    { const F = E.flights, W0 = 800, H0 = 300; const q = card("wide", "Flights · world airports", `${fmt(F.n)} airports, ${fmt(F.m)} routes`, `The ${fmt(F.n)} busiest of ${fmt(F.raw_n)} airports with scheduled service, and every route among them. The dots are where the airports are.`);
+      const svg = svgIn(q.fig, W0, H0); const proj = d3.geoNaturalEarth1().fitExtent([[0, 0], [W0, H0]], { type: "MultiPoint", coordinates: [[-180, 0], [180, 0], [0, -50], [0, 72]] }); const gp = d3.geoPath(proj);
+      svg.append("path").datum(G.world).attr("d", gp).attr("fill", "#EFEDE6");
+      svg.append("path").datum({ type: "MultiLineString", coordinates: F.edges.map(([a, b]) => [F.lonlat[a], F.lonlat[b]]) }).attr("d", gp).attr("stroke", C.grey).attr("stroke-opacity", .22).attr("stroke-width", .6).attr("fill", "none");
+      const pts = F.lonlat.map(ll => proj(ll)); const ng = svg.append("g").selectAll("circle").data(d3.range(F.n)).join("circle").attr("cx", i => pts[i][0]).attr("cy", i => pts[i][1]).attr("r", 3).attr("fill", C.light).attr("stroke", "#fff").attr("stroke-width", .6); const act = svg.append("g");
+      q.paint = s => { ng.attr("fill", i => Sim.STATE[s[i]]); act.selectAll("circle").data(d3.range(F.n).filter(i => s[i] === 1)).join("circle").attr("cx", i => pts[i][0]).attr("cy", i => pts[i][1]).attr("r", 6.5).attr("fill", Sim.STATE[1]).attr("stroke", "#fff").attr("stroke-width", 1); }; pulse(q, nbList(F.n, F.edges), "spread"); P.push(q); }
+    const specs = [["brain", "Brain · a worm's neurons", d => `${fmt(d.n)} neurons, ${fmt(d.m)} connections`, "Every neuron of C. elegans, joined by its synapses and gap junctions.", 3.2, "spread"],
+      ["grid", "Power · western US grid", d => `${fmt(d.n)} stations, ${fmt(d.m)} lines`, "Generators, transformers and substations, joined by high-voltage lines.", 1.5, "cascade"],
+      ["science", "Science · coauthors", d => `${fmt(d.n)} scientists, ${fmt(d.m)} coauthorships`, "The largest connected group of network scientists, joined by shared papers.", 2.6, "spread"],
+      ["blogs", "Politics · blog links", d => `${fmt(d.n)} blogs, ${fmt(d.m)} links`, "US political blogs before the 2004 election, joined when one links to the other.", 1.8, "spread"]];
+    for (const [key, k, hh, a, r, kind] of specs) { const d = E[key]; const q = card("", k, hh(d), a); q.paint = draw(q.fig, d.pos, d.edges, r, 420, 230); pulse(q, nbList(d.n, d.edges), kind); P.push(q); }
+    // the loops, as on the four-things slide: each panel replays a fresh run while the second beat is up
+    const section = e.closest("section"); let on = false;
+    // the still frame (print, reduced motion): the one whose active share is nearest 8%, so the wave shows without flooding the drawing
+    const still = fr => { const tgt = Math.max(5, .08 * fr[0].length); let b = 0, bd = Infinity; fr.forEach((f, i) => { let c = 0; for (const v of f) if (v === 1) c++; const d = Math.abs(c - tgt); if (d < bd) { bd = d; b = i; } }); return b; };
+    P.forEach(q => { q.frames = q.make(); q.k = 0; q.hold = 0; q.paint(q.frames[0]); });
+    const tick = () => { if (!on || (window.Reveal && Reveal.getCurrentSlide && Reveal.getCurrentSlide() !== section)) return; P.forEach(q => { if (q.k >= q.frames.length) { if (q.hold++ < 5) return; q.hold = 0; q.frames = q.make(); q.k = 0; } q.paint(q.frames[q.k++]); }); };
+    let timer = null; if (!reduce()) timer = setInterval(() => { if (!e.isConnected) { clearInterval(timer); return; } tick(); }, 330);
+    return { steps: 2, caps: ["Five real networks, drawn from their data, not sketched: a worm's nervous system, a power grid, the world's air routes, a field's coauthorships, a country's political blogs.", "And on every one of them something moves: a signal, a failure, a delay, an idea, a link. Each is a graph plus a dynamic on it, and each forecast of it needs error bars."],
+      show: k => { on = k >= 1; P.forEach(q => { q.p.classList.add("on"); if (k === 0) { q.frames = q.make(); q.k = 0; q.paint(q.frames[0]); } else if (reduce()) q.paint(q.frames[still(q.frames)]); }); } };
+  };
+
   // Part 0 · Braess's paradox: 4000 drivers, two routes, then a free shortcut that makes everyone slower
   R.braess = (e, D) => {
     const f = frame(e, 1300, 560, { l: 30, r: 30, t: 30, b: 20 }); const g = f.g; const L = Layers(g); const svg = f.svg; const uid = Math.random().toString(36).slice(2, 7);

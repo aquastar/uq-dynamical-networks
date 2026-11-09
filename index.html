@@ -6,7 +6,7 @@
 <title>Uncertainty Quantification for Dynamical Networks</title>
 <link rel="stylesheet" href="vendor/fonts/fonts.css">
 <link rel="stylesheet" href="vendor/reveal.css">
-<link rel="stylesheet" href="deck.css?v=37">
+<link rel="stylesheet" href="deck.css?v=38">
 </head>
 <body>
 <div class="reveal">
@@ -36,6 +36,15 @@
   <div class="viz" data-viz="spreads"></div>
   <p class="refs"><b>light</b> not reached yet · <b>red</b> active now · <b>amber</b> been through it (recovered, failed, cleared) · the ward is real (Vanhems et al. 2013); the other three graphs are drawn · the last beat shows the records behind two of them: night lights on 13 and 14 August 2003 (NOAA/DMSP, public domain) and rumour growth on three platforms (Cinelli et al. 2020, fig. 2, CC BY 4.0) · the COVID infodemic: Cinelli et al. 2020 Sci. Rep. · information and disease on two coupled layers: Granell, Gómez &amp; Arenas 2013 PRL · cascading failures: Motter &amp; Lai 2002 PRE; U.S.–Canada Power System Outage Task Force 2004 · temporal networks: Holme &amp; Saramäki 2012</p>
   <aside class="notes">Five beats: one panel each, every panel keeps running, and the fifth swaps two of the drawings for the real records behind them. The point for a newcomer: a graph is not decoration. In each of these systems the outcome for one node depends on its neighbours, so you cannot forecast a node without forecasting the network, and you cannot forecast the network with one number. Say that the ward is the only real graph; the other three are drawn to look right, and then show the fifth beat: the night lights going out from Toronto to New York, and the same S-curve of an epidemic in the number of people posting about COVID. The rumour panel is Dr. Chen’s infodemic example: during COVID the misinformation network and the contact network never touched, but a belief changed an action and an action changed exposure.</aside>
+</section>
+
+<section class="slide fig">
+  <p class="eyebrow">Part 0 · Why graphs</p>
+  <h2>Graphs are everywhere</h2>
+  <div class="viz" data-viz="everywhere"></div>
+  <p class="cap"></p>
+  <p class="refs">drawn from the data, not sketched · neurons: White et al. 1986, as compiled by Watts &amp; Strogatz 1998 · power grid: Watts &amp; Strogatz 1998 · flights: OpenFlights (Open Database License; routes as of 2014) · coauthorship: Newman 2006 PRE · political blogs: Adamic &amp; Glance 2005 · network files from Netzschleuder (Peixoto) · map: Natural Earth · the moving colours are illustrative runs, not records</p>
+  <aside class="notes">Two beats. First the five drawings: say that none of them is a sketch, every dot is a neuron, a substation, an airport, a person, a blog, placed by a layout algorithm or, for the airports, by where they are. Second beat: press, and something moves on each. The pulses are illustrative, the graphs are real. The point for a newcomer: the same object turns up in biology, engineering, transport, science and politics, and the questions of the day apply to all of them. This is the “graph dynamics are everywhere” beat of Dr. Chen’s introduction, built from the real objects.</aside>
 </section>
 
 <section class="slide fig">
@@ -529,10 +538,10 @@
 </div>
 <script src="vendor/reveal.js"></script>
 <script src="vendor/d3.js"></script>
-<script src="sim.js?v=37"></script>
-<script src="charts.js?v=37"></script>
+<script src="sim.js?v=38"></script>
+<script src="charts.js?v=38"></script>
 <script>
-Promise.all([fetch("data.json?v=37"), fetch("geo.json?v=37")].map(p => p.then(r => r.json()))).then(([D, G]) => { D.geo = G;
+Promise.all([fetch("data.json?v=38"), fetch("geo.json?v=38"), fetch("everywhere.json?v=38")].map(p => p.then(r => r.json()))).then(([D, G, EV]) => { D.geo = G; D.everywhere = EV;
   Sim.init(D.ward); window.DECK = D; Charts.fill(document, D);
   // cards, steps and table rows build one per arrow press
   document.querySelectorAll(".build > .card, .build > .step, .build > .check, .build > .note, table.build tr:not(:first-child)").forEach(el => el.classList.add("fragment", "fade-up"));

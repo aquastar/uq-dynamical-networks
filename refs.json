@@ -18,6 +18,114 @@
   "year": 2012
  },
  {
+  "part": "Part 0 · Why graphs, what UQ is",
+  "cite": "Cinelli et al. 2020 Sci. Rep.",
+  "url": "https://doi.org/10.1038/s41598-020-73510-5",
+  "title": "The COVID-19 social media infodemic",
+  "venue": "Scientific Reports",
+  "authors": "Matteo Cinelli, Walter Quattrociocchi, Alessandro Galeazzi, Carlo Michele Valensise et al.",
+  "year": 2020
+ },
+ {
+  "part": "Part 0 · Why graphs, what UQ is",
+  "cite": "Granell, Gómez & Arenas 2013 PRL",
+  "url": "https://doi.org/10.1103/PhysRevLett.111.128701",
+  "title": "Dynamical interplay between awareness and epidemic spreading in multiplex networks",
+  "venue": "Physical Review Letters",
+  "authors": "Clara Granell, Sergio Gómez, Alex Arenas",
+  "year": 2013
+ },
+ {
+  "part": "Part 0 · Why graphs, what UQ is",
+  "cite": "Motter & Lai 2002 PRE",
+  "url": "https://doi.org/10.1103/PhysRevE.66.065102",
+  "title": "Cascade-based attacks on complex networks",
+  "venue": "Physical Review E",
+  "authors": "Adilson E. Motter, Ying-Cheng Lai",
+  "year": 2002
+ },
+ {
+  "part": "Part 0 · Why graphs, what UQ is",
+  "cite": "U.S.–Canada Power System Outage Task Force 2004",
+  "url": "https://www.energy.gov/oe/articles/blackout-2003-final-report-august-14-2003-blackout-united-states-and-canada-causes-and",
+  "title": "Final Report on the August 14, 2003 Blackout in the United States and Canada: Causes and Recommendations",
+  "venue": "U.S. Department of Energy / Natural Resources Canada (report)",
+  "authors": "U.S.–Canada Power System Outage Task Force",
+  "year": 2004
+ },
+ {
+  "part": "Part 0 · Why graphs, what UQ is",
+  "cite": "Braess 1968",
+  "url": "https://doi.org/10.1007/BF01918335",
+  "title": "Über ein Paradoxon aus der Verkehrsplanung",
+  "venue": "Unternehmensforschung",
+  "authors": "Dietrich Braess",
+  "year": 1968
+ },
+ {
+  "part": "Part 0 · Why graphs, what UQ is",
+  "cite": "Steinberg & Zangwill 1983",
+  "url": "https://doi.org/10.1287/trsc.17.3.301",
+  "title": "The prevalence of Braess' paradox",
+  "venue": "Transportation Science",
+  "authors": "Richard Steinberg, Willard I. Zangwill",
+  "year": 1983
+ },
+ {
+  "part": "Part 0 · Why graphs, what UQ is",
+  "cite": "Easley & Kleinberg 2010",
+  "url": "https://www.cs.cornell.edu/home/kleinber/networks-book/",
+  "title": "Networks, Crowds, and Markets: Reasoning About a Highly Connected World",
+  "venue": "Cambridge University Press (book; free online)",
+  "authors": "David Easley, Jon Kleinberg",
+  "year": 2010
+ },
+ {
+  "part": "Part 0 · Why graphs, what UQ is",
+  "cite": "Der Kiureghian & Ditlevsen 2009",
+  "url": "https://doi.org/10.1016/j.strusafe.2008.06.020",
+  "title": "Aleatory or epistemic? Does it matter?",
+  "venue": "Structural Safety",
+  "authors": "Armen Der Kiureghian, Ove Ditlevsen",
+  "year": 2009
+ },
+ {
+  "part": "Part 0 · Why graphs, what UQ is",
+  "cite": "Hüllermeier & Waegeman 2021",
+  "url": "https://doi.org/10.1007/s10994-021-05946-3",
+  "title": "Aleatoric and epistemic uncertainty in machine learning: an introduction to concepts and methods",
+  "venue": "Machine Learning",
+  "authors": "Eyke Hüllermeier, Willem Waegeman",
+  "year": 2021
+ },
+ {
+  "part": "Part 0 · Why graphs, what UQ is",
+  "cite": "Chen & Zhang WSDM 2026",
+  "url": "https://aquastar.github.io/uq-dynamical-networks/previous-deck.html",
+  "title": "Uncertainty Quantification for Dynamical Networks (tutorial, WSDM 2026): the UQ lifecycle slide",
+  "venue": "WSDM 2026 tutorial; the slides are kept in this repository as previous-deck.html",
+  "authors": "Zhiqian Chen, Zonghan Zhang",
+  "year": 2026
+ },
+ {
+  "part": "Part 0 · Why graphs, what UQ is",
+  "cite": "Smith 2013",
+  "url": "https://doi.org/10.1137/1.9781611973228",
+  "title": "Uncertainty Quantification: Theory, Implementation, and Applications",
+  "venue": "SIAM (book)",
+  "authors": "Ralph C. Smith",
+  "year": 2013
+ },
+ {
+  "part": "Part 0 · Why graphs, what UQ is",
+  "cite": "Sullivan 2015",
+  "url": "https://doi.org/10.1007/978-3-319-23395-6",
+  "title": "Introduction to Uncertainty Quantification",
+  "venue": "Springer (book)",
+  "authors": "T. J. Sullivan",
+  "year": 2015
+ },
+ {
   "part": "Part 1 · Luck",
   "cite": "Newman 2002 PRE",
   "url": "https://doi.org/10.1103/physreve.66.016128",

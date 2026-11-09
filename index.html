@@ -6,7 +6,7 @@
 <title>Uncertainty Quantification for Dynamical Networks</title>
 <link rel="stylesheet" href="vendor/fonts/fonts.css">
 <link rel="stylesheet" href="vendor/reveal.css">
-<link rel="stylesheet" href="deck.css?v=28">
+<link rel="stylesheet" href="deck.css?v=30">
 </head>
 <body>
 <div class="reveal">
@@ -28,6 +28,23 @@
   </div>
   <div class="viz c-right" data-viz="cover"></div>
   <aside class="notes">Welcome. One promise before we start: there is exactly one example in this tutorial, a virus in a hospital ward of 75 people. It is running on the right: the same ward, the same virus, the same first patient, and every run ends differently. Every method today is applied to that same ward. And every part ends with the same test: did our error bars actually contain what happened?</aside>
+</section>
+
+<section class="slide fig">
+  <p class="eyebrow">Part 0 · Why graphs</p>
+  <h2>Four things that spread on a graph</h2>
+  <div class="viz" data-viz="spreads"></div>
+  <p class="refs"><b>light</b> not reached yet · <b>red</b> active now · <b>amber</b> been through it (recovered, failed, cleared) · the ward is real (Vanhems et al. 2013); the other three graphs are synthetic illustrations · the COVID infodemic: Cinelli et al. 2020 Sci. Rep. · information and disease on two coupled layers: Granell, Gómez &amp; Arenas 2013 PRL · cascading failures: Motter &amp; Lai 2002 PRE; U.S.–Canada Power System Outage Task Force 2004 · temporal networks: Holme &amp; Saramäki 2012</p>
+  <aside class="notes">Four beats, one panel each, and every panel keeps running. The point for a newcomer: a graph is not decoration. In each of these systems the outcome for one node depends on its neighbours, so you cannot forecast a node without forecasting the network, and you cannot forecast the network with one number. Say that the ward is the only real one; the other three are drawn to look like their domain. The rumour panel is Dr. Chen’s infodemic example: during COVID the misinformation network and the contact network never touched, but a belief changed an action and an action changed exposure.</aside>
+</section>
+
+<section class="slide fig">
+  <p class="eyebrow">Part 0 · Why graphs</p>
+  <h2>More roads, longer commutes</h2>
+  <div class="viz" data-viz="braess"></div>
+  <p class="cap"></p>
+  <p class="refs">Braess 1968, Unternehmensforschung · Steinberg &amp; Zangwill 1983, Transportation Science (how common the paradox is) · the numbers are the textbook example (Easley &amp; Kleinberg 2010, chapter 8)</p>
+  <aside class="notes">Four beats. Ask the room before the third: faster or slower? Most say faster. The fourth beat is the lesson, and it is not about traffic: on a network the right answer for one node depends on what every other node does, so local reasoning fails even without any uncertainty. Add uncertainty on top and the only honest answer is a distribution, which is the rest of the day.</aside>
 </section>
 
 <section class="slide fig">
@@ -55,17 +72,51 @@
 </section>
 
 <section class="slide fig">
-  <p class="eyebrow">Part 0 · Why one number is never enough</p>
+  <p class="eyebrow">Part 0 · What uncertainty quantification is</p>
+  <h2>A number, a spread, a check, a decision</h2>
+  <div class="viz" data-viz="whatuq"></div>
+  <p class="cap" style="opacity:0">How sure are we, and what does it cost to be wrong? Uncertainty quantification is the second and third panel: turn the number into a spread, check the spread against what actually happened, then decide with it.</p>
+  <aside class="notes">Four beats. The first panel is what most forecasts, dashboards and papers give. The second is what the question deserves; the numbers are the ward’s own, computed from the 2000 runs of Part 1. The third is why anyone bothers: a decision, and the check that the spread was honest. Dr. Chen’s one-line definition of UQ is the caption; say it slowly. Everything after this slide is one way of building the second panel, and one way of doing the check.</aside>
+</section>
+
+<section class="slide fig">
+  <p class="eyebrow">Part 0 · What uncertainty quantification is</p>
+  <h2>Two kinds of uncertainty, and only one of them shrinks</h2>
+  <div class="viz" data-viz="twokinds"></div>
+  <p class="cap" style="opacity:0">Spread = luck + not knowing. In symbols, Var Z = E[Var(Z | β)] + Var(E[Z | β]). Data shrinks only the second term; the first is the floor under every forecast.</p>
+  <p class="refs">Der Kiureghian &amp; Ditlevsen 2009, Structural Safety (aleatory or epistemic? does it matter?) · Hüllermeier &amp; Waegeman 2021, Machine Learning (the two kinds in machine learning)</p>
+  <aside class="notes">Three beats. Left: aleatoric, the randomness that stays when you know everything. Right: epistemic, the part that is only ignorance, so data can shrink it. The law of total variance in the caption is the only formula of Part 0; it says the two add up. On the ladder two slides from now, rung 1 is the left panel and rungs 2 to 5 are all versions of the right one.</aside>
+</section>
+
+<section class="slide fig">
+  <p class="eyebrow">Part 0 · What uncertainty quantification is</p>
+  <h2>The UQ lifecycle, and where today’s tour stops</h2>
+  <table class="map build lifecycle">
+    <tr><th>Stage</th><th>The question</th><th>Representative techniques</th><th>Today</th></tr>
+    <tr><td><b>Representation</b></td><td>Write every unknown as a random variable</td><td>random variables and priors, random graphs, Gaussian processes, random fields</td><td>Parts 1 to 3: a prior on β, a probability on each missed contact</td></tr>
+    <tr><td><b>Propagation</b></td><td>Push the unknowns through the model</td><td>Monte Carlo and quasi-Monte Carlo, polynomial chaos, emulators and surrogates</td><td>Part 1: 2000 runs · Part 2: a surrogate, checked</td></tr>
+    <tr><td><b>Inverse</b></td><td>Learn the unknowns from data</td><td>Bayes: MCMC, approximate Bayesian computation, variational and neural posteriors</td><td>Part 2: β from ten days · Part 6: patient zero</td></tr>
+    <tr><td><b>Sensitivity</b></td><td>Which unknown matters most?</td><td>Sobol indices, Morris screening, Shapley values</td><td>Part 2: β against γ (how fast people recover), the first patient and luck</td></tr>
+    <tr><td><b>Sequential</b></td><td>Update as data streams in</td><td>Kalman, ensemble Kalman and particle filters, smoothers</td><td>Part 4: who is infected right now</td></tr>
+    <tr><td><b>Distribution-free</b></td><td>Fix a band you cannot trust, and score it</td><td>conformal prediction, calibration, proper scoring rules</td><td>Part 5: three lines, then the scorecard</td></tr>
+    <tr><td><b>Risk</b></td><td>Act while still unsure</td><td>expected value, CVaR, robust and distributionally robust optimisation, stochastic programs</td><td>Part 7: eight doses, before anyone is sick</td></tr>
+  </table>
+  <p class="refs">The seven stages follow the UQ lifecycle slide of Chen &amp; Zhang’s WSDM 2026 tutorial, in the ward’s order · textbooks: Smith 2013, Uncertainty Quantification (SIAM) · Sullivan 2015, Introduction to Uncertainty Quantification (Springer)</p>
+  <aside class="notes">One row per press, seven presses. This is the whole field on one slide for someone who has never heard the words: each row is a stage, a plain question, the names they will meet in papers, and where today’s ward tour visits it. Every row gets visited; say so, and say that the order is the ward’s order, not the textbook’s. Spend time on the names: these are what people will search for on Monday.</aside>
+</section>
+
+<section class="slide fig">
+  <p class="eyebrow">Part 0 · The agenda</p>
   <h2>Five places uncertainty gets in</h2>
   <div class="viz" data-viz="ladder" data-lit="0"></div>
   <p class="cap"></p>
-  <aside class="notes">The agenda. Rung 1 is aleatoric, rungs 2 to 5 epistemic: the only jargon pair of the day. The ladder comes back in the corner of each part with the current rung lit.</aside>
+  <aside class="notes">The agenda. Rung 1 is aleatoric, rungs 2 to 5 epistemic: you met the pair two slides ago, and it is the only jargon pair of the day. Each part opens with this ladder and the current rung lit.</aside>
 </section>
 
 
 <!-- ================= PART 1 ================= -->
 <section class="slide opener">
-  <div class="op-left"><p class="eyebrow">Part 1 of 8 · 12 min</p><p class="op-num">1</p><h1>Luck</h1><p class="op-sub">the randomness you can’t remove</p><p class="op-q">“Suppose we knew everything about the virus and the ward. How big will it get?”</p><p class="thm"><b>The one theorem.</b> A quantile estimated from n runs is off by about √(p(1−p)/n) in probability: from 2000 runs, the 5% and 95% edges of our band are good to about one person (Dvoretzky–Kiefer–Wolfowitz).</p></div>
+  <div class="op-left"><p class="eyebrow">Part 1 of 8 · 10 min</p><p class="op-num">1</p><h1>Luck</h1><p class="op-sub">the randomness you can’t remove</p><p class="op-q">“Suppose we knew everything about the virus and the ward. How big will it get?”</p><p class="thm"><b>The one theorem.</b> A quantile estimated from n runs is off by about √(p(1−p)/n) in probability: from 2000 runs, the 5% and 95% edges of our band are good to about one person (Dvoretzky–Kiefer–Wolfowitz).</p></div>
   <div class="op-right"><div data-viz="ladder" data-lit="1"></div></div>
   <aside class="notes">Read the question aloud. It is what the whole part answers.</aside>
 </section>
@@ -126,7 +177,7 @@
 
 <!-- ================= PART 2 ================= -->
 <section class="slide opener">
-  <div class="op-left"><p class="eyebrow">Part 2 of 8 · 14 min</p><p class="op-num">2</p><h1>Numbers we don’t know</h1><p class="op-sub">learn β from ten days of data</p><p class="op-q">“It’s day 10. We’ve seen the case counts so far. How contagious is this thing, and what happens next?”</p><p class="thm"><b>The one theorem.</b> As the tolerance shrinks to zero, the kept guesses are draws from the exact posterior p(β | counts); with a tolerance of four, from a posterior given counts measured to within four (Pritchard et al. 1999; Beaumont, Zhang &amp; Balding 2002).</p></div>
+  <div class="op-left"><p class="eyebrow">Part 2 of 8 · 12 min</p><p class="op-num">2</p><h1>Numbers we don’t know</h1><p class="op-sub">learn β from ten days of data</p><p class="op-q">“It’s day 10. We’ve seen the case counts so far. How contagious is this thing, and what happens next?”</p><p class="thm"><b>The one theorem.</b> As the tolerance shrinks to zero, the kept guesses are draws from the exact posterior p(β | counts); with a tolerance of four, from a posterior given counts measured to within four (Pritchard et al. 1999; Beaumont, Zhang &amp; Balding 2002).</p></div>
   <div class="op-right"><div data-viz="ladder" data-lit="2"></div></div>
 </section>
 
@@ -186,7 +237,7 @@
 
 <!-- ================= PART 3 ================= -->
 <section class="slide opener">
-  <div class="op-left"><p class="eyebrow">Part 3 of 8 · 10 min</p><p class="op-num">3</p><h1>A graph we don’t fully know</h1><p class="op-sub">the badges missed a third of the contacts</p><p class="op-q">“The badges recorded the contacts. But badges miss things. How wrong does that make us?”</p><p class="thm"><b>The one theorem.</b> Averaging the forecast over graphs drawn from p(graph | badges) gives the posterior predictive, and its 90% band is honest exactly when that graph distribution is: a wrong prior over missed contacts is a wrong band (Bayes; Génois et al. 2015 for the missed-contact rate).</p></div>
+  <div class="op-left"><p class="eyebrow">Part 3 of 8 · 9 min</p><p class="op-num">3</p><h1>A graph we don’t fully know</h1><p class="op-sub">the badges missed a third of the contacts</p><p class="op-q">“The badges recorded the contacts. But badges miss things. How wrong does that make us?”</p><p class="thm"><b>The one theorem.</b> Averaging the forecast over graphs drawn from p(graph | badges) gives the posterior predictive, and its 90% band is honest exactly when that graph distribution is: a wrong prior over missed contacts is a wrong band (Bayes; Génois et al. 2015 for the missed-contact rate).</p></div>
   <div class="op-right"><div data-viz="ladder" data-lit="3"></div></div>
 </section>
 
@@ -211,7 +262,7 @@
 
 <!-- ================= PART 4 ================= -->
 <section class="slide opener">
-  <div class="op-left"><p class="eyebrow">Part 4 of 8 · 16 min · after the break</p><p class="op-num">4</p><h1>Tracking what we can’t see</h1><p class="op-sub">who is infected right now</p><p class="op-q">“We test 30% of the ward every two days. Tests miss 10% of cases. Who is infected right now?”</p><p class="thm"><b>The one theorem.</b> With K copies the filter’s estimate converges to the true posterior at rate 1/√K (Del Moral 2004), but the K needed grows exponentially with the dimension of what is observed: that is why 1000 copies collapse on a city (Snyder et al. 2008).</p></div>
+  <div class="op-left"><p class="eyebrow">Part 4 of 8 · 14 min · after the break</p><p class="op-num">4</p><h1>Tracking what we can’t see</h1><p class="op-sub">who is infected right now</p><p class="op-q">“We test 30% of the ward every two days. Tests miss 10% of cases. Who is infected right now?”</p><p class="thm"><b>The one theorem.</b> With K copies the filter’s estimate converges to the true posterior at rate 1/√K (Del Moral 2004), but the K needed grows exponentially with the dimension of what is observed: that is why 1000 copies collapse on a city (Snyder et al. 2008).</p></div>
   <div class="op-right"><div data-viz="ladder" data-lit="4"></div></div>
 </section>
 
@@ -252,7 +303,7 @@
 
 <!-- ================= PART 5 ================= -->
 <section class="slide opener">
-  <div class="op-left"><p class="eyebrow">Part 5 of 8 · 15 min</p><p class="op-num">5</p><h1>Guarantees for any model</h1><p class="op-sub">fix a model’s band in three lines</p><p class="op-q" id="p5q">“Any model can say 90% and deliver less. Can we fix the band without touching the model?”</p><p class="thm"><b>The one theorem.</b> If the n calibration cases and the new case are exchangeable, then P(truth ∈ forecast ± q) lies between 90% and 90% + 1/(n+1), for any forecaster and any distribution (Vovk, Gammerman &amp; Shafer 2005; Lei et al. 2018).</p></div>
+  <div class="op-left"><p class="eyebrow">Part 5 of 8 · 13 min</p><p class="op-num">5</p><h1>Guarantees for any model</h1><p class="op-sub">fix a model’s band in three lines</p><p class="op-q" id="p5q">“Any model can say 90% and deliver less. Can we fix the band without touching the model?”</p><p class="thm"><b>The one theorem.</b> If the n calibration cases and the new case are exchangeable, then P(truth ∈ forecast ± q) lies between 90% and 90% + 1/(n+1), for any forecaster and any distribution (Vovk, Gammerman &amp; Shafer 2005; Lei et al. 2018).</p></div>
   <div class="op-right"><div data-viz="ladder" data-lit="5"></div></div>
 </section>
 
@@ -326,7 +377,7 @@
 
 <!-- ================= PART 6 ================= -->
 <section class="slide opener">
-  <div class="op-left"><p class="eyebrow">Part 6 of 8 · 12 min</p><p class="op-num">6</p><h1>Running it backwards</h1><p class="op-sub">forward is done: now the same three lines, backwards</p><p class="op-q">“It’s day 8. We have a good picture of who is infected. Who started it?”</p><p class="thm"><b>The one theorem.</b> On a regular tree, the person with the most orderings of infection consistent with the picture is the maximum-likelihood source, and is found in linear time; on a general graph the likelihood needs simulation or message passing (Shah &amp; Zaman 2011).</p></div>
+  <div class="op-left"><p class="eyebrow">Part 6 of 8 · 11 min</p><p class="op-num">6</p><h1>Running it backwards</h1><p class="op-sub">forward is done: now the same three lines, backwards</p><p class="op-q">“It’s day 8. We have a good picture of who is infected. Who started it?”</p><p class="thm"><b>The one theorem.</b> On a regular tree, the person with the most orderings of infection consistent with the picture is the maximum-likelihood source, and is found in linear time; on a general graph the likelihood needs simulation or message passing (Shah &amp; Zaman 2011).</p></div>
   <div class="op-right"><div data-viz="ladder" data-lit="6"></div></div>
 </section>
 
@@ -349,7 +400,7 @@
 
 <!-- ================= PART 7 ================= -->
 <section class="slide opener">
-  <div class="op-left"><p class="eyebrow">Part 7 of 8 · 16 min</p><p class="op-num">7</p><h1>Deciding anyway</h1><p class="op-sub">before anyone is sick, so patient zero is unknown too</p><p class="op-q">“We have 8 doses, before the next outbreak. Whom do we vaccinate?”</p><p class="thm"><b>The one theorem.</b> The expected number of people saved by a set of doses is monotone and submodular, so greedy picking is within 1 − 1/e ≈ 63% of the best set (Nemhauser, Wolsey &amp; Fisher 1978; Kempe, Kleinberg &amp; Tardos 2003); the bad-day version is not submodular, and the guarantee weakens (Ohsaka &amp; Yoshida 2017).</p></div>
+  <div class="op-left"><p class="eyebrow">Part 7 of 8 · 14 min</p><p class="op-num">7</p><h1>Deciding anyway</h1><p class="op-sub">before anyone is sick, so patient zero is unknown too</p><p class="op-q">“We have 8 doses, before the next outbreak. Whom do we vaccinate?”</p><p class="thm"><b>The one theorem.</b> The expected number of people saved by a set of doses is monotone and submodular, so greedy picking is within 1 − 1/e ≈ 63% of the best set (Nemhauser, Wolsey &amp; Fisher 1978; Kempe, Kleinberg &amp; Tardos 2003); the bad-day version is not submodular, and the guarantee weakens (Ohsaka &amp; Yoshida 2017).</p></div>
   <div class="op-right"><div data-viz="ladder" data-lit="6"></div></div>
 </section>
 
@@ -478,10 +529,10 @@
 </div>
 <script src="vendor/reveal.js"></script>
 <script src="vendor/d3.js"></script>
-<script src="sim.js?v=28"></script>
-<script src="charts.js?v=28"></script>
+<script src="sim.js?v=30"></script>
+<script src="charts.js?v=30"></script>
 <script>
-fetch("data.json?v=28").then(r => r.json()).then(D => {
+fetch("data.json?v=30").then(r => r.json()).then(D => {
   Sim.init(D.ward); window.DECK = D; Charts.fill(document, D);
   // cards, steps and table rows build one per arrow press
   document.querySelectorAll(".build > .card, .build > .step, .build > .check, .build > .note, table.build tr:not(:first-child)").forEach(el => el.classList.add("fragment", "fade-up"));

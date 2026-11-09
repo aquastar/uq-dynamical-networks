@@ -645,6 +645,114 @@ window.Charts = (function () {
 
   // ---------- caption + beat plumbing ----------
   const mounted = new WeakMap();
+
+  // =====================================================================
+  // Part 0 · why graphs. Four things that spread on a graph, each alive in its own panel.
+  // The ward is real; the other three graphs are synthetic illustrations built from a seeded generator, so they are
+  // the same on every machine. Colours follow the state contract: light = untouched, red = active, amber = done.
+  const mulberry = s => () => { s |= 0; s = s + 0x6D2B79F5 | 0; let t = Math.imul(s ^ s >>> 15, 1 | s); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
+  const nbList = (n, edges) => { const nb = Array.from({ length: n }, () => []); for (const [a, b] of edges) { nb[a].push(b); nb[b].push(a); } return nb; };
+  // preferential attachment: a social graph with hubs
+  const socialGraph = (n, seed) => { const rnd = mulberry(seed), edges = [[0, 1], [1, 2], [0, 2]], ends = [0, 1, 1, 2, 0, 2]; for (let i = 3; i < n; i++) { const m = rnd() < .35 ? 2 : 1; const picked = new Set(); while (picked.size < m) picked.add(ends[Math.floor(rnd() * ends.length)]); for (const j of picked) { edges.push([i, j]); ends.push(i, j); } } return edges; };
+  // a lattice with some links missing: a transmission grid
+  const latticeGraph = (cols, rows, keep, seed) => { const rnd = mulberry(seed), edges = [], id = (c, r) => r * cols + c; for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) { if (c + 1 < cols && rnd() < keep) edges.push([id(c, r), id(c + 1, r)]); if (r + 1 < rows && rnd() < keep) edges.push([id(c, r), id(c, r + 1)]); } return edges; };
+  const latticePos = (cols, rows, w, h, jitter, seed) => { const rnd = mulberry(seed), pos = []; for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) pos.push([14 + c * (w - 28) / (cols - 1) + jitter * (rnd() - .5), 14 + r * (h - 28) / (rows - 1) + jitter * (rnd() - .5)]); return pos; };
+  const forcePos = (n, edges, w, h, seed) => { const rnd = mulberry(seed); const nodes = d3.range(n).map(i => ({ i, x: w * rnd(), y: h * rnd() })); const links = edges.map(([a, b]) => ({ source: a, target: b })); const sim = d3.forceSimulation(nodes).randomSource(rnd).force("link", d3.forceLink(links).distance(26).strength(.5)).force("charge", d3.forceManyBody().strength(-55)).force("center", d3.forceCenter(w / 2, h / 2)).force("collide", d3.forceCollide(8)).stop(); for (let k = 0; k < 300; k++) sim.tick(); const xs = nodes.map(d => d.x), ys = nodes.map(d => d.y), x0 = Math.min(...xs), x1 = Math.max(...xs), y0 = Math.min(...ys), y1 = Math.max(...ys); return nodes.map(d => [12 + (d.x - x0) / (x1 - x0) * (w - 24), 12 + (d.y - y0) / (y1 - y0) * (h - 24)]); };
+  // SIR-type spread on any graph; returns one frame (Uint8Array of states) per day
+  const spreadFrames = (nb, beta, gamma, src, T, rnd) => { const n = nb.length, s = new Uint8Array(n); s[src] = 1; const fr = [new Uint8Array(s)]; for (let t = 0; t < T; t++) { const nw = [], rc = []; for (let i = 0; i < n; i++) { if (s[i] === 0) { let k = 0; for (const j of nb[i]) if (s[j] === 1) k++; if (k && rnd() < 1 - Math.pow(1 - beta, k)) nw.push(i); } else if (s[i] === 1 && rnd() < gamma) rc.push(i); } for (const i of nw) s[i] = 1; for (const i of rc) s[i] = 2; fr.push(new Uint8Array(s)); if (!nw.length && !rc.length && !s.includes(1)) break; } return fr; };
+  // a local load-redistribution cascade in the spirit of Motter & Lai 2002 (they use betweenness load and recompute it globally): load = degree,
+  // capacity = (1 + α) × load; a failed node hands its load to its working neighbours; whoever is over capacity fails next.
+  // α is lowered in small steps until the cascade reaches between 40% and 85% of the grid, so the panel shows a partial blackout, not a wipe-out.
+  const cascadeFrames = (nb, src) => { const n = nb.length; let fallback = null; for (const alpha of [0.9, 0.8, 0.7, 0.6, 0.55, 0.5, 0.45, 0.4, 0.35, 0.3, 0.25, 0.2, 0.15, 0.1]) { const load = nb.map(a => a.length), cap = load.map(l => (1 + alpha) * l + .01), s = new Uint8Array(n); s[src] = 1; const fr = [new Uint8Array(s)]; for (let step = 0; step < 14; step++) { const just = []; for (let i = 0; i < n; i++) if (s[i] === 1) just.push(i); if (!just.length) break; for (const i of just) { const alive = nb[i].filter(j => s[j] === 0); for (const j of alive) load[j] += load[i] / alive.length; s[i] = 2; } for (let i = 0; i < n; i++) if (s[i] === 0 && load[i] > cap[i]) s[i] = 1; fr.push(new Uint8Array(s)); } const reached = fr[fr.length - 1].filter(v => v).length / n; if (reached >= .4 && reached <= .85) return fr; if (reached >= .4 && !fallback) fallback = fr; } return fallback || [new Uint8Array(n)]; };
+  R.spreads = (e, D) => {
+    const row = el("div", "fourq grid"); e.appendChild(row); const W = 420, H = 270; const rnd = mulberry(7);
+    const panel = (k, h, a) => { const p = el("div", "fq"); row.appendChild(p); const txt = el("div", "txt"); p.appendChild(txt); txt.appendChild(el("p", "k", k)); txt.appendChild(el("h3", null, h)); txt.appendChild(el("p", "a", a)); const fig = el("div", "figbox"); p.appendChild(fig); return { p, fig }; };
+    // a small graph drawing with a state painter; roads draw the jam on the streets, the others on the nodes
+    const graph = (fig, pos, edges, opt = {}) => { const svg = svgIn(fig, W, H); const eg = svg.append("g").selectAll("line").data(edges).join("line").attr("x1", d => pos[d[0]][0]).attr("y1", d => pos[d[0]][1]).attr("x2", d => pos[d[1]][0]).attr("y2", d => pos[d[1]][1]).attr("stroke", C.grey).attr("stroke-opacity", opt.roads ? .9 : .45).attr("stroke-width", opt.roads ? 5 : 1.1).attr("stroke-linecap", "round"); const deg = nbList(pos.length, edges).map(a => a.length); const ng = svg.append("g").selectAll("circle").data(d3.range(pos.length)).join("circle").attr("cx", i => pos[i][0]).attr("cy", i => pos[i][1]).attr("r", i => opt.roads ? 3.2 : opt.r ? opt.r(deg[i]) : 4.5).attr("fill", C.light).attr("stroke", "#fff").attr("stroke-width", 1);
+      return s => { ng.attr("fill", i => Sim.STATE[s[i]]); if (opt.roads) eg.attr("stroke", d => (s[d[0]] && s[d[1]]) ? (s[d[0]] === 1 || s[d[1]] === 1 ? C.red : C.amber) : C.grey); } };
+    const P = [];
+    // 1 · the real ward, a virus
+    { const q = panel("Disease · a hospital ward", "Who gets sick depends on who met whom", "The real ward of this tutorial: 75 people, four days of badge contacts, one virus running."); const w = ward(q.fig, { w: W, h: H, r: 5, pad: 8, padT: 6, padB: 6 }); w.edges.attr("stroke-opacity", .25).attr("stroke-width", 1); w.nodes.attr("stroke-width", .8);
+      P.push({ p: q.p, paint: s => w.state(s), make: () => { const fr = []; Sim.sir(Sim.W.beta, Sim.W.gamma, Sim.W.src, 30, null, (t, s) => fr.push(new Uint8Array(s))); return fr; } }); }
+    // 2 · a social network, a rumour
+    { const n = 80, edges = socialGraph(n, 11), nb = nbList(n, edges), pos = forcePos(n, edges, W, H, 5); const q = panel("Rumours · social network", "A false claim reaches the hubs first", "During COVID a rumour and the virus never touched, yet coupled through what people chose to do."); const deg = nb.map(a => a.length), md = Math.max(...deg); const paint = graph(q.fig, pos, edges, { r: d => 3 + 7 * Math.sqrt(d / md) }); const leaves = d3.range(n).filter(i => deg[i] === 1);
+      P.push({ p: q.p, paint, make: () => spreadFrames(nb, .45, .12, leaves[Math.floor(rnd() * leaves.length)], 30, rnd) }); }
+    // 3 · a power grid, a cascade
+    { const cols = 10, rows = 6, n = cols * rows, edges = latticeGraph(cols, rows, .8, 21), nb = nbList(n, edges), pos = latticePos(cols, rows, W, H, 22, 23); const q = panel("Failures · a power grid", "One line trips, its load moves next door", "Neighbours overload and trip in turn. The 2003 North American blackout left 50 million people without power."); const paint = graph(q.fig, pos, edges, {}); const hubs = d3.range(n).filter(i => nb[i].length >= 3);
+      P.push({ p: q.p, paint, make: () => cascadeFrames(nb, hubs[Math.floor(rnd() * hubs.length)]) }); }
+    // 4 · a road network, a jam
+    { const cols = 10, rows = 6, n = cols * rows, edges = latticeGraph(cols, rows, 1.01, 1), nb = nbList(n, edges), pos = latticePos(cols, rows, W, H, 0, 1); const q = panel("Traffic · a road network", "A blocked street jams the next one", "Flow on one street depends on flow on all the others. Each of these is a graph plus a dynamic on it, and each forecast of it needs error bars."); const paint = graph(q.fig, pos, edges, { roads: true });
+      P.push({ p: q.p, paint, make: () => spreadFrames(nb, .26, .22, Math.floor(rnd() * n), 40, rnd) }); }
+    // the loops: each panel replays a fresh run while its slide is up; print and reduced motion show the end of one run
+    const section = e.closest("section"); let on = 0;
+    P.forEach((q, i) => { q.frames = q.make(); q.k = 0; q.hold = 0; q.paint(q.frames[0]); });
+    const tick = () => { if (window.Reveal && Reveal.getCurrentSlide && Reveal.getCurrentSlide() !== section) return; P.forEach((q, i) => { if (i >= on) return; if (q.k >= q.frames.length) { if (q.hold++ < 5) return; q.hold = 0; q.frames = q.make(); q.k = 0; } q.paint(q.frames[q.k++]); }); };
+    let timer = null; if (!reduce()) timer = setInterval(() => { if (!e.isConnected) { clearInterval(timer); return; } tick(); }, 330);
+    // print and reduced motion: the frame with the most activity, so the page shows the spreading rather than the aftermath
+    const liveliest = fr => fr.reduce((b, f, i) => f.filter(v => v === 1).length > fr[b].filter(v => v === 1).length ? i : b, 0);
+    return { steps: 4, caps: [], show: k => { on = k + 1; P.forEach((q, i) => { q.p.classList.toggle("on", i <= k); if (reduce() && i <= k) q.paint(q.frames[liveliest(q.frames)]); }); } };
+  };
+
+  // Part 0 · Braess's paradox: 4000 drivers, two routes, then a free shortcut that makes everyone slower
+  R.braess = (e, D) => {
+    const f = frame(e, 1300, 560, { l: 30, r: 30, t: 30, b: 20 }); const g = f.g; const L = Layers(f.svg);
+    const N = { s: [70, 250], A: [450, 55], B: [450, 445], t: [830, 250] }; const DR = 4000;
+    const edges = [["s", "A", "1 min per 100 cars"], ["A", "t", "45 min"], ["s", "B", "45 min"], ["B", "t", "1 min per 100 cars"]];
+    const upper = d => d[1] === "A" || d[0] === "A";   // the two roads via A: labels above, flows below; via B the other way round
+    const mid = (a, b, off) => { const [x1, y1] = N[a], [x2, y2] = N[b]; const dx = x2 - x1, dy = y2 - y1, len = Math.hypot(dx, dy); return [(x1 + x2) / 2 - dy / len * off, (y1 + y2) / 2 + dx / len * off]; };
+    const lines = g.append("g").selectAll("line").data(edges).join("line").attr("x1", d => N[d[0]][0]).attr("y1", d => N[d[0]][1]).attr("x2", d => N[d[1]][0]).attr("y2", d => N[d[1]][1]).attr("stroke", C.blue).attr("stroke-linecap", "round").style("transition", "stroke-width .7s, opacity .7s");
+    // labels run along their road: rotated about the offset midpoint, so a long label never crosses the line
+    const along = (d, off) => { const [x1, y1] = N[d[0]], [x2, y2] = N[d[1]], [mx, my] = mid(d[0], d[1], off); return `rotate(${Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI},${mx},${my})`; };
+    g.append("g").selectAll("text").data(edges).join("text").attr("x", d => mid(d[0], d[1], upper(d) ? -26 : 26)[0]).attr("y", d => mid(d[0], d[1], upper(d) ? -26 : 26)[1] + 7).attr("transform", d => along(d, upper(d) ? -26 : 26)).attr("text-anchor", "middle").attr("font-size", 21).attr("fill", C.muted).text(d => d[2]);
+    const flows = g.append("g").selectAll("text").data(edges).join("text").attr("x", d => mid(d[0], d[1], upper(d) ? 30 : -30)[0]).attr("y", d => mid(d[0], d[1], upper(d) ? 30 : -30)[1] + 8).attr("transform", d => along(d, upper(d) ? 30 : -30)).attr("text-anchor", "middle").attr("font-size", 22).attr("font-weight", 700).attr("fill", C.blue).style("transition", "opacity .7s");
+    const lS = L.add(); lS.append("line").attr("x1", N.A[0]).attr("y1", N.A[1] + 30).attr("x2", N.B[0]).attr("y2", N.B[1] - 30).attr("stroke", C.orange).attr("stroke-width", 4).attr("stroke-dasharray", "10 8").attr("stroke-linecap", "round"); lS.append("text").attr("x", N.A[0] + 18).attr("y", 250).attr("font-size", 21).attr("fill", C.orange).attr("font-weight", 600).text("new shortcut: 0 min");
+    const nodes = g.append("g"); for (const [k, [x, y]] of Object.entries(N)) { const end = k === "s" || k === "t"; nodes.append("circle").attr("cx", x).attr("cy", y).attr("r", end ? 44 : 30).attr("fill", "#fff").attr("stroke", C.ink).attr("stroke-width", 3); nodes.append("text").attr("x", x).attr("y", y + (end ? 9 : 11)).attr("text-anchor", "middle").attr("font-size", end ? 24 : 30).attr("font-weight", 700).attr("fill", C.ink).attr("font-family", F.disp).text(k === "s" ? "home" : k === "t" ? "work" : k); }
+    // the numbers, in a block on the right
+    const bx = 905; const big = g.append("text").attr("x", bx).attr("y", 215).attr("font-size", 60).attr("font-weight", 700).attr("fill", C.ink).attr("font-family", F.disp);
+    const sub1 = g.append("text").attr("x", bx).attr("y", 256).attr("font-size", 22).attr("fill", C.muted), sub2 = g.append("text").attr("x", bx).attr("y", 286).attr("font-size", 22).attr("fill", C.muted);
+    const lX = L.add(); lX.append("text").attr("x", bx).attr("y", 354).attr("font-size", 21).attr("font-weight", 600).attr("fill", C.orange).text("both old routes would now take 85,"); lX.append("text").attr("x", bx).attr("y", 382).attr("font-size", 21).attr("font-weight", 600).attr("fill", C.orange).text("so nobody gains by switching back.");
+    const setFlows = k => { const fl = k < 2 ? [DR / 2, DR / 2, DR / 2, DR / 2] : [DR, 0, 0, DR]; lines.attr("stroke-width", (d, i) => 3 + 16 * fl[i] / DR).style("opacity", (d, i) => fl[i] ? 1 : .25); flows.text((d, i) => fl[i] ? `${fl[i]} cars` : "").style("opacity", (d, i) => fl[i] ? 1 : 0);
+      if (k < 2) { big.text("65 min"); sub1.text("every driver, either route"); sub2.text(`${DR / 2} cars each way: 20 + 45`); } else { big.text("80 min"); sub1.text("every driver, via the shortcut: was 65"); sub2.text(`${DR} cars: 40 + 0 + 40`); } };
+    setFlows(0);
+    return { steps: 4, caps: ["4000 people drive from home to work. Two routes, each a slow road that takes one minute per hundred cars, then a fixed 45-minute road. They split evenly: 65 minutes each.", "The city builds a free shortcut between the two junctions.", "Everyone takes it: at each step it looks faster. Now every driver needs 80 minutes, and nobody can do better by switching alone.", "A network is not the sum of its roads. What happens at one node depends on every other node, so we model the graph and the dynamics on it together, and that is before any uncertainty is added."],
+      show: k => { setFlows(k); L.show(k >= 2 ? 2 : k >= 1 ? 1 : 0); } };
+  };
+
+  // Part 0 · what uncertainty quantification is: a number, a spread, then the check and the decision, on the ward's own numbers
+  R.whatuq = (e, D) => {
+    const row = el("div", "fourq three"); e.appendChild(row); const F2 = D.fig2, Mg = D.p2.manager, finals = F2.finals, n = finals.length;
+    const mk = (k, title, sub, accent) => { const p = el("div", "fq" + (accent ? " accent" : "")); row.appendChild(p); p.appendChild(el("p", "k", k)); p.appendChild(el("h3", null, title)); const fig = el("div", "figbox"); p.appendChild(fig); p.appendChild(el("p", "a", sub)); return { p, fig }; };
+    const M = { l: 30, r: 16, t: 24, b: 54 }, W = 420, H = 300; const xs = () => d3.scaleLinear().domain([0, 76]).range([0, W - M.l - M.r]);
+    const pShort = Math.round(100 * finals.filter(v => v > F2.mean).length / n), q90 = Sim.q(finals, .9);
+    const P1 = mk("What most reports give", `One number: ${F2.mean} people`, `the average over ${n} simulated outbreaks of the same virus on the same ward`);
+    { const f = frame(P1.fig, W, H, M), x = xs(), y = d3.scaleLinear().domain([0, 1]).range([f.ih, 0]); axes(f, x, y, "people ever infected, out of 75", "", { xt: 6, noY: true });
+      f.g.append("line").attr("x1", x(F2.mean)).attr("x2", x(F2.mean)).attr("y1", f.ih).attr("y2", y(.25)).attr("stroke", C.orange).attr("stroke-width", 4); f.g.append("circle").attr("cx", x(F2.mean)).attr("cy", y(.25)).attr("r", 11).attr("fill", C.orange); f.g.append("text").attr("x", x(F2.mean)).attr("y", y(.25) - 22).attr("text-anchor", "middle").attr("font-size", 24).attr("font-weight", 700).attr("fill", C.orange).text(F2.mean); }
+    const P2 = mk("What the question deserves", `A spread: ${Mg.p_dieout}% nothing, otherwise ${F2.big_lo} to ${F2.big_hi} nine times in ten`, `the same ${n} outbreaks, all of them: two worlds, and the average sits in neither`);
+    { const f = frame(P2.fig, W, H, M), x = xs(), y = d3.scaleLinear().range([f.ih, 0]); bars(f.g, finals, x, y, { bins: 38, color: C.blue }); axes(f, x, y, "people ever infected, out of 75", "", { xt: 6, noY: true });
+      f.g.append("line").attr("x1", x(F2.mean)).attr("x2", x(F2.mean)).attr("y1", f.ih).attr("y2", 0).attr("stroke", C.orange).attr("stroke-width", 3).attr("stroke-dasharray", "6 5"); }
+    const P3 = mk("Then check it, then use it", `Plan for the bad day, ${Mg.cvar} beds, and test the spread`, `${F2.mean} beds fall short in ${pShort}% of outbreaks; the worst tenth averages ${Mg.cvar}. Every part today ends by checking its spread against what happened.`, true);
+    { const f = frame(P3.fig, W, H, M), x = xs(), y = d3.scaleLinear().range([f.ih, 0]); const bins = bars(f.g, finals, x, y, { bins: 38, color: C.grey }); f.g.selectAll("rect.bar").attr("fill", b => b.x0 >= q90 ? C.blue : C.light); axes(f, x, y, "people ever infected, out of 75", "", { xt: 6, noY: true });
+      f.g.append("line").attr("x1", x(Mg.cvar)).attr("x2", x(Mg.cvar)).attr("y1", f.ih).attr("y2", 0).attr("stroke", C.blue).attr("stroke-width", 3); f.g.append("text").attr("x", x(Mg.cvar) - 8).attr("y", 18).attr("text-anchor", "end").attr("font-size", 21).attr("font-weight", 700).attr("fill", C.blue).text(`bad day: ${Mg.cvar}`);
+      f.g.append("line").attr("x1", x(F2.mean)).attr("x2", x(F2.mean)).attr("y1", f.ih).attr("y2", 0).attr("stroke", C.orange).attr("stroke-width", 3).attr("stroke-dasharray", "6 5"); f.g.append("text").attr("x", x(F2.mean) - 8).attr("y", 18).attr("text-anchor", "end").attr("font-size", 21).attr("font-weight", 700).attr("fill", C.orange).text(`${F2.mean}`); }
+    const panels = [P1.p, P2.p, P3.p]; const cap = e.closest("section").querySelector(".cap");
+    return { steps: 4, caps: [], show: k => { panels.forEach((p, i) => p.classList.toggle("on", i <= k)); if (cap) { cap.style.transition = reduce() ? "none" : "opacity .4s"; cap.style.opacity = k >= 3 ? 1 : 0; } } };
+  };
+
+  // Part 0 · two kinds of uncertainty, on the ward: luck (the spread at a known β) and not knowing (the posterior over β)
+  R.twokinds = (e, D) => {
+    const row = el("div", "fourq two"); e.appendChild(row); const F2 = D.fig2, F4 = D.fig4;
+    const mk = (k, title, sub) => { const p = el("div", "fq"); row.appendChild(p); p.appendChild(el("p", "k", k)); p.appendChild(el("h3", null, title)); const fig = el("div", "figbox"); p.appendChild(fig); p.appendChild(el("p", "a", sub)); return { p, fig }; };
+    const M = { l: 30, r: 16, t: 24, b: 54 }, W = 560, H = 310;
+    const P1 = mk("Luck · aleatoric", "Same ward, same virus, same first patient", `${F2.runs} runs, ${F2.runs} endings. The randomness of which contacts passed the virus on, and on which day. No amount of data about the virus shrinks this spread.`);
+    { const f = frame(P1.fig, W, H, M), x = d3.scaleLinear().domain([0, 76]).range([0, f.iw]), y = d3.scaleLinear().range([f.ih, 0]); bars(f.g, F2.finals, x, y, { bins: 38, color: C.blue }); axes(f, x, y, "people ever infected, β known", "", { xt: 6, noY: true }); }
+    const P2 = mk("Not knowing · epistemic", "How contagious is it? We do not know β yet", `Before any data β could be anything from 1% to 30%. Ten days of case counts narrowed it to ${Math.round(100 * F4.beta_lo)}% to ${Math.round(100 * F4.beta_hi)}%. More data shrinks this one.`);
+    { const f = frame(P2.fig, W, H, M), x = d3.scaleLinear().domain([0, 0.31]).range([0, f.iw]), y = d3.scaleLinear().range([f.ih, 0]); bars(f.g, F4.keep, x, y, { bins: 30, color: C.blue }); const ymax = y.domain()[1], flatH = F4.keep.length / 29;   // the same 232 draws spread flat over the 29 prior bins
+      f.g.append("rect").attr("x", x(0.01)).attr("y", y(flatH)).attr("width", x(0.30) - x(0.01)).attr("height", f.ih - y(flatH)).attr("fill", C.blueSoft).attr("stroke", C.blue).attr("stroke-width", 1.5).attr("stroke-dasharray", "6 5").attr("rx", 3).lower(); axes(f, x, y, "β, how contagious", "", { xt: 6, noY: true });
+      f.g.append("text").attr("x", x(0.25)).attr("y", y(flatH) - 10).attr("text-anchor", "middle").attr("font-size", 19).attr("fill", C.muted).text("before data: flat"); f.g.append("text").attr("x", x(F4.beta_hi) + 10).attr("y", y(ymax * .8)).attr("font-size", 19).attr("fill", C.blue).attr("font-weight", 600).text("after ten days"); }
+    const panels = [P1.p, P2.p]; const cap = e.closest("section").querySelector(".cap");
+    return { steps: 3, caps: [], show: k => { panels.forEach((p, i) => p.classList.toggle("on", i <= k)); if (cap) { cap.style.transition = reduce() ? "none" : "opacity .4s"; cap.style.opacity = k >= 2 ? 1 : 0; } } };
+  };
+
   R.mount = (section, D) => {
     section.querySelectorAll("[data-viz]").forEach(e => {
       if (mounted.has(e)) return;

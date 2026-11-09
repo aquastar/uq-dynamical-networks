@@ -216,3 +216,8 @@ html.reveal-print .fq .real,html.reveal-print .fq .figbox svg{transition:none}
 .fourq.every>.fq.wide p.a{font-size:18px}
 .fourq.every .figbox{flex:1;min-height:0;display:flex}
 .fourq.every .figbox svg{width:100%;height:100%}
+
+/* the records slide: two cards, text on top, the image filling the rest */
+.fourq.records .figbox{flex-direction:column;align-items:stretch;gap:6px}
+.fourq.records .figbox img{flex:1;min-height:0;width:100%;object-fit:contain;border-radius:8px}
+.fourq.records .lab{display:flex;justify-content:space-around;font-size:17px;color:var(--muted);line-height:1.2}

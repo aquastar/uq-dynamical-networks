@@ -6,7 +6,7 @@
 <title>Uncertainty Quantification for Dynamical Networks</title>
 <link rel="stylesheet" href="vendor/fonts/fonts.css">
 <link rel="stylesheet" href="vendor/reveal.css">
-<link rel="stylesheet" href="deck.css?v=39">
+<link rel="stylesheet" href="deck.css?v=40">
 </head>
 <body>
 <div class="reveal">
@@ -34,8 +34,17 @@
   <p class="eyebrow">Part 0 · Why graphs</p>
   <h2>Four things that spread on a graph</h2>
   <div class="viz" data-viz="spreads"></div>
-  <p class="refs"><b>light</b> not reached yet · <b>red</b> active now · <b>amber</b> been through it · the ward is real (Vanhems et al. 2013); the other three graphs are drawn · records on the last beat: night lights, 13 and 14 August 2003 (NOAA/DMSP, public domain); rumour growth on three platforms (Cinelli et al. 2020 Sci. Rep., fig. 2, CC BY 4.0) · coupled layers: Granell, Gómez &amp; Arenas 2013 PRL · cascading failures: Motter &amp; Lai 2002 PRE; U.S.–Canada Power System Outage Task Force 2004 · temporal networks: Holme &amp; Saramäki 2012</p>
-  <aside class="notes">Five beats: one panel each, every panel keeps running, and the fifth swaps two of the drawings for the real records behind them. The point for a newcomer: a graph is not decoration. In each of these systems the outcome for one node depends on its neighbours, so you cannot forecast a node without forecasting the network, and you cannot forecast the network with one number. Say that the ward is the only real graph; the other three are drawn to look right, and then show the fifth beat: the night lights going out from Toronto to New York, and the same S-curve of an epidemic in the number of people posting about COVID. The rumour panel is Dr. Chen’s infodemic example: during COVID the misinformation network and the contact network never touched, but a belief changed an action and an action changed exposure.</aside>
+  <p class="refs"><b>light</b> not reached yet · <b>red</b> active now · <b>amber</b> been through it · the ward is real (Vanhems et al. 2013); the other three graphs are drawn; the records behind two of them follow on the next slide · the COVID infodemic: Cinelli et al. 2020 Sci. Rep. · coupled layers: Granell, Gómez &amp; Arenas 2013 PRL · cascading failures: Motter &amp; Lai 2002 PRE; U.S.–Canada Power System Outage Task Force 2004 · temporal networks: Holme &amp; Saramäki 2012</p>
+  <aside class="notes">Four beats: one panel each, every panel keeps running. The real records behind two of them are on the next slide. The point for a newcomer: a graph is not decoration. In each of these systems the outcome for one node depends on its neighbours, so you cannot forecast a node without forecasting the network, and you cannot forecast the network with one number. Say that the ward is the only real graph; the other three are drawn to look right, and then show the fifth beat: the night lights going out from Toronto to New York, and the same S-curve of an epidemic in the number of people posting about COVID. The rumour panel is Dr. Chen’s infodemic example: during COVID the misinformation network and the contact network never touched, but a belief changed an action and an action changed exposure.</aside>
+</section>
+
+<section class="slide fig">
+  <p class="eyebrow">Part 0 · Why graphs</p>
+  <h2>The same two, on the record</h2>
+  <div class="viz" data-viz="records"></div>
+  <p class="cap"></p>
+  <p class="refs">night lights: NOAA/DMSP via Wikimedia Commons, public domain, 13 August and 14 August 2003 at 21:03 EDT · the blackout: U.S.–Canada Power System Outage Task Force 2004 · rumour growth: Cinelli et al. 2020 Sci. Rep., fig. 2, CC BY 4.0 · the drawn panels are on the previous slide</p>
+  <aside class="notes">Two beats, one record each. The blackout: a line into a tree in Ohio, an alarm system down, then a cascade of seconds that cut Toronto to New York; the satellite pair is the evening before and the evening of. The infodemic: Cinelli and colleagues counted posts about COVID on five platforms and fitted the growth like an epidemic; three of the five are shown. Say plainly that the slide before was drawn and this one is not, and that the shapes match. One minute, taken from the slide before.</aside>
 </section>
 
 <section class="slide fig">
@@ -554,10 +563,10 @@
 </div>
 <script src="vendor/reveal.js"></script>
 <script src="vendor/d3.js"></script>
-<script src="sim.js?v=39"></script>
-<script src="charts.js?v=39"></script>
+<script src="sim.js?v=40"></script>
+<script src="charts.js?v=40"></script>
 <script>
-Promise.all([fetch("data.json?v=39"), fetch("geo.json?v=39"), fetch("everywhere.json?v=39")].map(p => p.then(r => r.json()))).then(([D, G, EV]) => { D.geo = G; D.everywhere = EV;
+Promise.all([fetch("data.json?v=40"), fetch("geo.json?v=40"), fetch("everywhere.json?v=40")].map(p => p.then(r => r.json()))).then(([D, G, EV]) => { D.geo = G; D.everywhere = EV;
   Sim.init(D.ward); window.DECK = D; Charts.fill(document, D);
   // cards, steps and table rows build one per arrow press
   document.querySelectorAll(".build > .card, .build > .step, .build > .check, .build > .note, table.build tr:not(:first-child)").forEach(el => el.classList.add("fragment", "fade-up"));

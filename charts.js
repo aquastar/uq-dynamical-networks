@@ -707,10 +707,10 @@ window.Charts = (function () {
     { const q = panel("Disease · a hospital ward", "Who gets sick depends on who met whom", "The real ward of this tutorial: 75 people, four days of badge contacts, one virus running."); const w = ward(q.fig, { w: W, h: H, r: 5, pad: 8, padT: 6, padB: 6 }); w.edges.attr("stroke-opacity", .25).attr("stroke-width", 1); w.nodes.attr("stroke-width", .8);
       P.push({ p: q.p, paint: s => w.state(s), make: () => { const fr = []; Sim.sir(Sim.W.beta, Sim.W.gamma, Sim.W.src, 30, null, (t, s) => fr.push(new Uint8Array(s))); return fr; } }); }
     // 2 · a social network, a rumour
-    { const n = 80, edges = socialGraph(n, 11), nb = nbList(n, edges), pos = forcePos(n, edges, W, H, 5); const q = panel("Rumours · social network", "A false claim reaches the hubs first", "During COVID a rumour and the virus never touched, yet coupled through what people chose to do."); real(q, "cinelli_fig2_top.png", "The record: who posted about COVID, day by day, early 2020. Fitted like an epidemic, R₀ and all."); const deg = nb.map(a => a.length), md = Math.max(...deg); const paint = graph(q.fig, pos, edges, { r: d => 3 + 7 * Math.sqrt(d / md) }); const leaves = d3.range(n).filter(i => deg[i] === 1);
+    { const n = 80, edges = socialGraph(n, 11), nb = nbList(n, edges), pos = forcePos(n, edges, W, H, 5); const q = panel("Rumours · social network", "A false claim reaches the hubs first", "During COVID a rumour and the virus never touched, yet coupled through what people chose to do."); const deg = nb.map(a => a.length), md = Math.max(...deg); const paint = graph(q.fig, pos, edges, { r: d => 3 + 7 * Math.sqrt(d / md) }); const leaves = d3.range(n).filter(i => deg[i] === 1);
       P.push({ p: q.p, paint, make: () => spreadFrames(nb, .45, .12, leaves[Math.floor(rnd() * leaves.length)], 30, rnd) }); }
     // 3 · a power grid, a cascade
-    { const cols = 10, rows = 6, n = cols * rows, edges = latticeGraph(cols, rows, .8, 21), nb = nbList(n, edges), pos = latticePos(cols, rows, W, H, 22, 23); const q = panel("Failures · a power grid", "One line trips, its load moves next door", "Neighbours overload and trip in turn. The 2003 North American blackout left 50 million people without power."); real(q, "blackout_pair.jpg", "The record: night lights the evening before, and at 21:03 on 14 August 2003, Toronto to New York gone dark (NOAA/DMSP).", ["13 August 2003", "14 August, 21:03"]); const paint = graph(q.fig, pos, edges, {}); const hubs = d3.range(n).filter(i => nb[i].length >= 3);
+    { const cols = 10, rows = 6, n = cols * rows, edges = latticeGraph(cols, rows, .8, 21), nb = nbList(n, edges), pos = latticePos(cols, rows, W, H, 22, 23); const q = panel("Failures · a power grid", "One line trips, its load moves next door", "Neighbours overload and trip in turn. The 2003 North American blackout left 50 million people without power."); const paint = graph(q.fig, pos, edges, {}); const hubs = d3.range(n).filter(i => nb[i].length >= 3);
       P.push({ p: q.p, paint, make: () => cascadeFrames(nb, hubs[Math.floor(rnd() * hubs.length)]) }); }
     // 4 · a road network, a jam
     { const cols = 10, rows = 6, n = cols * rows, edges = latticeGraph(cols, rows, 1.01, 1), nb = nbList(n, edges), pos = latticePos(cols, rows, W, H, 0, 1); const q = panel("Traffic · a road network", "A blocked street jams the next one", "Flow on one street depends on flow on all the others. Each of these is a graph plus a dynamic on it, and each forecast of it needs error bars."); const paint = graph(q.fig, pos, edges, { roads: true });
@@ -722,10 +722,21 @@ window.Charts = (function () {
     let timer = null; if (!reduce()) timer = setInterval(() => { if (!e.isConnected) { clearInterval(timer); return; } tick(); }, 330);
     // print and reduced motion: the frame with the most activity, so the page shows the spreading rather than the aftermath
     const liveliest = fr => fr.reduce((b, f, i) => f.filter(v => v === 1).length > fr[b].filter(v => v === 1).length ? i : b, 0);
-    return { steps: 5, caps: [], show: k => { on = Math.min(k, 3) + 1; P.forEach((q, i) => { q.p.classList.toggle("on", i <= k); if (reduce() && i <= k) q.paint(q.frames[liveliest(q.frames)]); const r = q.p.__real; if (r) { q.p.classList.toggle("show-real", k >= 4); r.a.textContent = k >= 4 ? r.cap : r.drawn; } }); } };
+    return { steps: 4, caps: [], show: k => { on = Math.min(k, 3) + 1; P.forEach((q, i) => { q.p.classList.toggle("on", i <= k); if (reduce() && i <= k) q.paint(q.frames[liveliest(q.frames)]); const r = q.p.__real; if (r) { q.p.classList.toggle("show-real", k >= 4); r.a.textContent = k >= 4 ? r.cap : r.drawn; } }); } };
   };
 
   // Part 0 · graphs are everywhere: five real networks drawn from their data, each with something moving on it
+  // Part 0 · the records behind two of the four panels, each large enough to read
+  R.records = (e, D) => {
+    const row = el("div", "fourq two records"); e.appendChild(row);
+    const card = (k, h, a, src, labels) => { const p = el("div", "fq"); row.appendChild(p); const txt = el("div", "txt"); p.appendChild(txt); txt.appendChild(el("p", "k", k)); txt.appendChild(el("h3", null, h)); txt.appendChild(el("p", "a", a)); const fig = el("div", "figbox"); p.appendChild(fig); if (labels) fig.appendChild(el("div", "lab", labels.map(s => `<span>${s}</span>`).join(""))); const im = el("img"); im.src = IMG(src); im.alt = ""; fig.appendChild(im); return p; };
+    const P = [
+      card("Failures · the 2003 blackout", "Night lights, the evening before and the evening of", "One line sagged into a tree in Ohio on 14 August 2003, and within minutes the cascade had reached Toronto and New York: 50 million people without power.", "blackout_pair.jpg", ["13 August 2003", "14 August, 21:03"]),
+      card("Rumours · the COVID infodemic", "Who posted about COVID, day by day", "Early 2020, three platforms. Cinelli et al. fitted the growth like an epidemic and read off an R₀ per platform: a rumour spreads the way a virus does, through who follows whom.", "cinelli_fig2_top.png")];
+    return { steps: 2, caps: ["The drawings on the last slide were sketches. This is the record behind one of them, and it looks like the sketch: a cascade that takes a region at once.", "And the record behind another: three platforms, three curves, each climbing like an outbreak, with a reproduction number read off the fit. Same shape as the ward’s case counts, which is why the same tools will apply."],
+      show: k => P.forEach((p, i) => p.classList.toggle("on", i <= k)) };
+  };
+
   R.everywhere = (e, D) => {
     const E = D.everywhere.panels, G = D.geo; const row = el("div", "fourq every"); e.appendChild(row); const fmt = n => n.toLocaleString("en-US");
     const card = (cls, k, h, a) => { const p = el("div", "fq" + (cls ? " " + cls : "")); row.appendChild(p); const txt = el("div", "txt"); p.appendChild(txt); txt.appendChild(el("p", "k", k)); txt.appendChild(el("h3", null, h)); txt.appendChild(el("p", "a", a)); const fig = el("div", "figbox"); p.appendChild(fig); return { p, fig }; };

@@ -19,7 +19,7 @@
  },
  {
   "part": "Part 0 · Why graphs, what UQ is",
-  "cite": "Cinelli et al. 2020 Sci. Rep.",
+  "cite": "Cinelli et al. 2020",
   "url": "https://doi.org/10.1038/s41598-020-73510-5",
   "title": "The COVID-19 social media infodemic",
   "venue": "Scientific Reports",
@@ -28,7 +28,7 @@
  },
  {
   "part": "Part 0 · Why graphs, what UQ is",
-  "cite": "Granell, Gómez & Arenas 2013 PRL",
+  "cite": "Granell et al. 2013",
   "url": "https://doi.org/10.1103/PhysRevLett.111.128701",
   "title": "Dynamical interplay between awareness and epidemic spreading in multiplex networks",
   "venue": "Physical Review Letters",
@@ -37,7 +37,7 @@
  },
  {
   "part": "Part 0 · Why graphs, what UQ is",
-  "cite": "Motter & Lai 2002 PRE",
+  "cite": "Motter & Lai 2002",
   "url": "https://doi.org/10.1103/PhysRevE.66.065102",
   "title": "Cascade-based attacks on complex networks",
   "venue": "Physical Review E",
@@ -46,7 +46,7 @@
  },
  {
   "part": "Part 0 · Why graphs, what UQ is",
-  "cite": "U.S.–Canada Power System Outage Task Force 2004",
+  "cite": "Outage Task Force 2004",
   "url": "https://www.energy.gov/oe/articles/blackout-2003-final-report-august-14-2003-blackout-united-states-and-canada-causes-and",
   "title": "Final Report on the August 14, 2003 Blackout in the United States and Canada: Causes and Recommendations",
   "venue": "U.S. Department of Energy / Natural Resources Canada (report)",
@@ -82,7 +82,7 @@
  },
  {
   "part": "Part 0 · Why graphs, what UQ is",
-  "cite": "Baker 2009, Scientific American",
+  "cite": "Baker 2009",
   "url": "https://www.scientificamerican.com/article/removing-roads-and-traffic-lights",
   "title": "Detours by design (online as: Removing roads and traffic lights speeds urban travel)",
   "venue": "Scientific American 300(2), 20–22",
@@ -109,7 +109,7 @@
  },
  {
   "part": "Part 0 · Why graphs, what UQ is",
-  "cite": "Newman 2006 PRE",
+  "cite": "Newman 2006",
   "url": "https://doi.org/10.1103/PhysRevE.74.036104",
   "title": "Finding community structure in networks using the eigenvectors of matrices",
   "venue": "Physical Review E 74, 036104",
@@ -127,7 +127,7 @@
  },
  {
   "part": "Part 0 · Why graphs, what UQ is",
-  "cite": "OpenFlights",
+  "cite": "OpenFlights 2014",
   "url": "https://openflights.org/data.php",
   "title": "OpenFlights airport and route databases",
   "venue": "Open Database License; route data last updated June 2014",
@@ -136,7 +136,7 @@
  },
  {
   "part": "Part 0 · Why graphs, what UQ is",
-  "cite": "Netzschleuder (Peixoto)",
+  "cite": "Peixoto 2020",
   "url": "https://networks.skewed.de/",
   "title": "Netzschleuder: the network catalogue, repository and centrifuge",
   "venue": "networks.skewed.de",
@@ -145,7 +145,7 @@
  },
  {
   "part": "Part 0 · Photographs, satellite images and maps",
-  "cite": "Aldg692VX, CC BY-SA 4.0",
+  "cite": "Aldg692VX 2023",
   "url": "https://commons.wikimedia.org/wiki/File:Lyon-part-dieu-2023.jpg",
   "title": "Lyon-part-dieu-2023.jpg: Lyon seen from Fourvière hill (photograph, cropped and resized for the slides)",
   "venue": "Wikimedia Commons, CC BY-SA 4.0",
@@ -154,7 +154,7 @@
  },
  {
   "part": "Part 0 · Photographs, satellite images and maps",
-  "cite": "Basile Morin 2024, CC BY-SA 4.0",
+  "cite": "Morin 2024",
   "url": "https://commons.wikimedia.org/wiki/File:Cheonggyecheon_stream_at_sunrise_with_trees_in_Seoul.jpg",
   "title": "Cheonggyecheon stream at sunrise with trees in Seoul (photograph, resized for the slides)",
   "venue": "Wikimedia Commons, CC BY-SA 4.0",
@@ -163,7 +163,7 @@
  },
  {
   "part": "Part 0 · Photographs, satellite images and maps",
-  "cite": "NOAA/DMSP",
+  "cite": "NOAA/DMSP 2003",
   "url": "https://commons.wikimedia.org/wiki/File:Northeast_blackout_2003.gif",
   "title": "Northeast blackout 2003: night lights on 13 August and on 14 August at 21:03 EDT (two frames, cropped to the Toronto–Washington corridor)",
   "venue": "NOAA / Defense Meteorological Satellite Program, via Wikimedia Commons; public domain (U.S. government work)",
@@ -199,7 +199,7 @@
  },
  {
   "part": "Part 0 · Why graphs, what UQ is",
-  "cite": "Chen & Zhang WSDM 2026",
+  "cite": "Chen & Zhang 2026",
   "url": "https://aquastar.github.io/uq-dynamical-networks/previous-deck.html",
   "title": "Uncertainty Quantification for Dynamical Networks (tutorial, WSDM 2026): the UQ lifecycle slide",
   "venue": "WSDM 2026 tutorial; the slides are kept in this repository as previous-deck.html",
@@ -226,7 +226,7 @@
  },
  {
   "part": "Part 1 · Luck",
-  "cite": "Newman 2002 PRE",
+  "cite": "Newman 2002",
   "url": "https://doi.org/10.1103/physreve.66.016128",
   "title": "Spread of epidemic disease on networks",
   "venue": "Physical Review E",
@@ -235,7 +235,7 @@
  },
  {
   "part": "Part 1 · Luck",
-  "cite": "Stehlé et al. 2011 BMC Medicine",
+  "cite": "Stehlé et al. 2011",
   "url": "https://doi.org/10.1186/1741-7015-9-87",
   "title": "Simulation of an SEIR infectious disease model on the dynamic contact network of conference attendees",
   "venue": "BMC Medicine",
@@ -244,7 +244,7 @@
  },
  {
   "part": "Part 1 · Luck",
-  "cite": "Kiss, Miller & Simon 2017",
+  "cite": "Kiss et al. 2017",
   "url": "https://doi.org/10.1007/978-3-319-50806-1",
   "title": "Mathematics of Epidemics on Networks: From Exact to Approximate Models",
   "venue": "Springer (book)",
@@ -253,7 +253,7 @@
  },
  {
   "part": "Part 1 · Luck",
-  "cite": "Kitsak et al. 2010 Nature Physics",
+  "cite": "Kitsak et al. 2010",
   "url": "https://doi.org/10.1038/nphys1746",
   "title": "Identification of influential spreaders in complex networks",
   "venue": "Nature Physics",
@@ -262,7 +262,7 @@
  },
  {
   "part": "Part 1 · Luck",
-  "cite": "Lawyer 2015 Scientific Reports",
+  "cite": "Lawyer 2015",
   "url": "https://doi.org/10.1038/srep08665",
   "title": "Understanding the influence of all nodes in a network",
   "venue": "Scientific Reports",
@@ -271,7 +271,7 @@
  },
  {
   "part": "Part 1 · Luck",
-  "cite": "Karrer & Newman 2010 PRE",
+  "cite": "Karrer & Newman 2010",
   "url": "https://doi.org/10.1103/physreve.82.016101",
   "title": "Message passing approach for general epidemic models",
   "venue": "Physical Review E",
@@ -289,7 +289,7 @@
  },
  {
   "part": "Part 2 · Numbers we don’t know",
-  "cite": "Beaumont, Zhang & Balding 2002",
+  "cite": "Beaumont et al. 2002",
   "url": "https://doi.org/10.1093/genetics/162.4.2025",
   "title": "Approximate Bayesian Computation in Population Genetics",
   "venue": "Genetics",
@@ -298,7 +298,7 @@
  },
  {
   "part": "Part 2 · Numbers we don’t know",
-  "cite": "Dutta, Mira & Onnela 2018",
+  "cite": "Dutta et al. 2018",
   "url": "https://doi.org/10.1098/rspa.2018.0129",
   "title": "Bayesian inference of spreading processes on networks",
   "venue": "Proceedings of the Royal Society A: Mathematical, Physical and Engineering Sciences",
@@ -307,7 +307,7 @@
  },
  {
   "part": "Part 2 · Numbers we don’t know",
-  "cite": "Kypraios, Neal & Prangle 2017",
+  "cite": "Kypraios et al. 2017",
   "url": "https://doi.org/10.1016/j.mbs.2016.07.001",
   "title": "A tutorial introduction to Bayesian inference for stochastic epidemic models using Approximate Bayesian Computation",
   "venue": "Mathematical Biosciences",
@@ -316,7 +316,7 @@
  },
  {
   "part": "Part 2 · Numbers we don’t know",
-  "cite": "Chatha et al. 2024, preprint",
+  "cite": "Chatha et al. 2024",
   "url": "https://arxiv.org/abs/2412.12967v2",
   "title": "Neural Posterior Estimation for Stochastic Epidemic Modeling",
   "venue": "arXiv preprint",
@@ -334,7 +334,7 @@
  },
  {
   "part": "Part 2 · Numbers we don’t know",
-  "cite": "Hart, Alexanderian & Gremaud 2017 SIAM SISC",
+  "cite": "Hart et al. 2017",
   "url": "https://doi.org/10.1137/16m106193x",
   "title": "Efficient Computation of Sobol' Indices for Stochastic Models",
   "venue": "SIAM Journal on Scientific Computing",
@@ -343,7 +343,7 @@
  },
  {
   "part": "Part 2 · Numbers we don’t know",
-  "cite": "Lu & Borgonovo 2023 EJOR",
+  "cite": "Lu & Borgonovo 2023",
   "url": "https://doi.org/10.1016/j.ejor.2021.11.018",
   "title": "Global sensitivity analysis in epidemiological modeling",
   "venue": "European Journal of Operational Research",
@@ -352,7 +352,7 @@
  },
  {
   "part": "Part 2 · Numbers we don’t know",
-  "cite": "Kennedy & O’Hagan 2001 JRSS-B",
+  "cite": "Kennedy & O’Hagan 2001",
   "url": "https://doi.org/10.1111/1467-9868.00294",
   "title": "Bayesian Calibration of Computer Models",
   "venue": "Journal of the Royal Statistical Society Series B: Statistical Methodology",
@@ -361,7 +361,7 @@
  },
  {
   "part": "Part 2 · Numbers we don’t know",
-  "cite": "Cranmer, Brehmer & Louppe 2020 PNAS",
+  "cite": "Cranmer et al. 2020",
   "url": "https://doi.org/10.1073/pnas.1912789117",
   "title": "The frontier of simulation-based inference",
   "venue": "Proceedings of the National Academy of Sciences",
@@ -370,7 +370,7 @@
  },
  {
   "part": "Part 2 · Numbers we don’t know",
-  "cite": "Biazzo et al. 2022 Scientific Reports",
+  "cite": "Biazzo et al. 2022",
   "url": "https://doi.org/10.1038/s41598-022-20898-x",
   "title": "A Bayesian generative neural network framework for epidemic inference problems",
   "venue": "Scientific Reports",
@@ -379,7 +379,7 @@
  },
  {
   "part": "Part 2 · Numbers we don’t know",
-  "cite": "Groendyke, Welch & Hunter 2011 (epinet)",
+  "cite": "Groendyke et al. 2011",
   "url": "https://doi.org/10.1111/j.1467-9469.2010.00721.x",
   "title": "Bayesian Inference for Contact Networks Given Epidemic Data",
   "venue": "Scandinavian Journal of Statistics",
@@ -388,7 +388,7 @@
  },
  {
   "part": "Part 3 · A graph we don’t fully know",
-  "cite": "Génois, Vestergaard, Cattuto & Barrat 2015 Nature Communications",
+  "cite": "Génois et al. 2015",
   "url": "https://doi.org/10.1038/ncomms9860",
   "title": "Compensating for population sampling in simulations of epidemic spread on temporal contact networks",
   "venue": "Nature Communications",
@@ -397,7 +397,7 @@
  },
  {
   "part": "Part 3 · A graph we don’t fully know",
-  "cite": "Newman 2018 Nature Physics",
+  "cite": "Newman 2018",
   "url": "https://doi.org/10.1038/s41567-018-0076-1",
   "title": "Network structure from rich but noisy data",
   "venue": "Nature Physics",
@@ -406,7 +406,7 @@
  },
  {
   "part": "Part 3 · A graph we don’t fully know",
-  "cite": "Young, Cantwell & Newman 2020",
+  "cite": "Young et al. 2020",
   "url": "https://doi.org/10.1093/comnet/cnaa046",
   "title": "Bayesian inference of network structure from unreliable data",
   "venue": "Journal of Complex Networks",
@@ -415,7 +415,7 @@
  },
  {
   "part": "Part 3 · A graph we don’t fully know",
-  "cite": "Hoff, Raftery & Handcock 2002",
+  "cite": "Hoff et al. 2002",
   "url": "https://doi.org/10.1198/016214502388618906",
   "title": "Latent space approaches to social network analysis",
   "venue": "Journal of the American Statistical Association",
@@ -433,7 +433,7 @@
  },
  {
   "part": "Part 3 · A graph we don’t fully know",
-  "cite": "Peixoto 2019 PRL",
+  "cite": "Peixoto 2019",
   "url": "https://doi.org/10.1103/physrevlett.123.128301",
   "title": "Network Reconstruction and Community Detection from Dynamics",
   "venue": "Physical Review Letters",
@@ -442,7 +442,7 @@
  },
  {
   "part": "Part 3 · A graph we don’t fully know",
-  "cite": "Kipf et al. 2018 (NRI)",
+  "cite": "Kipf et al. 2018",
   "url": "https://proceedings.mlr.press/v80/kipf18a.html",
   "title": "Neural Relational Inference for Interacting Systems",
   "venue": "ICML 2018, PMLR 80",
@@ -451,7 +451,7 @@
  },
  {
   "part": "Part 3 · A graph we don’t fully know",
-  "cite": "StructInfer, NeurIPS 2024",
+  "cite": "Wang et al. 2024b",
   "url": "https://doi.org/10.52202/079017-4295",
   "title": "Benchmarking Structural Inference Methods for Interacting Dynamical Systems with Synthetic Data",
   "venue": "Advances in Neural Information Processing Systems 37",
@@ -469,7 +469,7 @@
  },
  {
   "part": "Part 3 · A graph we don’t fully know",
-  "cite": "Prasse & Van Mieghem 2022 PNAS",
+  "cite": "Prasse & Van Mieghem 2022",
   "url": "https://doi.org/10.1073/pnas.2205517119",
   "title": "Predicting network dynamics without requiring the knowledge of the interaction graph",
   "venue": "Proceedings of the National Academy of Sciences",
@@ -505,7 +505,7 @@
  },
  {
   "part": "Part 4 · Tracking what we can’t see",
-  "cite": "Gordon, Salmond & Smith 1993",
+  "cite": "Gordon et al. 1993",
   "url": "https://doi.org/10.1049/ip-f-2.1993.0015",
   "title": "Novel approach to nonlinear/non-Gaussian Bayesian state estimation",
   "venue": "IEE Proceedings F Radar and Signal Processing",
@@ -523,7 +523,7 @@
  },
  {
   "part": "Part 4 · Tracking what we can’t see",
-  "cite": "Ju, Heng & Jacob 2021, arXiv",
+  "cite": "Ju et al. 2021",
   "url": "https://arxiv.org/abs/2101.12156v1",
   "title": "Sequential Monte Carlo algorithms for agent-based models of disease transmission",
   "venue": "arXiv preprint",
@@ -532,7 +532,7 @@
  },
  {
   "part": "Part 4 · Tracking what we can’t see",
-  "cite": "Li, Pei et al. 2020 Science",
+  "cite": "Li et al. 2020",
   "url": "https://doi.org/10.1126/science.abb3221",
   "title": "Substantial undocumented infection facilitates the rapid dissemination of novel coronavirus (SARS-CoV-2)",
   "venue": "Science",
@@ -541,7 +541,7 @@
  },
  {
   "part": "Part 4 · Tracking what we can’t see",
-  "cite": "Tsui et al. 2024 PNAS",
+  "cite": "Tsui et al. 2024",
   "url": "https://doi.org/10.1073/pnas.2412424121",
   "title": "Toward optimal disease surveillance with graph-based active learning",
   "venue": "Proceedings of the National Academy of Sciences 121(52)",
@@ -550,7 +550,7 @@
  },
  {
   "part": "Part 4 · Tracking what we can’t see",
-  "cite": "Meirom et al. 2021 ICML",
+  "cite": "Meirom et al. 2021",
   "url": "https://arxiv.org/abs/2010.05313",
   "title": "Controlling graph dynamics with reinforcement learning and graph neural networks",
   "venue": "ICML 2021",
@@ -568,7 +568,7 @@
  },
  {
   "part": "Part 4 · Tracking what we can’t see",
-  "cite": "Stadler et al. 2021 NeurIPS (GPN)",
+  "cite": "Stadler et al. 2021",
   "url": "https://arxiv.org/abs/2110.14012v1",
   "title": "Graph Posterior Network: Bayesian Predictive Uncertainty for Node Classification",
   "venue": "NeurIPS 2021",
@@ -577,7 +577,7 @@
  },
  {
   "part": "Part 5 · Guarantees for any model",
-  "cite": "Vovk, Gammerman & Shafer 2005",
+  "cite": "Vovk et al. 2005",
   "url": "https://doi.org/10.1007/b106715",
   "title": "Algorithmic Learning in a Random World",
   "venue": "Springer (book)",
@@ -613,7 +613,7 @@
  },
  {
   "part": "Part 5 · Guarantees for any model",
-  "cite": "Gibbs & Candès 2021 NeurIPS",
+  "cite": "Gibbs & Candès 2021",
   "url": "https://arxiv.org/abs/2106.00170v3",
   "title": "Adaptive Conformal Inference Under Distribution Shift",
   "venue": "NeurIPS 2021",
@@ -622,7 +622,7 @@
  },
  {
   "part": "Part 5 · Guarantees for any model",
-  "cite": "Barber, Candès, Ramdas & Tibshirani 2023",
+  "cite": "Barber et al. 2023",
   "url": "https://doi.org/10.1214/23-aos2276",
   "title": "Conformal prediction beyond exchangeability",
   "venue": "The Annals of Statistics",
@@ -631,7 +631,7 @@
  },
  {
   "part": "Part 5 · Guarantees for any model",
-  "cite": "Gneiting, Balabdaoui & Raftery 2007 JRSS-B",
+  "cite": "Gneiting et al. 2007",
   "url": "https://doi.org/10.1111/j.1467-9868.2007.00587.x",
   "title": "Probabilistic Forecasts, Calibration and Sharpness",
   "venue": "Journal of the Royal Statistical Society Series B: Statistical Methodology",
@@ -640,7 +640,7 @@
  },
  {
   "part": "Part 5 · Guarantees for any model",
-  "cite": "Gneiting & Raftery 2007 JASA",
+  "cite": "Gneiting & Raftery 2007",
   "url": "https://doi.org/10.1198/016214506000001437",
   "title": "Strictly Proper Scoring Rules, Prediction, and Estimation",
   "venue": "Journal of the American Statistical Association",
@@ -649,7 +649,7 @@
  },
  {
   "part": "Part 5 · Guarantees for any model",
-  "cite": "Bracher, Ray, Gneiting & Reich 2021 PLOS Comp Bio",
+  "cite": "Bracher et al. 2021",
   "url": "https://doi.org/10.1371/journal.pcbi.1008618",
   "title": "Evaluating epidemic forecasts in an interval format",
   "venue": "PLOS Computational Biology 17(2)",
@@ -658,7 +658,7 @@
  },
  {
   "part": "Part 5 · Guarantees for any model",
-  "cite": "CF-GNN, NeurIPS 2023 (Huang et al.)",
+  "cite": "Huang et al. 2023",
   "url": "https://doi.org/10.52202/075280-1160",
   "title": "Uncertainty Quantification over Graph with Conformalized Graph Neural Networks",
   "venue": "Advances in Neural Information Processing Systems 36",
@@ -667,7 +667,7 @@
  },
  {
   "part": "Part 5 · Guarantees for any model",
-  "cite": "DAPS, ICML 2023 (Zargarbashi et al.)",
+  "cite": "Zargarbashi et al. 2023",
   "url": "https://proceedings.mlr.press/v202/h-zargarbashi23a.html",
   "title": "Conformal prediction sets for graph neural networks",
   "venue": "ICML 2023, PMLR 202",
@@ -676,7 +676,7 @@
  },
  {
   "part": "Part 5 · Guarantees for any model",
-  "cite": "CoRel, ICML 2025 (Cini et al.)",
+  "cite": "Cini et al. 2025",
   "url": "https://proceedings.mlr.press/v267/cini25a.html",
   "title": "Relational Conformal Prediction for Correlated Time Series",
   "venue": "ICML 2025, PMLR 267",
@@ -685,7 +685,7 @@
  },
  {
   "part": "Part 5 · Guarantees for any model",
-  "cite": "Zargarbashi & Bojchevski, ICLR 2024",
+  "cite": "Zargarbashi & Bojchevski 2024",
   "url": "https://arxiv.org/abs/2407.09173v1",
   "title": "Conformal Inductive Graph Neural Networks",
   "venue": "ICLR 2024",
@@ -694,7 +694,7 @@
  },
  {
   "part": "Part 5 · Guarantees for any model",
-  "cite": "Conformal PID, NeurIPS 2023 (Angelopoulos et al.)",
+  "cite": "Angelopoulos et al. 2023",
   "url": "https://doi.org/10.52202/075280-1000",
   "title": "Conformal PID Control for Time Series Prediction",
   "venue": "Advances in Neural Information Processing Systems 36",
@@ -703,7 +703,7 @@
  },
  {
   "part": "Part 5 · Guarantees for any model",
-  "cite": "Lakshminarayanan, Pritzel & Blundell 2017",
+  "cite": "Lakshminarayanan et al. 2017",
   "url": "https://arxiv.org/abs/1612.01474v3",
   "title": "Simple and Scalable Predictive Uncertainty Estimation using Deep Ensembles",
   "venue": "NeurIPS 2017",
@@ -721,7 +721,7 @@
  },
  {
   "part": "Part 5 · Guarantees for any model",
-  "cite": "Wang et al. 2024 TMLR",
+  "cite": "Wang et al. 2024a",
   "url": "https://arxiv.org/abs/2403.07185",
   "title": "Uncertainty in graph neural networks: a survey",
   "venue": "Transactions on Machine Learning Research",
@@ -730,7 +730,7 @@
  },
  {
   "part": "Part 5 · Guarantees for any model",
-  "cite": "Hsu et al. 2022 (GATS)",
+  "cite": "Hsu et al. 2022",
   "url": "https://doi.org/10.52202/068431-1001",
   "title": "What Makes Graph Neural Networks Miscalibrated?",
   "venue": "Advances in Neural Information Processing Systems 35",
@@ -739,7 +739,7 @@
  },
  {
   "part": "Part 5 · Guarantees for any model",
-  "cite": "Wen et al. 2023 (DiffSTG)",
+  "cite": "Wen et al. 2023",
   "url": "https://doi.org/10.1145/3589132.3625614",
   "title": "DiffSTG: Probabilistic Spatio-Temporal Graph Forecasting with Denoising Diffusion Models",
   "venue": "Proceedings of the 31st ACM International Conference on Advances in Geographic Information Systems",
@@ -748,7 +748,7 @@
  },
  {
   "part": "Part 5 · Guarantees for any model",
-  "cite": "Kamarthi et al. 2021 (EpiFNP)",
+  "cite": "Kamarthi et al. 2021",
   "url": "https://arxiv.org/abs/2106.03904v3",
   "title": "When in Doubt: Neural Non-Parametric Uncertainty Quantification for Epidemic Forecasting",
   "venue": "NeurIPS 2021",
@@ -757,7 +757,7 @@
  },
  {
   "part": "Part 5 · Guarantees for any model",
-  "cite": "Cramer et al. 2022 PNAS",
+  "cite": "Cramer et al. 2022",
   "url": "https://doi.org/10.1073/pnas.2113561119",
   "title": "Evaluation of individual and ensemble probabilistic forecasts of COVID-19 mortality in the United States",
   "venue": "Proceedings of the National Academy of Sciences",
@@ -766,7 +766,7 @@
  },
  {
   "part": "Part 5 · Guarantees for any model",
-  "cite": "Wu et al. 2021 KDD",
+  "cite": "Wu et al. 2021",
   "url": "https://doi.org/10.1145/3447548.3467325",
   "title": "Quantifying Uncertainty in Deep Spatiotemporal Forecasting",
   "venue": "Proceedings of the 27th ACM SIGKDD Conference on Knowledge Discovery & Data Mining",
@@ -784,7 +784,7 @@
  },
  {
   "part": "Part 6 · Running it backwards",
-  "cite": "Antulov-Fantulin et al. 2015 PRL",
+  "cite": "Antulov-Fantulin et al. 2015",
   "url": "https://doi.org/10.1103/physrevlett.114.248701",
   "title": "Identification of Patient Zero in Static and Temporal Networks: Robustness and Limitations",
   "venue": "Physical Review Letters",
@@ -793,7 +793,7 @@
  },
  {
   "part": "Part 6 · Running it backwards",
-  "cite": "Dawkins, Li & Xu 2021 ICML",
+  "cite": "Dawkins et al. 2021",
   "url": "https://proceedings.mlr.press/v139/dawkins21a.html",
   "title": "Diffusion Source Identification on Networks with Statistical Confidence",
   "venue": "ICML 2021, PMLR 139",
@@ -802,7 +802,7 @@
  },
  {
   "part": "Part 6 · Running it backwards",
-  "cite": "Jian et al. 2026 AAAI",
+  "cite": "Jian et al. 2026",
   "url": "https://doi.org/10.1609/aaai.v40i43.40990",
   "title": "Conformal Prediction for Multi-Source Detection on a Network",
   "venue": "Proceedings of the AAAI Conference on Artificial Intelligence",
@@ -811,7 +811,7 @@
  },
  {
   "part": "Part 6 · Running it backwards",
-  "cite": "Yan, Fang & He 2023 NeurIPS",
+  "cite": "Yan et al. 2023",
   "url": "https://doi.org/10.52202/075280-0980",
   "title": "Diffusion Model for Graph Inverse Problems: Towards Effective Source Localization on Complex Networks",
   "venue": "Advances in Neural Information Processing Systems 36",
@@ -820,7 +820,7 @@
  },
  {
   "part": "Part 6 · Running it backwards",
-  "cite": "Ling et al. 2022 KDD",
+  "cite": "Ling et al. 2022",
   "url": "https://doi.org/10.1145/3534678.3539288",
   "title": "Source Localization of Graph Diffusion via Variational Autoencoders for Graph Inverse Problems",
   "venue": "Proceedings of the 28th ACM SIGKDD Conference on Knowledge Discovery and Data Mining",
@@ -829,7 +829,7 @@
  },
  {
   "part": "Part 7 · Deciding anyway",
-  "cite": "Nemhauser, Wolsey & Fisher 1978",
+  "cite": "Nemhauser et al. 1978",
   "url": "https://doi.org/10.1007/bf01588971",
   "title": "An analysis of approximations for maximizing submodular set functions—I",
   "venue": "Mathematical Programming",
@@ -838,7 +838,7 @@
  },
  {
   "part": "Part 7 · Deciding anyway",
-  "cite": "Kempe, Kleinberg & Tardos 2003",
+  "cite": "Kempe et al. 2003",
   "url": "https://doi.org/10.1145/956750.956769",
   "title": "Maximizing the spread of influence through a social network",
   "venue": "Proceedings of the ninth ACM SIGKDD international conference on Knowledge discovery and data mining",
@@ -847,7 +847,7 @@
  },
  {
   "part": "Part 7 · Deciding anyway",
-  "cite": "Ohsaka & Yoshida 2017 WWW",
+  "cite": "Ohsaka & Yoshida 2017",
   "url": "https://doi.org/10.1145/3038912.3052628",
   "title": "Portfolio Optimization for Influence Spread",
   "venue": "Proceedings of the 26th International Conference on World Wide Web",
@@ -865,7 +865,7 @@
  },
  {
   "part": "Part 7 · Deciding anyway",
-  "cite": "Staib, Wilder & Jegelka 2019 AISTATS",
+  "cite": "Staib et al. 2019",
   "url": "https://proceedings.mlr.press/v89/staib19a.html",
   "title": "Distributionally Robust Submodular Maximization",
   "venue": "AISTATS 2019, PMLR 89",
@@ -883,7 +883,7 @@
  },
  {
   "part": "Part 7 · Deciding anyway",
-  "cite": "Chen et al. 2016 KDD",
+  "cite": "Chen et al. 2016",
   "url": "https://doi.org/10.1145/2939672.2939745",
   "title": "Robust Influence Maximization",
   "venue": "Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining",
@@ -892,7 +892,7 @@
  },
  {
   "part": "Part 7 · Deciding anyway",
-  "cite": "Han, Preciado, Nowzari & Pappas 2015 IEEE TNSE",
+  "cite": "Han et al. 2015",
   "url": "https://doi.org/10.1109/tnse.2015.2500158",
   "title": "Data-Driven Network Resource Allocation for Controlling Spreading Processes",
   "venue": "IEEE Transactions on Network Science and Engineering",
@@ -901,7 +901,7 @@
  },
  {
   "part": "Part 7 · Deciding anyway",
-  "cite": "Patel, Rayan & Tewari 2024 AISTATS",
+  "cite": "Patel et al. 2024",
   "url": "https://proceedings.mlr.press/v238/patel24a.html",
   "title": "Conformal Contextual Robust Optimization",
   "venue": "AISTATS 2024, PMLR 238",
@@ -910,7 +910,7 @@
  },
  {
   "part": "Part 7 · Deciding anyway",
-  "cite": "Wilder, Dilkina & Tambe 2019 AAAI",
+  "cite": "Wilder et al. 2019",
   "url": "https://doi.org/10.1609/aaai.v33i01.33011658",
   "title": "Melding the Data-Decisions Pipeline: Decision-Focused Learning for Combinatorial Optimization",
   "venue": "Proceedings of the AAAI Conference on Artificial Intelligence",
@@ -928,7 +928,7 @@
  },
  {
   "part": "Part 7 · Deciding anyway",
-  "cite": "Hu et al. 2026 ICLR",
+  "cite": "Hu et al. 2026",
   "url": "https://openreview.net/forum?id=bt4Ahpemmi",
   "title": "Conformal robustness control: a new strategy for robust decision",
   "venue": "ICLR 2026 (oral)",
@@ -937,7 +937,7 @@
  },
  {
   "part": "Part 8 · The map",
-  "cite": "Rebeschini & van Handel 2015 Ann. Appl. Probab.",
+  "cite": "Rebeschini & van Handel 2015",
   "url": "https://doi.org/10.1214/14-aap1061",
   "title": "Can local particle filters beat the curse of dimensionality?",
   "venue": "The Annals of Applied Probability",
@@ -946,7 +946,7 @@
  },
  {
   "part": "Part 8 · The map",
-  "cite": "Gross, D’Lima & Blasius 2006 PRL",
+  "cite": "Gross et al. 2006",
   "url": "https://doi.org/10.1103/physrevlett.96.208701",
   "title": "Epidemic Dynamics on an Adaptive Network",
   "venue": "Physical Review Letters",
@@ -955,7 +955,7 @@
  },
  {
   "part": "Part 8 · The map",
-  "cite": "Psaros et al. 2023 J. Comp. Phys.",
+  "cite": "Psaros et al. 2023",
   "url": "https://doi.org/10.1016/j.jcp.2022.111902",
   "title": "Uncertainty quantification in scientific machine learning: Methods, metrics, and comparisons",
   "venue": "Journal of Computational Physics",
@@ -964,7 +964,7 @@
  },
  {
   "part": "Part 8 · The map",
-  "cite": "Lunde, Levina & Zhu 2025 JASA",
+  "cite": "Lunde et al. 2025",
   "url": "https://doi.org/10.1080/01621459.2025.2506198",
   "title": "Conformal Prediction for Network-Assisted Regression",
   "venue": "Journal of the American Statistical Association",

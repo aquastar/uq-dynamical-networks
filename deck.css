@@ -39,7 +39,7 @@ html,body{background:var(--paper)}
 .check::before{content:"Did the band cover the truth, and how wide was it?";display:block;font-family:var(--mono);font-size:16px;letter-spacing:.1em;text-transform:uppercase;color:var(--orange);margin-bottom:4px}
 .check.rep::before{content:"Repeat on 100 outbreaks"}
 .note{background:var(--blue-soft);border-radius:12px;padding:14px 20px;font-size:23px;line-height:1.35}
-.refs{font-size:18px;color:var(--muted);line-height:1.35}
+.refs{font-size:17px;color:#959CA7;line-height:1.35}
 .refs b{color:var(--ink)}
 .cards{display:grid;gap:22px;flex:1;min-height:0;grid-auto-rows:1fr;align-content:stretch}
 .cards.c2{grid-template-columns:1fr 1fr}.cards.c3{grid-template-columns:1fr 1fr 1fr}.cards.c4{grid-template-columns:1fr 1fr 1fr 1fr}

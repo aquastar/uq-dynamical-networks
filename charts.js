@@ -737,6 +737,36 @@ window.Charts = (function () {
       show: k => P.forEach((p, i) => p.classList.toggle("on", i <= k)) };
   };
 
+  // Part 0 · the framework in one picture: what we do not know goes in, a band comes out, the band is checked, a decision is made against it
+  R.framework = (e, D) => {
+    const f = frame(e, 1300, 560, { l: 10, r: 10, t: 10, b: 10 }); const g = f.g; const L = Layers(g); const uid = Math.random().toString(36).slice(2, 7);
+    const defs = f.svg.append("defs"); for (const [n, col] of [["ink", C.ink], ["orange", C.orange], ["blue", C.blue]]) defs.append("marker").attr("id", `ah-${n}-${uid}`).attr("viewBox", "0 0 10 10").attr("refX", 9).attr("refY", 5).attr("markerWidth", 7).attr("markerHeight", 7).attr("orient", "auto-start-reverse").append("path").attr("d", "M0,0L10,5L0,10Z").attr("fill", col);
+    const arrow = (l, d, col = "ink", dash) => { const p = l.append("path").attr("d", d).attr("fill", "none").attr("stroke", col === "ink" ? C.ink : col === "orange" ? C.orange : C.blue).attr("stroke-width", 3).attr("marker-end", `url(#ah-${col}-${uid})`); if (dash) p.attr("stroke-dasharray", "8 7"); return p; };
+    const card = (l, x, y, w, h, kicker, title, sub, accent) => { l.append("rect").attr("x", x).attr("y", y).attr("width", w).attr("height", h).attr("rx", 14).attr("fill", accent ? C.orangeSoft : C.blueSoft).attr("stroke", accent ? "#F3C8AE" : "#C9D3E6");
+      l.append("text").attr("x", x + 18).attr("y", y + 30).attr("font-size", 15).attr("font-family", F.mono).attr("letter-spacing", 1.5).attr("fill", accent ? C.orange : C.blue).text(kicker.toUpperCase());
+      l.append("text").attr("x", x + 18).attr("y", y + 64).attr("font-size", 27).attr("font-weight", 700).attr("font-family", F.disp).attr("fill", C.ink).text(title);
+      sub.forEach((s, i) => l.append("text").attr("x", x + 18).attr("y", y + 92 + i * 24).attr("font-size", 19).attr("fill", C.muted).text(s)); };
+    // beat 0: the five unknowns, stacked as the ladder stacks them
+    const l0 = L.add(); const names = ["Luck", "Numbers we don’t know", "A graph we don’t fully know", "What we can’t see", "A model that is wrong"];
+    l0.append("text").attr("x", 0).attr("y", 24).attr("font-size", 15).attr("font-family", F.mono).attr("letter-spacing", 1.5).attr("fill", C.blue).text("WHAT WE DON’T KNOW · PARTS 1 TO 5");
+    names.forEach((n, k) => { const y = 500 - k * 94; l0.append("rect").attr("x", 0).attr("y", y - 36).attr("width", 352).attr("height", 64).attr("rx", 12).attr("fill", "#fff").attr("stroke", "#C9D3E6").attr("stroke-width", 1.5);
+      l0.append("text").attr("x", 22).attr("y", y + 10).attr("font-size", 34).attr("font-weight", 800).attr("font-family", F.disp).attr("fill", k === 0 ? C.blue : C.orange).text(k + 1);
+      l0.append("text").attr("x", 62).attr("y", y + 6).attr("font-size", 21).attr("font-weight", 600).attr("font-family", F.disp).attr("fill", C.ink).text(n); });
+    l0.append("text").attr("x", 0).attr("y", 548).attr("font-size", 16).attr("fill", C.grey).text("1 aleatoric · 2 to 5 epistemic");
+    // beat 1: the model and the band
+    const l1 = L.add(); arrow(l1, "M358,300 L400,300"); card(l1, 404, 190, 270, 190, "the model · Part 1", "Graph + dynamics", ["who meets whom, and what", "spreads over it: one simulator,", "every unknown pushed through"]);
+    arrow(l1, "M680,300 L742,300"); card(l1, 746, 190, 270, 190, "the forecast", "A band, not a number", ["how many, who, when: each", "as a spread of outcomes, with", "a 90% range we can be held to"]);
+    // beat 2: the check, and the calibration loop back to the band
+    const l2 = L.add(); arrow(l2, "M1022,300 L1084,300"); card(l2, 1088, 190, 192, 190, "the check", "Coverage · width", ["did the band hold what", "happened, and how wide", "was it? Every part."], true);
+    arrow(l2, "M1184,186 C1184,110 881,110 881,186", "orange", true); l2.append("text").attr("x", 1032).attr("y", 128).attr("text-anchor", "middle").attr("font-size", 18).attr("font-weight", 600).attr("fill", C.orange).text("if it fails: calibrate, run again · Part 5");
+    // beat 3: the decision, and the machine run backwards
+    const l3 = L.add(); arrow(l3, "M1184,384 L1184,420"); card(l3, 746, 424, 534, 120, "the decision · Part 7", "Optimise against the band", ["the doses, the plan, whom to test next:", "chosen with the whole spread in view, not its middle"]);
+    arrow(l3, "M881,384 C881,470 600,560 358,470", "blue", true); l3.append("text").attr("x", 580).attr("y", 524).attr("text-anchor", "middle").attr("font-size", 18).attr("font-weight", 600).attr("fill", C.blue).text("the same machine backwards:");
+    l3.append("text").attr("x", 580).attr("y", 548).attr("text-anchor", "middle").attr("font-size", 18).attr("font-weight", 600).attr("fill", C.blue).text("from the picture to who started it · Part 6");
+    return { steps: 4, caps: ["Five things we do not know, one rung each. Every one of them is a random variable we can push through the model.", "Push all five through the model, the graph and the dynamics together, and out comes a band, not a number.", "Then the check, at the end of every part: did the band hold what happened, and how wide was it? If it fails, calibrate and run again.", "A band is a decision input: optimise against it. And the same machine runs backwards, from today’s picture to who started it. That is the whole tutorial, on one slide."],
+      show: k => L.show(k + 1) };
+  };
+
   R.everywhere = (e, D) => {
     const E = D.everywhere.panels, G = D.geo; const row = el("div", "fourq every"); e.appendChild(row); const fmt = n => n.toLocaleString("en-US");
     const card = (cls, k, h, a) => { const p = el("div", "fq" + (cls ? " " + cls : "")); row.appendChild(p); const txt = el("div", "txt"); p.appendChild(txt); txt.appendChild(el("p", "k", k)); txt.appendChild(el("h3", null, h)); txt.appendChild(el("p", "a", a)); const fig = el("div", "figbox"); p.appendChild(fig); return { p, fig }; };

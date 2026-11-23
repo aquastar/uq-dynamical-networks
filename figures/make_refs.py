@@ -26,7 +26,6 @@ REFS = [
  ("Part 0 · Why graphs, what UQ is", "Baker 2009", "Baker", 2009, "Detours by design", ""),
  ("Part 0 · Why graphs, what UQ is", "White et al. 1986", "White", 1986, "The structure of the nervous system of the nematode Caenorhabditis elegans", ""),
  ("Part 0 · Why graphs, what UQ is", "Watts & Strogatz 1998", "Watts", 1998, "Collective dynamics of 'small-world' networks", ""),
- ("Part 0 · Why graphs, what UQ is", "Newman 2006", "Newman", 2006, "Finding community structure in networks using the eigenvectors of matrices", ""),
  ("Part 0 · Why graphs, what UQ is", "Adamic & Glance 2005", "Adamic", 2005, "The political blogosphere and the 2004 U.S. election: divided they blog", ""),
  ("Part 0 · Why graphs, what UQ is", "OpenFlights 2014", "OpenFlights 2014", 2014, "OpenFlights airport and route databases", ""),
  ("Part 0 · Why graphs, what UQ is", "Peixoto 2020", "Peixoto", 2020, "Netzschleuder: the network catalogue, repository and centrifuge", ""),

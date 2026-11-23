@@ -66,8 +66,8 @@ html,body{background:var(--paper)}
 .stat span{font-size:17px;color:var(--muted)}
 /* part openers */
 .reveal section.opener{flex-direction:row;align-items:stretch;gap:48px;padding:64px 80px}
-.op-left{flex:1.2;display:flex;flex-direction:column;justify-content:center;gap:18px}
-.op-right{flex:1;display:flex;align-items:center;justify-content:center;min-height:0}
+.op-left{flex:1;display:flex;flex-direction:column;justify-content:center;gap:18px}
+.op-right{flex:1.25;display:flex;align-items:center;justify-content:center;min-height:0}
 .op-right>div{width:100%;height:100%;display:flex;align-items:center}
 .op-right svg{width:100%;height:100%}
 .op-num{font-family:var(--display);font-size:200px;font-weight:700;line-height:.85;color:var(--blue-soft);margin:-10px 0 -20px -6px}
@@ -204,7 +204,7 @@ html.reveal-print .fq .real,html.reveal-print .fq .figbox svg{transition:none}
 @media (prefers-reduced-motion:reduce){.fq .real,.fq .figbox svg{transition:none}}
 
 /* graphs are everywhere (pass 7): the world on top, four real networks below */
-.fourq.every{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:auto minmax(0,1fr);gap:14px}
+.fourq.every{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:auto minmax(0,1fr);gap:14px}
 .fourq.every>.fq{padding:11px 16px 12px;gap:5px}
 .fourq.every>.fq.wide{grid-column:1/-1;flex-direction:row;align-items:center;gap:22px}
 .fourq.every>.fq.wide .txt{flex:0 0 330px;display:flex;flex-direction:column;gap:6px}
@@ -221,3 +221,7 @@ html.reveal-print .fq .real,html.reveal-print .fq .figbox svg{transition:none}
 .fourq.records .figbox{flex-direction:column;align-items:stretch;gap:6px}
 .fourq.records .figbox img{flex:1;min-height:0;width:100%;object-fit:contain;border-radius:8px}
 .fourq.records .lab{display:flex;justify-content:space-around;font-size:17px;color:var(--muted);line-height:1.2}
+
+/* meeting notes, 22 Nov: the opener's big number repeated the ladder; slide 17 gives the figure 60% */
+.op-num{display:none}
+.cols.fig60>.steps{flex:2}.cols.fig60>.viz[data-viz]{flex:3}

@@ -109,15 +109,6 @@
  },
  {
   "part": "Part 0 · Why graphs, what UQ is",
-  "cite": "Newman 2006",
-  "url": "https://doi.org/10.1103/PhysRevE.74.036104",
-  "title": "Finding community structure in networks using the eigenvectors of matrices",
-  "venue": "Physical Review E 74, 036104",
-  "authors": "M. E. J. Newman",
-  "year": 2006
- },
- {
-  "part": "Part 0 · Why graphs, what UQ is",
   "cite": "Adamic & Glance 2005",
   "url": "https://doi.org/10.1145/1134271.1134277",
   "title": "The political blogosphere and the 2004 U.S. election: divided they blog",

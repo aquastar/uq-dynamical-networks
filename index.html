@@ -6,7 +6,7 @@
 <title>Uncertainty Quantification for Dynamical Networks</title>
 <link rel="stylesheet" href="vendor/fonts/fonts.css">
 <link rel="stylesheet" href="vendor/reveal.css">
-<link rel="stylesheet" href="deck.css?v=40">
+<link rel="stylesheet" href="deck.css?v=41">
 </head>
 <body>
 <div class="reveal">
@@ -53,8 +53,8 @@
   <h2>Graphs are everywhere</h2>
   <div class="viz" data-viz="everywhere"></div>
   <p class="cap"></p>
-  <p class="refs">White et al. 1986 · Watts &amp; Strogatz 1998 · OpenFlights 2014 · Newman 2006 · Adamic &amp; Glance 2005 · Peixoto 2020 · Natural Earth</p>
-  <aside class="notes">Two beats. First the five drawings: say that none of them is a sketch, every dot is a neuron, a substation, an airport, a person, a blog, placed by a layout algorithm or, for the airports, by where they are. Second beat: press, and something moves on each. The pulses are illustrative, the graphs are real. The point for a newcomer: the same object turns up in biology, engineering, transport, science and politics, and the questions of the day apply to all of them. This is the “graph dynamics are everywhere” beat of Dr. Chen’s introduction, built from the real objects. Two minutes: one per beat.</aside>
+  <p class="refs">White et al. 1986 · Watts &amp; Strogatz 1998 · OpenFlights 2014 · Adamic &amp; Glance 2005 · Peixoto 2020 · Natural Earth</p>
+  <aside class="notes">Two beats. First the four drawings: say that none of them is a sketch, every dot is a neuron, a substation, an airport, a blog, placed by a layout algorithm or, for the airports, by where they are. Second beat: press, and something moves on each. The pulses are illustrative, the graphs are real. The point for a newcomer: the same object turns up in biology, engineering, transport and politics, and the questions of the day apply to all of them. This is the “graph dynamics are everywhere” beat of Dr. Chen’s introduction, built from the real objects. Two minutes: one per beat.</aside>
 </section>
 
 <section class="slide fig">
@@ -169,7 +169,7 @@
 <section class="slide fig">
   <p class="eyebrow">Part 1 · Luck</p>
   <h2>Tool 1: simulate, then report quantiles</h2>
-  <div class="cols">
+  <div class="cols fig60">
     <div class="steps build">
       <div class="step"><span class="n">1</span><span>Monte Carlo: run the model many times, read the histogram</span></div>
       <div class="step"><span class="n">2</span><span>Report the probability of die-out, and the 5%–95% range of the big-outbreak branch</span></div>
@@ -284,13 +284,13 @@
 
 <!-- ================= PART 4 ================= -->
 <section class="slide opener">
-  <div class="op-left"><p class="eyebrow">Part 4 of 8 · 13 min · after the break</p><p class="op-num">4</p><h1>Tracking what we can’t see</h1><p class="op-sub">who is infected right now</p><p class="op-q">“We test 30% of the ward every two days. Tests miss 10% of cases. Who is infected right now?”</p><p class="thm"><b>The one theorem.</b> With K copies the filter’s estimate converges to the true posterior at rate 1/√K (Del Moral 2004), but the K needed grows exponentially with the dimension of what is observed: that is why 1000 copies collapse on a city (Snyder et al. 2008).</p></div>
+  <div class="op-left"><p class="eyebrow">Part 4 of 8 · 13 min · after the break</p><p class="op-num">4</p><h1>What we can’t see</h1><p class="op-sub">who is infected right now</p><p class="op-q">“We test 30% of the ward every two days. Tests miss 10% of cases. Who is infected right now?”</p><p class="thm"><b>The one theorem.</b> With K copies the filter’s estimate converges to the true posterior at rate 1/√K (Del Moral 2004), but the K needed grows exponentially with the dimension of what is observed: that is why 1000 copies collapse on a city (Snyder et al. 2008).</p></div>
   <div class="op-right"><div data-viz="ladder" data-lit="4"></div></div>
   <aside class="notes">Back from the break, rung 4 lit. Now we observe the outbreak itself, badly: 30% tested every two days, and the tests miss 10%. The theorem says why 1000 copies are enough for 75 people and collapse on a city. Thirteen minutes.</aside>
 </section>
 
 <section class="slide fig">
-  <p class="eyebrow">Part 4 · Tracking what we can’t see</p>
+  <p class="eyebrow">Part 4 · What we can’t see</p>
   <h2>The Kalman filter is a weighted average</h2>
   <div class="viz" data-viz="kalman"></div>
   <p class="cap"></p>
@@ -299,7 +299,7 @@
 </section>
 
 <section class="slide fig">
-  <p class="eyebrow">Part 4 · Tracking what we can’t see</p>
+  <p class="eyebrow">Part 4 · What we can’t see</p>
   <h2>Our ward isn’t a bell curve, so we use 1000 copies</h2>
   <div class="viz" data-viz="particles"></div>
   <p class="cap"></p>
@@ -308,7 +308,7 @@
 </section>
 
 <section class="slide fig">
-  <p class="eyebrow">Part 4 · Tracking what we can’t see</p>
+  <p class="eyebrow">Part 4 · What we can’t see</p>
   <h2>It works, mostly: tracking the hidden count</h2>
   <div class="viz" data-viz="filter"></div>
   <p class="cap"></p>
@@ -316,7 +316,7 @@
 </section>
 
 <section class="slide fig">
-  <p class="eyebrow">Part 4 · Tracking what we can’t see</p>
+  <p class="eyebrow">Part 4 · What we can’t see</p>
   <h2>Uncertainty has a location</h2>
   <div class="viz" data-viz="uncmap"></div>
   <p class="cap"></p>
@@ -326,13 +326,13 @@
 
 <!-- ================= PART 5 ================= -->
 <section class="slide opener">
-  <div class="op-left"><p class="eyebrow">Part 5 of 8 · 13 min</p><p class="op-num">5</p><h1>Guarantees for any model</h1><p class="op-sub">fix a model’s band in three lines</p><p class="op-q" id="p5q">“Any model can say 90% and deliver less. Can we fix the band without touching the model?”</p><p class="thm"><b>The one theorem.</b> If the n calibration cases and the new case are exchangeable, then P(truth ∈ forecast ± q) lies between 90% and 90% + 1/(n+1), for any forecaster and any distribution (Vovk, Gammerman &amp; Shafer 2005; Lei et al. 2018).</p></div>
+  <div class="op-left"><p class="eyebrow">Part 5 of 8 · 13 min</p><p class="op-num">5</p><h1>A model that is wrong</h1><p class="op-sub">fix a model’s band in three lines</p><p class="op-q" id="p5q">“Any model can say 90% and deliver less. Can we fix the band without touching the model?”</p><p class="thm"><b>The one theorem.</b> If the n calibration cases and the new case are exchangeable, then P(truth ∈ forecast ± q) lies between 90% and 90% + 1/(n+1), for any forecaster and any distribution (Vovk, Gammerman &amp; Shafer 2005; Lei et al. 2018).</p></div>
   <div class="op-right"><div data-viz="ladder" data-lit="5"></div></div>
   <aside class="notes">Rung 5 lit, the last one. The promise of this part is unusual: a guarantee that holds for any model, in three lines, with one condition. Read the 1/(n+1) aloud: with 2000 calibration cases the slack is a twentieth of a percent. Thirteen minutes.</aside>
 </section>
 
 <section class="slide fig">
-  <p class="eyebrow">Part 5 · Guarantees for any model</p>
+  <p class="eyebrow">Part 5 · A model that is wrong</p>
   <h2>The 3-line recipe</h2>
   <div class="cols recipe">
     <div class="steps build">
@@ -350,7 +350,7 @@
 </section>
 
 <section class="slide fig">
-  <p class="eyebrow">Part 5 · Guarantees for any model</p>
+  <p class="eyebrow">Part 5 · A model that is wrong</p>
   <h2>Before and after, on the ward</h2>
   <div class="viz" data-viz="conformal"></div>
   <p class="cap"></p>
@@ -358,7 +358,7 @@
 </section>
 
 <section class="slide fig">
-  <p class="eyebrow">Part 5 · Guarantees for any model</p>
+  <p class="eyebrow">Part 5 · A model that is wrong</p>
   <h2>Back to Part 4’s filter: the same three lines</h2>
   <div class="viz" data-viz="filterfix"></div>
   <p class="cap"></p>
@@ -366,7 +366,7 @@
 </section>
 
 <section class="slide fig">
-  <p class="eyebrow">Part 5 · Guarantees for any model</p>
+  <p class="eyebrow">Part 5 · A model that is wrong</p>
   <h2>The scorecard the field uses</h2>
   <div class="viz" data-viz="metrics"></div>
   <p class="cap"></p>
@@ -374,7 +374,7 @@
 </section>
 
 <section class="slide fig">
-  <p class="eyebrow">Part 5 · Guarantees for any model</p>
+  <p class="eyebrow">Part 5 · A model that is wrong</p>
   <h2>Why graphs and time break the promise, and the fixes</h2>
   <div class="cards c3 build">
     <div class="card"><h3>Neighbours are not independent</h3><p>Nurse 12’s case tells you about nurse 13’s.</p><p class="dark"><b>Fix:</b> calibrate with the graph, smoothing the scores over neighbours.</p><p class="refs">Huang et al. 2023 · Zargarbashi et al. 2023 · Cini et al. 2025</p></div>
@@ -385,7 +385,7 @@
 </section>
 
 <section class="slide fig">
-  <p class="eyebrow">Part 5 · Guarantees for any model</p>
+  <p class="eyebrow">Part 5 · A model that is wrong</p>
   <h2>The deep-learning column: three heuristics and one guarantee</h2>
   <div class="viz" data-viz="dl"></div>
   <p class="cap"></p>
@@ -393,7 +393,7 @@
 </section>
 
 <section class="slide fig">
-  <p class="eyebrow">Part 5 · Guarantees for any model</p>
+  <p class="eyebrow">Part 5 · A model that is wrong</p>
   <h2>Leaving the ward for one slide: a country</h2>
   <div class="viz" data-viz="hub"></div>
   <p class="cap"></p>
@@ -564,10 +564,10 @@
 </div>
 <script src="vendor/reveal.js"></script>
 <script src="vendor/d3.js"></script>
-<script src="sim.js?v=40"></script>
-<script src="charts.js?v=40"></script>
+<script src="sim.js?v=41"></script>
+<script src="charts.js?v=41"></script>
 <script>
-Promise.all([fetch("data.json?v=40"), fetch("geo.json?v=40"), fetch("everywhere.json?v=40")].map(p => p.then(r => r.json()))).then(([D, G, EV]) => { D.geo = G; D.everywhere = EV;
+Promise.all([fetch("data.json?v=41"), fetch("geo.json?v=41"), fetch("everywhere.json?v=41")].map(p => p.then(r => r.json()))).then(([D, G, EV]) => { D.geo = G; D.everywhere = EV;
   Sim.init(D.ward); window.DECK = D; Charts.fill(document, D);
   // cards, steps and table rows build one per arrow press
   document.querySelectorAll(".build > .card, .build > .step, .build > .check, .build > .note, table.build tr:not(:first-child)").forEach(el => el.classList.add("fragment", "fade-up"));

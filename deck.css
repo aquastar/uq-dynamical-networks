@@ -74,7 +74,7 @@ html,body{background:var(--paper)}
 .opener h1{font-size:76px}
 .op-sub{font-size:30px;color:var(--muted)}
 .op-q{font-size:30px;line-height:1.35;color:var(--ink);border-left:6px solid var(--orange);padding-left:22px;margin-top:10px}
-.thm{font-size:20px;line-height:1.35;color:var(--muted);border-top:1px solid var(--line);padding-top:12px;margin-top:6px}
+.thm{font-size:21px;line-height:1.35;color:var(--muted);border-top:1px solid var(--line);padding-top:12px;margin-top:6px}
 .thm b{color:var(--ink)}
 table.map.metrics td,table.map.scale td{font-size:21px}
 table.map.metrics .c3,table.map.metrics .c4{transition:opacity .4s}
@@ -94,7 +94,7 @@ section.dark{background:#FFFFFF!important}
 .reveal .controls{color:var(--blue)}
 table.map{border-collapse:collapse;width:100%;font-size:21px;line-height:1.35;flex:1}
 table.map td,table.map th{height:1px}
-table.map th{font-family:var(--mono);font-size:16px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:left;padding:8px 10px;border-bottom:2px solid var(--line);font-weight:500}
+table.map th{font-family:var(--mono);font-size:17px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:left;padding:8px 10px;border-bottom:2px solid var(--line);font-weight:500}
 table.map td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
 table.map tr:nth-child(even) td{background:#F6F7FB}
 table.map td.num{font-family:var(--mono);white-space:nowrap}
@@ -225,3 +225,8 @@ html.reveal-print .fq .real,html.reveal-print .fq .figbox svg{transition:none}
 /* meeting notes, 22 Nov: the opener's big number repeated the ladder; slide 17 gives the figure 60% */
 .op-num{display:none}
 .cols.fig60>.steps{flex:2}.cols.fig60>.viz[data-viz]{flex:3}
+
+/* a photograph on its own slide */
+.viz.photo{position:relative;display:flex;align-items:center;justify-content:center;min-height:0}
+.viz.photo img{max-width:100%;max-height:100%;object-fit:contain;border-radius:14px;display:block}
+.viz.photo .photolabel{position:absolute;left:50%;transform:translateX(-50%);bottom:0;background:rgba(0,0,0,.5);color:#fff;font-size:19px;font-weight:600;padding:8px 16px;border-radius:0 0 14px 14px;white-space:nowrap}
